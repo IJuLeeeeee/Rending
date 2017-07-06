@@ -1,5 +1,5 @@
 /***************************
-4103056037 李易儒 第2次作業 4/11
+4103056037 李易儒 第4次作業 5/15
 ***************************/
 
 
@@ -14,22 +14,24 @@
 
 #include <stdlib.h>
 
-#define DRAWARRAY 1
-#define MULTIDRAWARRAY 2
-#define DRAWELEMENT 3
-#define MULTIDRAWELEMENT  4
 #define total 1962
-
-
 static GLfloat spin = 0.0;
-static char spinMode = 'x' ;
-int derefMethod = DRAWARRAY;
-
+static char spinMode = 'x';
+static int flag = 1;
+static int jump = 0;
+static int fjump = 0;
+static int spaceIsClicked = 0;
+static int year = 0, day = 0;
+static int leftAttack = 0;
+static float planetShoot = 0;
+static int rightAttack = 0;
+static int rightSwing = 0;
 
 
 void setupinitPointers(void)
 {
 	float xx, yy;
+
 	xx = 1500;
 	yy = 750 / 221 * 750 / 3;
 
@@ -4693,2154 +4695,3153 @@ void setupinitPointers(void)
 
 	glVertexPointer(2, GL_FLOAT, 0, vertices);
 	glColorPointer(3, GL_FLOAT, 0, colors);
-	
+
 }
-void setupInterleave(void)
-{
+void drawLogo(){
+	glPushMatrix();
+	if (spinMode == 'x'){
+		glRotatef(spin, 0.0, 1.0, 0.0);
+	}
+	else if (spinMode == 'y'){
+		glRotatef(spin, 1.0, 0.0, 0.0);
+	}
+	else if (spinMode == 'z'){
+		glRotatef(spin, 0.0, 0.0, 1.0);
+	}
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -10.0);
+	glTranslatef(-0.5, -0.5, 0.0);
+
+
+	glPushMatrix();
+	glColor3f(0.0, 0.0, 1.0);
+
+
 	float xx, yy;
 	xx = 1500;
 	yy = 750 / 221 * 750 / 3;
 
+	glBegin(GL_TRIANGLES);
+
+
+
+
+	glVertex3f(13 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(13 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(23 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(13 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(23 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(23 / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f(23 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(60 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(23 / xx, 1 - (629 / yy), 0.0);
+
+	glVertex3f(23 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(60 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(60 / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f(60 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(60 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(68 / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f(60 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(68 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(68 / xx, 1 - (604 / yy), 0.0);
+
+	//N
+
+
+	glVertex3f(86 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(87 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(94 / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f(87 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(94 / xx, 1 - (658 / yy), 0.0);
+	glVertex3f(98 / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f(94 / xx, 1 - (658 / yy), 0.0);
+	glVertex3f(98 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(102 / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f(98 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(102 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(117 / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f(102 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(117 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(113 / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f(117 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(113 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (649 / yy), 0.0);
+
+	glVertex3f(113 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (649 / yy), 0.0);
+	glVertex3f(118 / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f(128 / xx, 1 - (649 / yy), 0.0);
+	glVertex3f(118 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (655 / yy), 0.0);
+
+	glVertex3f(118 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (655 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (717 / yy), 0.0);
+
+	glVertex3f(118 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(118 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(118 / xx, 1 - (663 / yy), 0.0);
+	glVertex3f(118 / xx, 1 - (677 / yy), 0.0);
+	glVertex3f(100 / xx, 1 - (682 / yy), 0.0);
+
+	glVertex3f(118 / xx, 1 - (663 / yy), 0.0);
+	glVertex3f(100 / xx, 1 - (682 / yy), 0.0);
+	glVertex3f(92 / xx, 1 - (672 / yy), 0.0);
+
+	glVertex3f(100 / xx, 1 - (682 / yy), 0.0);
+	glVertex3f(92 / xx, 1 - (672 / yy), 0.0);
+	glVertex3f(93 / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f(92 / xx, 1 - (672 / yy), 0.0);
+	glVertex3f(93 / xx, 1 - (694 / yy), 0.0);
+	glVertex3f(84 / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f(93 / xx, 1 - (694 / yy), 0.0);
+	glVertex3f(84 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(88 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(93 / xx, 1 - (694 / yy), 0.0);
+	glVertex3f(88 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(94 / xx, 1 - (703 / yy), 0.0);
+
+	glVertex3f(88 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(94 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(101 / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f(88 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(101 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(101 / xx, 1 - (718 / yy), 0.0);
+
+	glVertex3f(101 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(101 / xx, 1 - (718 / yy), 0.0);
+	glVertex3f(109 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(101 / xx, 1 - (718 / yy), 0.0);
+	glVertex3f(109 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(113 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(109 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(113 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(116 / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f(113 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(116 / xx, 1 - (694 / yy), 0.0);
+	glVertex3f(120 / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f(118 / xx, 1 - (677 / yy), 0.0);
+	glVertex3f(116 / xx, 1 - (649 / yy), 0.0);
+	glVertex3f(120 / xx, 1 - (704 / yy), 0.0);
+
+	//a
+
+	glVertex3f(140 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(163 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(140 / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f(140 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(163 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(163 / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f(146 / xx, 1 - (615 / yy), 0.0);
+	glVertex3f(155 / xx, 1 - (606 / yy), 0.0);
+	glVertex3f(155 / xx, 1 - (615 / yy), 0.0);
+
+	glVertex3f(146 / xx, 1 - (615 / yy), 0.0);
+	glVertex3f(155 / xx, 1 - (615 / yy), 0.0);
+	glVertex3f(155 / xx, 1 - (702 / yy), 0.0);
+
+	glVertex3f(146 / xx, 1 - (615 / yy), 0.0);
+	glVertex3f(155 / xx, 1 - (702 / yy), 0.0);
+	glVertex3f(146 / xx, 1 - (707 / yy), 0.0);
+
+	glVertex3f(155 / xx, 1 - (702 / yy), 0.0);
+	glVertex3f(146 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(149 / xx, 1 - (711 / yy), 0.0);
+
+	glVertex3f(155 / xx, 1 - (702 / yy), 0.0);
+	glVertex3f(149 / xx, 1 - (711 / yy), 0.0);
+	glVertex3f(160 / xx, 1 - (707 / yy), 0.0);
+
+	glVertex3f(149 / xx, 1 - (711 / yy), 0.0);
+	glVertex3f(160 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(156 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(160 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(156 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(165 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(160 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(165 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(165 / xx, 1 - (709 / yy), 0.0);
+
+	//t
+
+	glVertex3f(176 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(187 / xx, 1 - (621 / yy), 0.0);
+	glVertex3f(187 / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f(176 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(187 / xx, 1 - (621 / yy), 0.0);
+	glVertex3f(176 / xx, 1 - (621 / yy), 0.0);
+
+	glVertex3f(176 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(187 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(176 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(187 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(176 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(187 / xx, 1 - (716 / yy), 0.0);
+
+	//i
+
+	glVertex3f(201 / xx, 1 - (657 / yy), 0.0);
+	glVertex3f(217 / xx, 1 - (648 / yy), 0.0);
+	glVertex3f(212 / xx, 1 - (655 / yy), 0.0);
+
+	glVertex3f(217 / xx, 1 - (648 / yy), 0.0);
+	glVertex3f(208 / xx, 1 - (642 / yy), 0.0);
+	glVertex3f(201 / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f(217 / xx, 1 - (648 / yy), 0.0);
+	glVertex3f(208 / xx, 1 - (642 / yy), 0.0);
+	glVertex3f(215 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(217 / xx, 1 - (648 / yy), 0.0);
+	glVertex3f(215 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(236 / xx, 1 - (637 / yy), 0.0);
+
+	glVertex3f(217 / xx, 1 - (648 / yy), 0.0);
+	glVertex3f(236 / xx, 1 - (637 / yy), 0.0);
+	glVertex3f(229 / xx, 1 - (645 / yy), 0.0);
+
+	glVertex3f(215 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(222 / xx, 1 - (633 / yy), 0.0);
+	glVertex3f(236 / xx, 1 - (637 / yy), 0.0);
+
+	glVertex3f(236 / xx, 1 - (637 / yy), 0.0);
+	glVertex3f(229 / xx, 1 - (645 / yy), 0.0);
+	glVertex3f(242 / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f(229 / xx, 1 - (645 / yy), 0.0);
+	glVertex3f(242 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(235 / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f(242 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(235 / xx, 1 - (657 / yy), 0.0);
+	glVertex3f(245 / xx, 1 - (664 / yy), 0.0);
+
+	glVertex3f(235 / xx, 1 - (657 / yy), 0.0);
+	glVertex3f(245 / xx, 1 - (664 / yy), 0.0);
+	glVertex3f(238 / xx, 1 - (678 / yy), 0.0);
+
+	glVertex3f(245 / xx, 1 - (664 / yy), 0.0);
+	glVertex3f(238 / xx, 1 - (678 / yy), 0.0);
+	glVertex3f(246 / xx, 1 - (688 / yy), 0.0);
+
+	glVertex3f(238 / xx, 1 - (678 / yy), 0.0);
+	glVertex3f(246 / xx, 1 - (688 / yy), 0.0);
+	glVertex3f(235 / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f(246 / xx, 1 - (688 / yy), 0.0);
+	glVertex3f(235 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(242 / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f(235 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(242 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(230 / xx, 1 - (705 / yy), 0.0);
+
+	glVertex3f(242 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(230 / xx, 1 - (705 / yy), 0.0);
+	glVertex3f(233 / xx, 1 - (714 / yy), 0.0);
+
+	glVertex3f(230 / xx, 1 - (705 / yy), 0.0);
+	glVertex3f(233 / xx, 1 - (714 / yy), 0.0);
+	glVertex3f(224 / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f(233 / xx, 1 - (714 / yy), 0.0);
+	glVertex3f(224 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(215 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(224 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(215 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(216 / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f(215 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(216 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(206 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(216 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(206 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(211 / xx, 1 - (692 / yy), 0.0);
+
+	glVertex3f(206 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(211 / xx, 1 - (692 / yy), 0.0);
+	glVertex3f(201 / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f(211 / xx, 1 - (692 / yy), 0.0);
+	glVertex3f(201 / xx, 1 - (694 / yy), 0.0);
+	glVertex3f(209 / xx, 1 - (678 / yy), 0.0);
+
+	glVertex3f(201 / xx, 1 - (694 / yy), 0.0);
+	glVertex3f(209 / xx, 1 - (678 / yy), 0.0);
+	glVertex3f(202 / xx, 1 - (670 / yy), 0.0);
+
+	glVertex3f(209 / xx, 1 - (678 / yy), 0.0);
+	glVertex3f(202 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(211 / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f(202 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(211 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(202 / xx, 1 - (657 / yy), 0.0);
+
+	//o
+
+	glVertex3f(260 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(269 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(260 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(260 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(269 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(269 / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f(269 / xx, 1 - (645 / yy), 0.0);
+	glVertex3f(268 / xx, 1 - (676 / yy), 0.0);
+	glVertex3f(271 / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f(269 / xx, 1 - (645 / yy), 0.0);
+	glVertex3f(271 / xx, 1 - (658 / yy), 0.0);
+	glVertex3f(277 / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f(269 / xx, 1 - (645 / yy), 0.0);
+	glVertex3f(277 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(277 / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f(277 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(277 / xx, 1 - (637 / yy), 0.0);
+	glVertex3f(284 / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f(277 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(284 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(291 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(284 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(291 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(299 / xx, 1 - (643 / yy), 0.0);
+
+	glVertex3f(291 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(299 / xx, 1 - (643 / yy), 0.0);
+	glVertex3f(292 / xx, 1 - (654 / yy), 0.0);
+
+	glVertex3f(299 / xx, 1 - (643 / yy), 0.0);
+	glVertex3f(292 / xx, 1 - (654 / yy), 0.0);
+	glVertex3f(302 / xx, 1 - (660 / yy), 0.0);
+
+	glVertex3f(292 / xx, 1 - (654 / yy), 0.0);
+	glVertex3f(302 / xx, 1 - (660 / yy), 0.0);
+	glVertex3f(292 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(302 / xx, 1 - (660 / yy), 0.0);
+	glVertex3f(292 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(302 / xx, 1 - (716 / yy), 0.0);
+
+	//n
 	float national2a;
 	national2a = (317 - 86);
 
+	glVertex3f((86 + national2a) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((87 + national2a) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((94 + national2a) / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f((87 + national2a) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((94 + national2a) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((98 + national2a) / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f((94 + national2a) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((98 + national2a) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((102 + national2a) / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f((98 + national2a) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((102 + national2a) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((117 + national2a) / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f((102 + national2a) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((117 + national2a) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((113 + national2a) / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f((117 + national2a) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((113 + national2a) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((128 + national2a) / xx, 1 - (649 / yy), 0.0);
+
+	glVertex3f((113 + national2a) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((128 + national2a) / xx, 1 - (649 / yy), 0.0);
+	glVertex3f((118 + national2a) / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f((128 + national2a) / xx, 1 - (649 / yy), 0.0);
+	glVertex3f((118 + national2a) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((128 + national2a) / xx, 1 - (655 / yy), 0.0);
+
+	glVertex3f((118 + national2a) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((128 + national2a) / xx, 1 - (655 / yy), 0.0);
+	glVertex3f((128 + national2a) / xx, 1 - (717 / yy), 0.0);
+
+	glVertex3f((118 + national2a) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((128 + national2a) / xx, 1 - (717 / yy), 0.0);
+	glVertex3f((118 + national2a) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((118 + national2a) / xx, 1 - (663 / yy), 0.0);
+	glVertex3f((118 + national2a) / xx, 1 - (677 / yy), 0.0);
+	glVertex3f((100 + national2a) / xx, 1 - (682 / yy), 0.0);
+
+	glVertex3f((118 + national2a) / xx, 1 - (663 / yy), 0.0);
+	glVertex3f((100 + national2a) / xx, 1 - (682 / yy), 0.0);
+	glVertex3f((92 + national2a) / xx, 1 - (672 / yy), 0.0);
+
+	glVertex3f((100 + national2a) / xx, 1 - (682 / yy), 0.0);
+	glVertex3f((92 + national2a) / xx, 1 - (672 / yy), 0.0);
+	glVertex3f((93 + national2a) / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f((92 + national2a) / xx, 1 - (672 / yy), 0.0);
+	glVertex3f((93 + national2a) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((84 + national2a) / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f((93 + national2a) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((84 + national2a) / xx, 1 - (691 / yy), 0.0);
+	glVertex3f((88 + national2a) / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f((93 + national2a) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((88 + national2a) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((94 + national2a) / xx, 1 - (703 / yy), 0.0);
+
+	glVertex3f((88 + national2a) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((94 + national2a) / xx, 1 - (703 / yy), 0.0);
+	glVertex3f((101 + national2a) / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f((88 + national2a) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((101 + national2a) / xx, 1 - (708 / yy), 0.0);
+	glVertex3f((101 + national2a) / xx, 1 - (718 / yy), 0.0);
+
+	glVertex3f((101 + national2a) / xx, 1 - (708 / yy), 0.0);
+	glVertex3f((101 + national2a) / xx, 1 - (718 / yy), 0.0);
+	glVertex3f((109 + national2a) / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f((101 + national2a) / xx, 1 - (718 / yy), 0.0);
+	glVertex3f((109 + national2a) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((113 + national2a) / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f((109 + national2a) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((113 + national2a) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((116 + national2a) / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f((113 + national2a) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((116 + national2a) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((120 + national2a) / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f((118 + national2a) / xx, 1 - (677 / yy), 0.0);
+	glVertex3f((116 + national2a) / xx, 1 - (649 / yy), 0.0);
+	glVertex3f((120 + national2a) / xx, 1 - (704 / yy), 0.0);
+
+
+	//a
+
+
+	glVertex3f(376 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(376 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(386 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(376 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(386 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(386 / xx, 1 - (604 / yy), 0.0);
+
+	//l
+
+	glVertex3f(483 / xx, 1 - (638 / yy), 0.0);
+	glVertex3f(473 / xx, 1 - (638 / yy), 0.0);
+	glVertex3f(481 / xx, 1 - (628 / yy), 0.0);
+
+	glVertex3f(473 / xx, 1 - (638 / yy), 0.0);
+	glVertex3f(481 / xx, 1 - (628 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (629 / yy), 0.0);
+
+	glVertex3f(481 / xx, 1 - (628 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (629 / yy), 0.0);
+	glVertex3f(473 / xx, 1 - (612 / yy), 0.0);
+
+	glVertex3f(471 / xx, 1 - (629 / yy), 0.0);
+	glVertex3f(473 / xx, 1 - (612 / yy), 0.0);
+	glVertex3f(466 / xx, 1 - (621 / yy), 0.0);
+
+	glVertex3f(473 / xx, 1 - (612 / yy), 0.0);
+	glVertex3f(466 / xx, 1 - (621 / yy), 0.0);
+	glVertex3f(460 / xx, 1 - (602 / yy), 0.0);
+
+	glVertex3f(466 / xx, 1 - (621 / yy), 0.0);
+	glVertex3f(460 / xx, 1 - (602 / yy), 0.0);
+	glVertex3f(453 / xx, 1 - (617 / yy), 0.0);
+
+	glVertex3f(460 / xx, 1 - (602 / yy), 0.0);
+	glVertex3f(453 / xx, 1 - (617 / yy), 0.0);
+	glVertex3f(448 / xx, 1 - (603 / yy), 0.0);
+
+	glVertex3f(453 / xx, 1 - (617 / yy), 0.0);
+	glVertex3f(448 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(445 / xx, 1 - (619 / yy), 0.0);
+
+	glVertex3f(448 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(445 / xx, 1 - (619 / yy), 0.0);
+	glVertex3f(434 / xx, 1 - (611 / yy), 0.0);
+
+	glVertex3f(455 / xx, 1 - (619 / yy), 0.0);
+	glVertex3f(434 / xx, 1 - (611 / yy), 0.0);
+	glVertex3f(440 / xx, 1 - (627 / yy), 0.0);
+
+	glVertex3f(434 / xx, 1 - (611 / yy), 0.0);
+	glVertex3f(440 / xx, 1 - (627 / yy), 0.0);
+	glVertex3f(426 / xx, 1 - (629 / yy), 0.0);
+
+	glVertex3f(440 / xx, 1 - (627 / yy), 0.0);
+	glVertex3f(426 / xx, 1 - (629 / yy), 0.0);
+	glVertex3f(435 / xx, 1 - (640 / yy), 0.0);
+
+	glVertex3f(426 / xx, 1 - (629 / yy), 0.0);
+	glVertex3f(435 / xx, 1 - (640 / yy), 0.0);
+	glVertex3f(423 / xx, 1 - (642 / yy), 0.0);
+
+	glVertex3f(435 / xx, 1 - (640 / yy), 0.0);
+	glVertex3f(423 / xx, 1 - (642 / yy), 0.0);
+	glVertex3f(434 / xx, 1 - (652 / yy), 0.0);
+
+	glVertex3f(423 / xx, 1 - (642 / yy), 0.0);
+	glVertex3f(434 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(422 / xx, 1 - (664 / yy), 0.0);
+
+	glVertex3f(434 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(422 / xx, 1 - (664 / yy), 0.0);
+	glVertex3f(434 / xx, 1 - (676 / yy), 0.0);
+
+	glVertex3f(422 / xx, 1 - (644 / yy), 0.0);
+	glVertex3f(434 / xx, 1 - (676 / yy), 0.0);
+	glVertex3f(426 / xx, 1 - (687 / yy), 0.0);
+
+	glVertex3f(434 / xx, 1 - (676 / yy), 0.0);
+	glVertex3f(426 / xx, 1 - (687 / yy), 0.0);
+	glVertex3f(437 / xx, 1 - (690 / yy), 0.0);
+
+	glVertex3f(426 / xx, 1 - (687 / yy), 0.0);
+	glVertex3f(437 / xx, 1 - (690 / yy), 0.0);
+	glVertex3f(433 / xx, 1 - (707 / yy), 0.0);
+
+	glVertex3f(437 / xx, 1 - (690 / yy), 0.0);
+	glVertex3f(433 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(446 / xx, 1 - (701 / yy), 0.0);
+
+	glVertex3f(433 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(446 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(446 / xx, 1 - (717 / yy), 0.0);
+
+	glVertex3f(446 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(446 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(455 / xx, 1 - (705 / yy), 0.0);
+
+	glVertex3f(446 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(455 / xx, 1 - (705 / yy), 0.0);
+	glVertex3f(458 / xx, 1 - (719 / yy), 0.0);
+
+	glVertex3f(455 / xx, 1 - (705 / yy), 0.0);
+	glVertex3f(458 / xx, 1 - (719 / yy), 0.0);
+	glVertex3f(464 / xx, 1 - (700 / yy), 0.0);
+
+	glVertex3f(458 / xx, 1 - (719 / yy), 0.0);
+	glVertex3f(464 / xx, 1 - (700 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (711 / yy), 0.0);
+
+	glVertex3f(464 / xx, 1 - (700 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (711 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f(471 / xx, 1 - (711 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(484 / xx, 1 - (683 / yy), 0.0);
+
+	glVertex3f(471 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(484 / xx, 1 - (683 / yy), 0.0);
+	glVertex3f(474 / xx, 1 - (678 / yy), 0.0);
+
+	//C
 	float chungh;
 	chungh = (499 - 260);
+	glVertex3f((260 + chungh) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((269 + chungh) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((260 + chungh) / xx, 1 - (715 / yy), 0.0);
 
+	glVertex3f((260 + chungh) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((269 + chungh) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((269 + chungh) / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f((269 + chungh) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((268 + chungh) / xx, 1 - (676 / yy), 0.0);
+	glVertex3f((271 + chungh) / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f((269 + chungh) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((271 + chungh) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((277 + chungh) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((269 + chungh) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((277 + chungh) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + chungh) / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f((277 + chungh) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + chungh) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((284 + chungh) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((277 + chungh) / xx, 1 - (638 / yy), 0.0);
+	glVertex3f((284 + chungh) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + chungh) / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f((284 + chungh) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + chungh) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + chungh) / xx, 1 - (643 / yy), 0.0);
+
+	glVertex3f((291 + chungh) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + chungh) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + chungh) / xx, 1 - (654 / yy), 0.0);
+
+	glVertex3f((299 + chungh) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + chungh) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + chungh) / xx, 1 - (660 / yy), 0.0);
+
+	glVertex3f((292 + chungh) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + chungh) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + chungh) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((302 + chungh) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + chungh) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((302 + chungh) / xx, 1 - (716 / yy), 0.0);
+
+	//h
+
+	glVertex3f(555 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(565 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(565 / xx, 1 - (699 / yy), 0.0);
+
+	glVertex3f(555 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(557 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(565 / xx, 1 - (699 / yy), 0.0);
+
+	glVertex3f(557 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(565 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(566 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(565 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(566 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(571 / xx, 1 - (707 / yy), 0.0);
+
+	glVertex3f(566 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(571 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(575 / xx, 1 - (717 / yy), 0.0);
+
+	glVertex3f(571 / xx, 1 - (707 / yy), 0.0);
+	glVertex3f(575 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(578 / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f(575 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(578 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(583 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(578 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(583 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(584 / xx, 1 - (701 / yy), 0.0);
+
+	glVertex3f(583 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(584 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(588 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(584 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(588 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(588 / xx, 1 - (684 / yy), 0.0);
+
+	glVertex3f(588 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(588 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(598 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(588 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(598 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(598 / xx, 1 - (636 / yy), 0.0);
+
+	//u
 	float chungn;
 	chungn = (615 - 260);
+	glVertex3f((260 + chungn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((269 + chungn) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((260 + chungn) / xx, 1 - (715 / yy), 0.0);
 
+	glVertex3f((260 + chungn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((269 + chungn) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((269 + chungn) / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f((269 + chungn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((268 + chungn) / xx, 1 - (676 / yy), 0.0);
+	glVertex3f((271 + chungn) / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f((269 + chungn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((271 + chungn) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((277 + chungn) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((269 + chungn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((277 + chungn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + chungn) / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f((277 + chungn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + chungn) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((284 + chungn) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((277 + chungn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((284 + chungn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + chungn) / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f((284 + chungn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + chungn) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + chungn) / xx, 1 - (643 / yy), 0.0);
+
+	glVertex3f((291 + chungn) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + chungn) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + chungn) / xx, 1 - (654 / yy), 0.0);
+
+	glVertex3f((299 + chungn) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + chungn) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + chungn) / xx, 1 - (660 / yy), 0.0);
+
+	glVertex3f((292 + chungn) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + chungn) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + chungn) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((302 + chungn) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + chungn) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((302 + chungn) / xx, 1 - (716 / yy), 0.0);
+
+	//n
 	float chungg;
 	chungg = (670 - 201);
+	glVertex3f((201 + chungg) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((217 + chungg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((212 + chungg) / xx, 1 - (655 / yy), 0.0);
 
+	glVertex3f((217 + chungg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((208 + chungg) / xx, 1 - (642 / yy), 0.0);
+	glVertex3f((201 + chungg) / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f((217 + chungg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((208 + chungg) / xx, 1 - (642 / yy), 0.0);
+	glVertex3f((215 + chungg) / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f((217 + chungg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((215 + chungg) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((236 + chungg) / xx, 1 - (637 / yy), 0.0);
+
+	glVertex3f((217 + chungg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((236 + chungg) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((229 + chungg) / xx, 1 - (645 / yy), 0.0);
+
+	glVertex3f((215 + chungg) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((222 + chungg) / xx, 1 - (633 / yy), 0.0);
+	glVertex3f((236 + chungg) / xx, 1 - (637 / yy), 0.0);
+
+	glVertex3f((236 + chungg) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((229 + chungg) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((242 + chungg) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((229 + chungg) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((242 + chungg) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((235 + chungg) / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f((242 + chungg) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((235 + chungg) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((245 + chungg) / xx, 1 - (664 / yy), 0.0);
+
+	glVertex3f((235 + chungg) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((245 + chungg) / xx, 1 - (664 / yy), 0.0);
+	glVertex3f((238 + chungg) / xx, 1 - (678 / yy), 0.0);
+
+	glVertex3f((245 + chungg) / xx, 1 - (664 / yy), 0.0);
+	glVertex3f((238 + chungg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((246 + chungg) / xx, 1 - (688 / yy), 0.0);
+
+	glVertex3f((238 + chungg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((246 + chungg) / xx, 1 - (688 / yy), 0.0);
+	glVertex3f((235 + chungg) / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f((246 + chungg) / xx, 1 - (688 / yy), 0.0);
+	glVertex3f((235 + chungg) / xx, 1 - (691 / yy), 0.0);
+	glVertex3f((242 + chungg) / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f((235 + chungg) / xx, 1 - (691 / yy), 0.0);
+	glVertex3f((242 + chungg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((230 + chungg) / xx, 1 - (705 / yy), 0.0);
+
+	glVertex3f((242 + chungg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((230 + chungg) / xx, 1 - (705 / yy), 0.0);
+	glVertex3f((233 + chungg) / xx, 1 - (714 / yy), 0.0);
+
+	glVertex3f((230 + chungg) / xx, 1 - (705 / yy), 0.0);
+	glVertex3f((233 + chungg) / xx, 1 - (714 / yy), 0.0);
+	glVertex3f((224 + chungg) / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f((233 + chungg) / xx, 1 - (714 / yy), 0.0);
+	glVertex3f((224 + chungg) / xx, 1 - (708 / yy), 0.0);
+	glVertex3f((215 + chungg) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((224 + chungg) / xx, 1 - (708 / yy), 0.0);
+	glVertex3f((215 + chungg) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((216 + chungg) / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f((215 + chungg) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((216 + chungg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((206 + chungg) / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f((216 + chungg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((206 + chungg) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((211 + chungg) / xx, 1 - (692 / yy), 0.0);
+
+	glVertex3f((206 + chungg) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((211 + chungg) / xx, 1 - (692 / yy), 0.0);
+	glVertex3f((201 + chungg) / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f((211 + chungg) / xx, 1 - (692 / yy), 0.0);
+	glVertex3f((201 + chungg) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((209 + chungg) / xx, 1 - (678 / yy), 0.0);
+
+	glVertex3f((201 + chungg) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((209 + chungg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((202 + chungg) / xx, 1 - (670 / yy), 0.0);
+
+	glVertex3f((209 + chungg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((202 + chungg) / xx, 1 - (670 / yy), 0.0);
+	glVertex3f((211 + chungg) / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f((202 + chungg) / xx, 1 - (670 / yy), 0.0);
+	glVertex3f((211 + chungg) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((202 + chungg) / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f(705 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(713 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(714 / xx, 1 - (726 / yy), 0.0);
+
+	glVertex3f(705 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(714 / xx, 1 - (726 / yy), 0.0);
+	glVertex3f(705 / xx, 1 - (724 / yy), 0.0);
+
+	glVertex3f(714 / xx, 1 - (726 / yy), 0.0);
+	glVertex3f(705 / xx, 1 - (724 / yy), 0.0);
+	glVertex3f(708 / xx, 1 - (738 / yy), 0.0);
+
+	glVertex3f(705 / xx, 1 - (724 / yy), 0.0);
+	glVertex3f(708 / xx, 1 - (738 / yy), 0.0);
+	glVertex3f(698 / xx, 1 - (735 / yy), 0.0);
+
+	glVertex3f(708 / xx, 1 - (738 / yy), 0.0);
+	glVertex3f(698 / xx, 1 - (735 / yy), 0.0);
+	glVertex3f(701 / xx, 1 - (746 / yy), 0.0);
+
+	glVertex3f(698 / xx, 1 - (735 / yy), 0.0);
+	glVertex3f(701 / xx, 1 - (746 / yy), 0.0);
+	glVertex3f(693 / xx, 1 - (739 / yy), 0.0);
+
+	glVertex3f(701 / xx, 1 - (746 / yy), 0.0);
+	glVertex3f(693 / xx, 1 - (739 / yy), 0.0);
+	glVertex3f(692 / xx, 1 - (750 / yy), 0.0);
+
+	glVertex3f(693 / xx, 1 - (739 / yy), 0.0);
+	glVertex3f(692 / xx, 1 - (750 / yy), 0.0);
+	glVertex3f(683 / xx, 1 - (736 / yy), 0.0);
+
+	glVertex3f(692 / xx, 1 - (750 / yy), 0.0);
+	glVertex3f(683 / xx, 1 - (736 / yy), 0.0);
+	glVertex3f(682 / xx, 1 - (747 / yy), 0.0);
+
+	glVertex3f(683 / xx, 1 - (736 / yy), 0.0);
+	glVertex3f(682 / xx, 1 - (747 / yy), 0.0);
+	glVertex3f(676 / xx, 1 - (723 / yy), 0.0);
+
+	glVertex3f(682 / xx, 1 - (747 / yy), 0.0);
+	glVertex3f(676 / xx, 1 - (723 / yy), 0.0);
+	glVertex3f(676 / xx, 1 - (744 / yy), 0.0);
+
+	glVertex3f(676 / xx, 1 - (723 / yy), 0.0);
+	glVertex3f(676 / xx, 1 - (744 / yy), 0.0);
+	glVertex3f(671 / xx, 1 - (723 / yy), 0.0);
+
+	//g
+
+	glVertex3f(753 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(763 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(763 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(753 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(763 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(753 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(763 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(763 / xx, 1 - (663 / yy), 0.0);
+	glVertex3f(798 / xx, 1 - (652 / yy), 0.0);
+
+	glVertex3f(763 / xx, 1 - (663 / yy), 0.0);
+	glVertex3f(798 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(798 / xx, 1 - (663 / yy), 0.0);
+
+	glVertex3f(798 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(798 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(808 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(798 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(808 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(808 / xx, 1 - (603 / yy), 0.0);
+
+	//H
+
+
+	glVertex3f(863 / xx, 1 - (657 / yy), 0.0);
+	glVertex3f(853 / xx, 1 - (658 / yy), 0.0);
+	glVertex3f(859 / xx, 1 - (642 / yy), 0.0);
+
+	glVertex3f(853 / xx, 1 - (658 / yy), 0.0);
+	glVertex3f(859 / xx, 1 - (642 / yy), 0.0);
+	glVertex3f(848 / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f(859 / xx, 1 - (642 / yy), 0.0);
+	glVertex3f(848 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(849 / xx, 1 - (634 / yy), 0.0);
+
+	glVertex3f(848 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(849 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(838 / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f(849 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(838 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(839 / xx, 1 - (633 / yy), 0.0);
+
+	glVertex3f(838 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(839 / xx, 1 - (633 / yy), 0.0);
+	glVertex3f(831 / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f(839 / xx, 1 - (633 / yy), 0.0);
+	glVertex3f(831 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(828 / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f(831 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(828 / xx, 1 - (638 / yy), 0.0);
+	glVertex3f(824 / xx, 1 - (648 / yy), 0.0);
+
+	glVertex3f(831 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(824 / xx, 1 - (648 / yy), 0.0);
+	glVertex3f(825 / xx, 1 - (662 / yy), 0.0);
+
+	glVertex3f(831 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(825 / xx, 1 - (662 / yy), 0.0);
+	glVertex3f(827 / xx, 1 - (671 / yy), 0.0);
+
+	glVertex3f(831 / xx, 1 - (656 / yy), 0.0);
+	glVertex3f(827 / xx, 1 - (671 / yy), 0.0);
+	glVertex3f(839 / xx, 1 - (664 / yy), 0.0);
+
+	glVertex3f(827 / xx, 1 - (671 / yy), 0.0);
+	glVertex3f(839 / xx, 1 - (664 / yy), 0.0);
+	glVertex3f(838 / xx, 1 - (677 / yy), 0.0);
+
+	glVertex3f(839 / xx, 1 - (664 / yy), 0.0);
+	glVertex3f(838 / xx, 1 - (677 / yy), 0.0);
+	glVertex3f(852 / xx, 1 - (670 / yy), 0.0);
+
+	glVertex3f(838 / xx, 1 - (677 / yy), 0.0);
+	glVertex3f(852 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(850 / xx, 1 - (685 / yy), 0.0);
+
+	glVertex3f(852 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(850 / xx, 1 - (685 / yy), 0.0);
+	glVertex3f(860 / xx, 1 - (674 / yy), 0.0);
+
+	glVertex3f(850 / xx, 1 - (685 / yy), 0.0);
+	glVertex3f(860 / xx, 1 - (674 / yy), 0.0);
+	glVertex3f(855 / xx, 1 - (688 / yy), 0.0);
+
+	glVertex3f(860 / xx, 1 - (674 / yy), 0.0);
+	glVertex3f(855 / xx, 1 - (688 / yy), 0.0);
+	glVertex3f(864 / xx, 1 - (683 / yy), 0.0);
+
+	glVertex3f(855 / xx, 1 - (688 / yy), 0.0);
+	glVertex3f(864 / xx, 1 - (683 / yy), 0.0);
+	glVertex3f(855 / xx, 1 - (699 / yy), 0.0);
+
+	glVertex3f(864 / xx, 1 - (683 / yy), 0.0);
+	glVertex3f(855 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(864 / xx, 1 - (697 / yy), 0.0);
+
+	glVertex3f(855 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(864 / xx, 1 - (697 / yy), 0.0);
+	glVertex3f(860 / xx, 1 - (709 / yy), 0.0);
+
+	glVertex3f(855 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(860 / xx, 1 - (709 / yy), 0.0);
+	glVertex3f(852 / xx, 1 - (714 / yy), 0.0);
+
+	glVertex3f(855 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(852 / xx, 1 - (714 / yy), 0.0);
+	glVertex3f(843 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(852 / xx, 1 - (714 / yy), 0.0);
+	glVertex3f(843 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(841 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(843 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(841 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(838 / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f(841 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(838 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(830 / xx, 1 - (711 / yy), 0.0);
+
+	glVertex3f(838 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(830 / xx, 1 - (711 / yy), 0.0);
+	glVertex3f(832 / xx, 1 - (698 / yy), 0.0);
+
+	glVertex3f(830 / xx, 1 - (711 / yy), 0.0);
+	glVertex3f(832 / xx, 1 - (698 / yy), 0.0);
+	glVertex3f(824 / xx, 1 - (703 / yy), 0.0);
+
+	glVertex3f(832 / xx, 1 - (698 / yy), 0.0);
+	glVertex3f(824 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(831 / xx, 1 - (689 / yy), 0.0);
+
+	glVertex3f(824 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(831 / xx, 1 - (689 / yy), 0.0);
+	glVertex3f(823 / xx, 1 - (691 / yy), 0.0);
+
+
+	//s
 	float hsingi;
 	hsingi = (878 - 176);
+
+	glVertex3f((176 + hsingi) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((187 + hsingi) / xx, 1 - (621 / yy), 0.0);
+	glVertex3f((187 + hsingi) / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f((176 + hsingi) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((187 + hsingi) / xx, 1 - (621 / yy), 0.0);
+	glVertex3f((176 + hsingi) / xx, 1 - (621 / yy), 0.0);
+
+	glVertex3f((176 + hsingi) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((187 + hsingi) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((176 + hsingi) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((187 + hsingi) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((176 + hsingi) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((187 + hsingi) / xx, 1 - (716 / yy), 0.0);
+
+	//i
 
 	float hsingn;
 	hsingn = (906 - 260);
 
+	glVertex3f((260 + hsingn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((269 + hsingn) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((260 + hsingn) / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f((260 + hsingn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((269 + hsingn) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((269 + hsingn) / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f((269 + hsingn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((268 + hsingn) / xx, 1 - (676 / yy), 0.0);
+	glVertex3f((271 + hsingn) / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f((269 + hsingn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((271 + hsingn) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((277 + hsingn) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((269 + hsingn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((277 + hsingn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + hsingn) / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f((277 + hsingn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + hsingn) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((284 + hsingn) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((277 + hsingn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((284 + hsingn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + hsingn) / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f((284 + hsingn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + hsingn) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + hsingn) / xx, 1 - (643 / yy), 0.0);
+
+	glVertex3f((291 + hsingn) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + hsingn) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + hsingn) / xx, 1 - (654 / yy), 0.0);
+
+	glVertex3f((299 + hsingn) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + hsingn) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + hsingn) / xx, 1 - (660 / yy), 0.0);
+
+	glVertex3f((292 + hsingn) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + hsingn) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + hsingn) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((302 + hsingn) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + hsingn) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((302 + hsingn) / xx, 1 - (716 / yy), 0.0);
+
+	//n
+
 	float hsingg;
 	hsingg = (995 - 705);
+	glVertex3f((201 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((212 + chungg + hsingg) / xx, 1 - (655 / yy), 0.0);
 
+	glVertex3f((217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((208 + chungg + hsingg) / xx, 1 - (642 / yy), 0.0);
+	glVertex3f((201 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f((217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((208 + chungg + hsingg) / xx, 1 - (642 / yy), 0.0);
+	glVertex3f((215 + chungg + hsingg) / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f((217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((215 + chungg + hsingg) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0);
+
+	glVertex3f((217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((229 + chungg + hsingg) / xx, 1 - (645 / yy), 0.0);
+
+	glVertex3f((215 + chungg + hsingg) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((222 + chungg + hsingg) / xx, 1 - (633 / yy), 0.0);
+	glVertex3f((236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0);
+
+	glVertex3f((236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((229 + chungg + hsingg) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((242 + chungg + hsingg) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((229 + chungg + hsingg) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((242 + chungg + hsingg) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((235 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0);
+
+	glVertex3f((242 + chungg + hsingg) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((235 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((245 + chungg + hsingg) / xx, 1 - (664 / yy), 0.0);
+
+	glVertex3f((235 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((245 + chungg + hsingg) / xx, 1 - (664 / yy), 0.0);
+	glVertex3f((238 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0);
+
+	glVertex3f((245 + chungg + hsingg) / xx, 1 - (664 / yy), 0.0);
+	glVertex3f((238 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((246 + chungg + hsingg) / xx, 1 - (688 / yy), 0.0);
+
+	glVertex3f((238 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((246 + chungg + hsingg) / xx, 1 - (688 / yy), 0.0);
+	glVertex3f((235 + chungg + hsingg) / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f((246 + chungg + hsingg) / xx, 1 - (688 / yy), 0.0);
+	glVertex3f((235 + chungg + hsingg) / xx, 1 - (691 / yy), 0.0);
+	glVertex3f((242 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f((235 + chungg + hsingg) / xx, 1 - (691 / yy), 0.0);
+	glVertex3f((242 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((230 + chungg + hsingg) / xx, 1 - (705 / yy), 0.0);
+
+	glVertex3f((242 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((230 + chungg + hsingg) / xx, 1 - (705 / yy), 0.0);
+	glVertex3f((233 + chungg + hsingg) / xx, 1 - (714 / yy), 0.0);
+
+	glVertex3f((230 + chungg + hsingg) / xx, 1 - (705 / yy), 0.0);
+	glVertex3f((233 + chungg + hsingg) / xx, 1 - (714 / yy), 0.0);
+	glVertex3f((224 + chungg + hsingg) / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f((233 + chungg + hsingg) / xx, 1 - (714 / yy), 0.0);
+	glVertex3f((224 + chungg + hsingg) / xx, 1 - (708 / yy), 0.0);
+	glVertex3f((215 + chungg + hsingg) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((224 + chungg + hsingg) / xx, 1 - (708 / yy), 0.0);
+	glVertex3f((215 + chungg + hsingg) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((216 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f((215 + chungg + hsingg) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((216 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((206 + chungg + hsingg) / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f((216 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((206 + chungg + hsingg) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((211 + chungg + hsingg) / xx, 1 - (692 / yy), 0.0);
+
+	glVertex3f((206 + chungg + hsingg) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((211 + chungg + hsingg) / xx, 1 - (692 / yy), 0.0);
+	glVertex3f((201 + chungg + hsingg) / xx, 1 - (694 / yy), 0.0);
+
+	glVertex3f((211 + chungg + hsingg) / xx, 1 - (692 / yy), 0.0);
+	glVertex3f((201 + chungg + hsingg) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((209 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0);
+
+	glVertex3f((201 + chungg + hsingg) / xx, 1 - (694 / yy), 0.0);
+	glVertex3f((209 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((202 + chungg + hsingg) / xx, 1 - (670 / yy), 0.0);
+
+	glVertex3f((209 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0);
+	glVertex3f((202 + chungg + hsingg) / xx, 1 - (670 / yy), 0.0);
+	glVertex3f((211 + chungg + hsingg) / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f((202 + chungg + hsingg) / xx, 1 - (670 / yy), 0.0);
+	glVertex3f((211 + chungg + hsingg) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((202 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0);
+
+
+	glVertex3f((705 + hsingg) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((713 + hsingg) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((714 + hsingg) / xx, 1 - (726 / yy), 0.0);
+
+	glVertex3f((705 + hsingg) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((714 + hsingg) / xx, 1 - (726 / yy), 0.0);
+	glVertex3f((705 + hsingg) / xx, 1 - (724 / yy), 0.0);
+
+	glVertex3f((714 + hsingg) / xx, 1 - (726 / yy), 0.0);
+	glVertex3f((705 + hsingg) / xx, 1 - (724 / yy), 0.0);
+	glVertex3f((708 + hsingg) / xx, 1 - (738 / yy), 0.0);
+
+	glVertex3f((705 + hsingg) / xx, 1 - (724 / yy), 0.0);
+	glVertex3f((708 + hsingg) / xx, 1 - (738 / yy), 0.0);
+	glVertex3f((698 + hsingg) / xx, 1 - (735 / yy), 0.0);
+
+	glVertex3f((708 + hsingg) / xx, 1 - (738 / yy), 0.0);
+	glVertex3f((698 + hsingg) / xx, 1 - (735 / yy), 0.0);
+	glVertex3f((701 + hsingg) / xx, 1 - (746 / yy), 0.0);
+
+	glVertex3f((698 + hsingg) / xx, 1 - (735 / yy), 0.0);
+	glVertex3f((701 + hsingg) / xx, 1 - (746 / yy), 0.0);
+	glVertex3f((693 + hsingg) / xx, 1 - (739 / yy), 0.0);
+
+	glVertex3f((701 + hsingg) / xx, 1 - (746 / yy), 0.0);
+	glVertex3f((693 + hsingg) / xx, 1 - (739 / yy), 0.0);
+	glVertex3f((692 + hsingg) / xx, 1 - (750 / yy), 0.0);
+
+	glVertex3f((693 + hsingg) / xx, 1 - (739 / yy), 0.0);
+	glVertex3f((692 + hsingg) / xx, 1 - (750 / yy), 0.0);
+	glVertex3f((683 + hsingg) / xx, 1 - (736 / yy), 0.0);
+
+	glVertex3f((692 + hsingg) / xx, 1 - (750 / yy), 0.0);
+	glVertex3f((683 + hsingg) / xx, 1 - (736 / yy), 0.0);
+	glVertex3f((682 + hsingg) / xx, 1 - (747 / yy), 0.0);
+
+	glVertex3f((683 + hsingg) / xx, 1 - (736 / yy), 0.0);
+	glVertex3f((682 + hsingg) / xx, 1 - (747 / yy), 0.0);
+	glVertex3f((676 + hsingg) / xx, 1 - (723 / yy), 0.0);
+
+	glVertex3f((682 + hsingg) / xx, 1 - (747 / yy), 0.0);
+	glVertex3f((676 + hsingg) / xx, 1 - (723 / yy), 0.0);
+	glVertex3f((676 + hsingg) / xx, 1 - (744 / yy), 0.0);
+
+	glVertex3f((676 + hsingg) / xx, 1 - (723 / yy), 0.0);
+	glVertex3f((676 + hsingg) / xx, 1 - (744 / yy), 0.0);
+	glVertex3f((671 + hsingg) / xx, 1 - (723 / yy), 0.0);
+
+
+	//g
+
+
+	glVertex3f(1053 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(1043 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(1054 / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f(1043 / xx, 1 - (604 / yy), 0.0);
+	glVertex3f(1054 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(1045 / xx, 1 - (690 / yy), 0.0);
+
+	glVertex3f(1054 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(1045 / xx, 1 - (690 / yy), 0.0);
+	glVertex3f(1051 / xx, 1 - (708 / yy), 0.0);
+
+	glVertex3f(1054 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(1051 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(1063 / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f(1051 / xx, 1 - (708 / yy), 0.0);
+	glVertex3f(1063 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(1060 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(1063 / xx, 1 - (704 / yy), 0.0);
+	glVertex3f(1060 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(1073 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(1060 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(1073 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(1075 / xx, 1 - (718 / yy), 0.0);
+
+	glVertex3f(1073 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(1075 / xx, 1 - (718 / yy), 0.0);
+	glVertex3f(1082 / xx, 1 - (699 / yy), 0.0);
+
+	glVertex3f(1075 / xx, 1 - (718 / yy), 0.0);
+	glVertex3f(1082 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(1084 / xx, 1 - (714 / yy), 0.0);
+
+	glVertex3f(1082 / xx, 1 - (699 / yy), 0.0);
+	glVertex3f(1084 / xx, 1 - (714 / yy), 0.0);
+	glVertex3f(1087 / xx, 1 - (692 / yy), 0.0);
+
+	glVertex3f(1084 / xx, 1 - (714 / yy), 0.0);
+	glVertex3f(1087 / xx, 1 - (692 / yy), 0.0);
+	glVertex3f(1094 / xx, 1 - (701 / yy), 0.0);
+
+	glVertex3f(1087 / xx, 1 - (692 / yy), 0.0);
+	glVertex3f(1094 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(1089 / xx, 1 - (675 / yy), 0.0);
+
+	glVertex3f(1094 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(1089 / xx, 1 - (675 / yy), 0.0);
+	glVertex3f(1097 / xx, 1 - (690 / yy), 0.0);
+
+	glVertex3f(1089 / xx, 1 - (675 / yy), 0.0);
+	glVertex3f(1097 / xx, 1 - (690 / yy), 0.0);
+	glVertex3f(1088 / xx, 1 - (603 / yy), 0.0);
+
+	glVertex3f(1097 / xx, 1 - (690 / yy), 0.0);
+	glVertex3f(1088 / xx, 1 - (603 / yy), 0.0);
+	glVertex3f(1098 / xx, 1 - (603 / yy), 0.0);
+
+
+
+	//U
 	float universityn;
 	universityn = (1117 - 260);
+	glVertex3f((260 + universityn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((269 + universityn) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((260 + universityn) / xx, 1 - (715 / yy), 0.0);
 
+	glVertex3f((260 + universityn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((269 + universityn) / xx, 1 - (715 / yy), 0.0);
+	glVertex3f((269 + universityn) / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f((269 + universityn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((268 + universityn) / xx, 1 - (676 / yy), 0.0);
+	glVertex3f((271 + universityn) / xx, 1 - (658 / yy), 0.0);
+
+	glVertex3f((269 + universityn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((271 + universityn) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((277 + universityn) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((269 + universityn) / xx, 1 - (645 / yy), 0.0);
+	glVertex3f((277 + universityn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + universityn) / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f((277 + universityn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((277 + universityn) / xx, 1 - (637 / yy), 0.0);
+	glVertex3f((284 + universityn) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((277 + universityn) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((284 + universityn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + universityn) / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f((284 + universityn) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((291 + universityn) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + universityn) / xx, 1 - (643 / yy), 0.0);
+
+	glVertex3f((291 + universityn) / xx, 1 - (635 / yy), 0.0);
+	glVertex3f((299 + universityn) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + universityn) / xx, 1 - (654 / yy), 0.0);
+
+	glVertex3f((299 + universityn) / xx, 1 - (643 / yy), 0.0);
+	glVertex3f((292 + universityn) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + universityn) / xx, 1 - (660 / yy), 0.0);
+
+	glVertex3f((292 + universityn) / xx, 1 - (654 / yy), 0.0);
+	glVertex3f((302 + universityn) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + universityn) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((302 + universityn) / xx, 1 - (660 / yy), 0.0);
+	glVertex3f((292 + universityn) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((302 + universityn) / xx, 1 - (716 / yy), 0.0);
+	//n
 	float uni;
 	uni = (1173 - 176);
+	glVertex3f((176 + uni) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((187 + uni) / xx, 1 - (621 / yy), 0.0);
+	glVertex3f((187 + uni) / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f((176 + uni) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((187 + uni) / xx, 1 - (621 / yy), 0.0);
+	glVertex3f((176 + uni) / xx, 1 - (621 / yy), 0.0);
+
+	glVertex3f((176 + uni) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((187 + uni) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((176 + uni) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((187 + uni) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((176 + uni) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((187 + uni) / xx, 1 - (716 / yy), 0.0);
+
+	//i
+
+
+
+	glVertex3f(1195 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1206 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1214 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(1206 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1214 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(1224 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(1214 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(1224 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(1233 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(1224 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(1233 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1243 / xx, 1 - (635 / yy), 0.0);
+
+	//v
+
+	glVertex3f(1261 / xx, 1 - (680 / yy), 0.0);
+	glVertex3f(1262 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(1297 / xx, 1 - (680 / yy), 0.0);
+
+	glVertex3f(1262 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(1297 / xx, 1 - (680 / yy), 0.0);
+	glVertex3f(1288 / xx, 1 - (669 / yy), 0.0);
+
+	glVertex3f(1288 / xx, 1 - (669 / yy), 0.0);
+	glVertex3f(1297 / xx, 1 - (680 / yy), 0.0);
+	glVertex3f(1296 / xx, 1 - (659 / yy), 0.0);
+
+	glVertex3f(1288 / xx, 1 - (669 / yy), 0.0);
+	glVertex3f(1296 / xx, 1 - (659 / yy), 0.0);
+	glVertex3f(1286 / xx, 1 - (662 / yy), 0.0);
+
+	glVertex3f(1296 / xx, 1 - (659 / yy), 0.0);
+	glVertex3f(1286 / xx, 1 - (662 / yy), 0.0);
+	glVertex3f(1292 / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f(1286 / xx, 1 - (662 / yy), 0.0);
+	glVertex3f(1292 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1284 / xx, 1 - (652 / yy), 0.0);
+
+	glVertex3f(1292 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1284 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(1285 / xx, 1 - (636 / yy), 0.0);
+
+	glVertex3f(1284 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(1285 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(1277 / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f(1285 / xx, 1 - (636 / yy), 0.0);
+	glVertex3f(1277 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(1270 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(1277 / xx, 1 - (646 / yy), 0.0);
+	glVertex3f(1270 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1269 / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f(1270 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1269 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1260 / xx, 1 - (639 / yy), 0.0);
+
+	glVertex3f(1269 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1260 / xx, 1 - (639 / yy), 0.0);
+	glVertex3f(1266 / xx, 1 - (651 / yy), 0.0);
+
+	glVertex3f(1260 / xx, 1 - (639 / yy), 0.0);
+	glVertex3f(1266 / xx, 1 - (651 / yy), 0.0);
+	glVertex3f(1254 / xx, 1 - (652 / yy), 0.0);
+
+	glVertex3f(1266 / xx, 1 - (651 / yy), 0.0);
+	glVertex3f(1254 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(1262 / xx, 1 - (659 / yy), 0.0);
+
+	glVertex3f(1254 / xx, 1 - (652 / yy), 0.0);
+	glVertex3f(1262 / xx, 1 - (659 / yy), 0.0);
+	glVertex3f(1252 / xx, 1 - (667 / yy), 0.0);
+
+	glVertex3f(1262 / xx, 1 - (659 / yy), 0.0);
+	glVertex3f(1252 / xx, 1 - (667 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (670 / yy), 0.0);
+
+	glVertex3f(1252 / xx, 1 - (667 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(1252 / xx, 1 - (684 / yy), 0.0);
+
+	glVertex3f(1261 / xx, 1 - (670 / yy), 0.0);
+	glVertex3f(1252 / xx, 1 - (684 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (680 / yy), 0.0);
+
+	glVertex3f(1252 / xx, 1 - (684 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (680 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (687 / yy), 0.0);
+
+	glVertex3f(1261 / xx, 1 - (687 / yy), 0.0);
+	glVertex3f(1254 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(1252 / xx, 1 - (683 / yy), 0.0);
+
+	glVertex3f(1261 / xx, 1 - (687 / yy), 0.0);
+	glVertex3f(1254 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(1266 / xx, 1 - (701 / yy), 0.0);
+
+	glVertex3f(1254 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(1266 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (712 / yy), 0.0);
+
+	glVertex3f(1266 / xx, 1 - (701 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (712 / yy), 0.0);
+	glVertex3f(1272 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(1261 / xx, 1 - (712 / yy), 0.0);
+	glVertex3f(1272 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(1273 / xx, 1 - (717 / yy), 0.0);
+
+	glVertex3f(1272 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(1273 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(1279 / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f(1273 / xx, 1 - (717 / yy), 0.0);
+	glVertex3f(1279 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(1286 / xx, 1 - (715 / yy), 0.0);
+
+	glVertex3f(1279 / xx, 1 - (706 / yy), 0.0);
+	glVertex3f(1286 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(1284 / xx, 1 - (700 / yy), 0.0);
+
+	glVertex3f(1286 / xx, 1 - (715 / yy), 0.0);
+	glVertex3f(1284 / xx, 1 - (700 / yy), 0.0);
+	glVertex3f(1293 / xx, 1 - (703 / yy), 0.0);
+
+	glVertex3f(1284 / xx, 1 - (700 / yy), 0.0);
+	glVertex3f(1293 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(1287 / xx, 1 - (691 / yy), 0.0);
+
+	glVertex3f(1293 / xx, 1 - (703 / yy), 0.0);
+	glVertex3f(1287 / xx, 1 - (691 / yy), 0.0);
+	glVertex3f(1296 / xx, 1 - (692 / yy), 0.0);
+
+
+
+	//e
+
+	glVertex3f(1310 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1310 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(1320 / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f(1310 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1320 / xx, 1 - (716 / yy), 0.0);
+	glVertex3f(1320 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(1319 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1321 / xx, 1 - (671 / yy), 0.0);
+	glVertex3f(1324 / xx, 1 - (659 / yy), 0.0);
+
+	glVertex3f(1319 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1324 / xx, 1 - (659 / yy), 0.0);
+	glVertex3f(1324 / xx, 1 - (650 / yy), 0.0);
+
+	glVertex3f(1319 / xx, 1 - (647 / yy), 0.0);
+	glVertex3f(1324 / xx, 1 - (650 / yy), 0.0);
+	glVertex3f(1322 / xx, 1 - (639 / yy), 0.0);
+
+	glVertex3f(1324 / xx, 1 - (650 / yy), 0.0);
+	glVertex3f(1322 / xx, 1 - (639 / yy), 0.0);
+	glVertex3f(1331 / xx, 1 - (649 / yy), 0.0);
+
+	glVertex3f(1322 / xx, 1 - (639 / yy), 0.0);
+	glVertex3f(1331 / xx, 1 - (649 / yy), 0.0);
+	glVertex3f(1332 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(1331 / xx, 1 - (649 / yy), 0.0);
+	glVertex3f(1329 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1337 / xx, 1 - (653 / yy), 0.0);
+
+	glVertex3f(1329 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1337 / xx, 1 - (653 / yy), 0.0);
+	glVertex3f(1339 / xx, 1 - (638 / yy), 0.0);
+
+
+	//r
 
 	float universitys;
 	universitys = (1376 - 853);
 
+	glVertex3f((863 + universitys) / xx, 1 - (657 / yy), 0.0);
+	glVertex3f((853 + universitys) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((859 + universitys) / xx, 1 - (642 / yy), 0.0);
+
+	glVertex3f((853 + universitys) / xx, 1 - (658 / yy), 0.0);
+	glVertex3f((859 + universitys) / xx, 1 - (642 / yy), 0.0);
+	glVertex3f((848 + universitys) / xx, 1 - (646 / yy), 0.0);
+
+	glVertex3f((859 + universitys) / xx, 1 - (642 / yy), 0.0);
+	glVertex3f((848 + universitys) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((849 + universitys) / xx, 1 - (634 / yy), 0.0);
+
+	glVertex3f((848 + universitys) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((849 + universitys) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((838 + universitys) / xx, 1 - (647 / yy), 0.0);
+
+	glVertex3f((849 + universitys) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((838 + universitys) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((839 + universitys) / xx, 1 - (633 / yy), 0.0);
+
+	glVertex3f((838 + universitys) / xx, 1 - (647 / yy), 0.0);
+	glVertex3f((839 + universitys) / xx, 1 - (633 / yy), 0.0);
+	glVertex3f((831 + universitys) / xx, 1 - (656 / yy), 0.0);
+
+	glVertex3f((839 + universitys) / xx, 1 - (633 / yy), 0.0);
+	glVertex3f((831 + universitys) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((828 + universitys) / xx, 1 - (638 / yy), 0.0);
+
+	glVertex3f((831 + universitys) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((828 + universitys) / xx, 1 - (638 / yy), 0.0);
+	glVertex3f((824 + universitys) / xx, 1 - (648 / yy), 0.0);
+
+	glVertex3f((831 + universitys) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((824 + universitys) / xx, 1 - (648 / yy), 0.0);
+	glVertex3f((825 + universitys) / xx, 1 - (662 / yy), 0.0);
+
+	glVertex3f((831 + universitys) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((825 + universitys) / xx, 1 - (662 / yy), 0.0);
+	glVertex3f((827 + universitys) / xx, 1 - (671 / yy), 0.0);
+
+	glVertex3f((831 + universitys) / xx, 1 - (656 / yy), 0.0);
+	glVertex3f((827 + universitys) / xx, 1 - (671 / yy), 0.0);
+	glVertex3f((839 + universitys) / xx, 1 - (664 / yy), 0.0);
+
+	glVertex3f((827 + universitys) / xx, 1 - (671 / yy), 0.0);
+	glVertex3f((839 + universitys) / xx, 1 - (664 / yy), 0.0);
+	glVertex3f((838 + universitys) / xx, 1 - (677 / yy), 0.0);
+
+	glVertex3f((839 + universitys) / xx, 1 - (664 / yy), 0.0);
+	glVertex3f((838 + universitys) / xx, 1 - (677 / yy), 0.0);
+	glVertex3f((852 + universitys) / xx, 1 - (670 / yy), 0.0);
+
+	glVertex3f((838 + universitys) / xx, 1 - (677 / yy), 0.0);
+	glVertex3f((852 + universitys) / xx, 1 - (670 / yy), 0.0);
+	glVertex3f((850 + universitys) / xx, 1 - (685 / yy), 0.0);
+
+	glVertex3f((852 + universitys) / xx, 1 - (670 / yy), 0.0);
+	glVertex3f((850 + universitys) / xx, 1 - (685 / yy), 0.0);
+	glVertex3f((860 + universitys) / xx, 1 - (674 / yy), 0.0);
+
+	glVertex3f((850 + universitys) / xx, 1 - (685 / yy), 0.0);
+	glVertex3f((860 + universitys) / xx, 1 - (674 / yy), 0.0);
+	glVertex3f((855 + universitys) / xx, 1 - (688 / yy), 0.0);
+
+	glVertex3f((860 + universitys) / xx, 1 - (674 / yy), 0.0);
+	glVertex3f((855 + universitys) / xx, 1 - (688 / yy), 0.0);
+	glVertex3f((864 + universitys) / xx, 1 - (683 / yy), 0.0);
+
+	glVertex3f((855 + universitys) / xx, 1 - (688 / yy), 0.0);
+	glVertex3f((864 + universitys) / xx, 1 - (683 / yy), 0.0);
+	glVertex3f((855 + universitys) / xx, 1 - (699 / yy), 0.0);
+
+	glVertex3f((864 + universitys) / xx, 1 - (683 / yy), 0.0);
+	glVertex3f((855 + universitys) / xx, 1 - (699 / yy), 0.0);
+	glVertex3f((864 + universitys) / xx, 1 - (697 / yy), 0.0);
+
+	glVertex3f((855 + universitys) / xx, 1 - (699 / yy), 0.0);
+	glVertex3f((864 + universitys) / xx, 1 - (697 / yy), 0.0);
+	glVertex3f((860 + universitys) / xx, 1 - (709 / yy), 0.0);
+
+	glVertex3f((855 + universitys) / xx, 1 - (699 / yy), 0.0);
+	glVertex3f((860 + universitys) / xx, 1 - (709 / yy), 0.0);
+	glVertex3f((852 + universitys) / xx, 1 - (714 / yy), 0.0);
+
+	glVertex3f((855 + universitys) / xx, 1 - (699 / yy), 0.0);
+	glVertex3f((852 + universitys) / xx, 1 - (714 / yy), 0.0);
+	glVertex3f((843 + universitys) / xx, 1 - (706 / yy), 0.0);
+
+	glVertex3f((852 + universitys) / xx, 1 - (714 / yy), 0.0);
+	glVertex3f((843 + universitys) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((841 + universitys) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((843 + universitys) / xx, 1 - (706 / yy), 0.0);
+	glVertex3f((841 + universitys) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((838 + universitys) / xx, 1 - (704 / yy), 0.0);
+
+	glVertex3f((841 + universitys) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((838 + universitys) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((830 + universitys) / xx, 1 - (711 / yy), 0.0);
+
+	glVertex3f((838 + universitys) / xx, 1 - (704 / yy), 0.0);
+	glVertex3f((830 + universitys) / xx, 1 - (711 / yy), 0.0);
+	glVertex3f((832 + universitys) / xx, 1 - (698 / yy), 0.0);
+
+	glVertex3f((830 + universitys) / xx, 1 - (711 / yy), 0.0);
+	glVertex3f((832 + universitys) / xx, 1 - (698 / yy), 0.0);
+	glVertex3f((824 + universitys) / xx, 1 - (703 / yy), 0.0);
+
+	glVertex3f((832 + universitys) / xx, 1 - (698 / yy), 0.0);
+	glVertex3f((824 + universitys) / xx, 1 - (703 / yy), 0.0);
+	glVertex3f((831 + universitys) / xx, 1 - (689 / yy), 0.0);
+
+	glVertex3f((824 + universitys) / xx, 1 - (703 / yy), 0.0);
+	glVertex3f((831 + universitys) / xx, 1 - (689 / yy), 0.0);
+	glVertex3f((823 + universitys) / xx, 1 - (691 / yy), 0.0);
+
+
+	//s
 	float universi;
 	universi = (1400 - 176);
+	glVertex3f((176 + universi) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((187 + universi) / xx, 1 - (621 / yy), 0.0);
+	glVertex3f((187 + universi) / xx, 1 - (604 / yy), 0.0);
+
+	glVertex3f((176 + universi) / xx, 1 - (604 / yy), 0.0);
+	glVertex3f((187 + universi) / xx, 1 - (621 / yy), 0.0);
+	glVertex3f((176 + universi) / xx, 1 - (621 / yy), 0.0);
+
+	glVertex3f((176 + universi) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((187 + universi) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((176 + universi) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((187 + universi) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((176 + universi) / xx, 1 - (634 / yy), 0.0);
+	glVertex3f((187 + universi) / xx, 1 - (716 / yy), 0.0);
+
+	//i
 
 	float universityt;
 	universityt = (1424 - 140);
-	static GLfloat intertwined[] = { 
-		0.0, 0.0, 1.0, 13 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 13 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 23 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 13 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 23 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 23 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 23 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 60 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 23 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 23 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 60 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 60 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 60 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 60 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 68 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 60 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 68 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 68 / xx, 1 - (604 / yy), 0.0,
-		//N
+	glVertex3f((140 + universityt) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((163 + universityt) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((140 + universityt) / xx, 1 - (646 / yy), 0.0);
 
-		0.0, 0.0, 1.0,86 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 87 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 87 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 98 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 98 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 102 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 98 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 102 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 117 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 102 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 117 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 117 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, 100 / xx, 1 - (682 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, 100 / xx, 1 - (682 / yy), 0.0,
-		0.0, 0.0, 1.0, 92 / xx, 1 - (672 / yy), 0.0,
-		0.0, 0.0, 1.0, 100 / xx, 1 - (682 / yy), 0.0,
-		0.0, 0.0, 1.0, 92 / xx, 1 - (672 / yy), 0.0,
-		0.0, 0.0, 1.0, 93 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 92 / xx, 1 - (672 / yy), 0.0,
-		0.0, 0.0, 1.0, 93 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 84 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 93 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 84 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 88 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 93 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 88 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 88 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 101 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 88 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 101 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 101 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 101 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 101 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 109 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 101 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 109 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 109 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 116 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 116 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 120 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, 116 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 120 / xx, 1 - (704 / yy), 0.0,
-		//a
+	glVertex3f((140 + universityt) / xx, 1 - (636 / yy), 0.0);
+	glVertex3f((163 + universityt) / xx, 1 - (646 / yy), 0.0);
+	glVertex3f((163 + universityt) / xx, 1 - (636 / yy), 0.0);
 
-		0.0, 0.0, 1.0,	140 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 163 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 140 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 140 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 163 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 163 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 146 / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (606 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, 146 / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, 146 / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, 146 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, 146 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 149 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 155 / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, 149 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 160 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 149 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 160 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 156 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 160 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 156 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 165 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 160 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 165 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 165 / xx, 1 - (709 / yy), 0.0,
-		//t
+	glVertex3f((146 + universityt) / xx, 1 - (615 / yy), 0.0);
+	glVertex3f((155 + universityt) / xx, 1 - (606 / yy), 0.0);
+	glVertex3f((155 + universityt) / xx, 1 - (615 / yy), 0.0);
 
-		0.0, 0.0, 1.0,176 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 187 / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, 187 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 176 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 187 / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, 176 / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, 176 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 187 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 176 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 187 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 176 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 187 / xx, 1 - (716 / yy), 0.0,
-		//i
+	glVertex3f((146 + universityt) / xx, 1 - (615 / yy), 0.0);
+	glVertex3f((155 + universityt) / xx, 1 - (615 / yy), 0.0);
+	glVertex3f((155 + universityt) / xx, 1 - (702 / yy), 0.0);
 
-		0.0, 0.0, 1.0,201 / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 217 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 212 / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, 217 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 208 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 201 / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 217 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 208 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 215 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 217 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 215 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 236 / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, 217 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 236 / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, 229 / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, 215 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 222 / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, 236 / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, 236 / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, 229 / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, 242 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 229 / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, 242 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 235 / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 242 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 235 / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 245 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 235 / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 245 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 238 / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, 245 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 238 / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, 246 / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, 238 / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, 246 / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, 235 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 246 / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, 235 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 242 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 235 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 242 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 230 / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, 242 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 230 / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, 233 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 230 / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, 233 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 224 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 233 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 224 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 215 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 224 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 215 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 216 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 215 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 216 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 206 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 216 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 206 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 211 / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, 206 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 211 / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, 201 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 211 / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, 201 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 209 / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, 201 / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, 209 / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, 202 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 209 / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, 202 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 211 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 202 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 211 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 202 / xx, 1 - (657 / yy), 0.0,
-		//o
+	glVertex3f((146 + universityt) / xx, 1 - (615 / yy), 0.0);
+	glVertex3f((155 + universityt) / xx, 1 - (702 / yy), 0.0);
+	glVertex3f((146 + universityt) / xx, 1 - (707 / yy), 0.0);
 
-		0.0, 0.0, 1.0,	260 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 269 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 260 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 260 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 269 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 269 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 269 / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, 268 / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, 271 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 269 / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, 271 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 277 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 269 / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, 277 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 277 / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, 277 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 277 / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, 284 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 277 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 284 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 291 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 284 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 291 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 299 / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, 291 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 299 / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, 292 / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, 299 / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, 292 / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, 302 / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, 292 / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, 302 / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, 292 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 302 / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, 292 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 302 / xx, 1 - (716 / yy), 0.0,
-		//n
+	glVertex3f((155 + universityt) / xx, 1 - (702 / yy), 0.0);
+	glVertex3f((146 + universityt) / xx, 1 - (707 / yy), 0.0);
+	glVertex3f((149 + universityt) / xx, 1 - (711 / yy), 0.0);
 
-		0.0, 0.0, 1.0,	(86 + national2a) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (87 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (94 + national2a) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (87 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (94 + national2a) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (98 + national2a) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (94 + national2a) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (98 + national2a) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (102 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (98 + national2a) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (102 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (117 + national2a) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (102 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (117 + national2a) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (113 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (117 + national2a) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (113 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, (113 + national2a) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (128 + national2a) / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, (100 + national2a) / xx, 1 - (682 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, (100 + national2a) / xx, 1 - (682 / yy), 0.0,
-		0.0, 0.0, 1.0, (92 + national2a) / xx, 1 - (672 / yy), 0.0,
-		0.0, 0.0, 1.0, (100 + national2a) / xx, 1 - (682 / yy), 0.0,
-		0.0, 0.0, 1.0, (92 + national2a) / xx, 1 - (672 / yy), 0.0,
-		0.0, 0.0, 1.0, (93 + national2a) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (92 + national2a) / xx, 1 - (672 / yy), 0.0,
-		0.0, 0.0, 1.0, (93 + national2a) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (84 + national2a) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (93 + national2a) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (84 + national2a) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (88 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (93 + national2a) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (88 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (94 + national2a) / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, (88 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (94 + national2a) / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, (101 + national2a) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (88 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (101 + national2a) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (101 + national2a) / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, (101 + national2a) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (101 + national2a) / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, (109 + national2a) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (101 + national2a) / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, (109 + national2a) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (113 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (109 + national2a) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (113 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (116 + national2a) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (113 + national2a) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (116 + national2a) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (120 + national2a) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (118 + national2a) / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, (116 + national2a) / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, (120 + national2a) / xx, 1 - (704 / yy), 0.0,
+	glVertex3f((155 + universityt) / xx, 1 - (702 / yy), 0.0);
+	glVertex3f((149 + universityt) / xx, 1 - (711 / yy), 0.0);
+	glVertex3f((160 + universityt) / xx, 1 - (707 / yy), 0.0);
+
+	glVertex3f((149 + universityt) / xx, 1 - (711 / yy), 0.0);
+	glVertex3f((160 + universityt) / xx, 1 - (707 / yy), 0.0);
+	glVertex3f((156 + universityt) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((160 + universityt) / xx, 1 - (707 / yy), 0.0);
+	glVertex3f((156 + universityt) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((165 + universityt) / xx, 1 - (716 / yy), 0.0);
+
+	glVertex3f((160 + universityt) / xx, 1 - (707 / yy), 0.0);
+	glVertex3f((165 + universityt) / xx, 1 - (716 / yy), 0.0);
+	glVertex3f((165 + universityt) / xx, 1 - (709 / yy), 0.0);
+
+
+	//t
+
+
+	glVertex3f(1454 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1463 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1477 / xx, 1 - (736 / yy), 0.0);
+
+	glVertex3f(1463 / xx, 1 - (635 / yy), 0.0);
+	glVertex3f(1477 / xx, 1 - (736 / yy), 0.0);
+	glVertex3f(1481 / xx, 1 - (720 / yy), 0.0);
+
+	glVertex3f(1481 / xx, 1 - (720 / yy), 0.0);
+	glVertex3f(1492 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(1477 / xx, 1 - (703 / yy), 0.0);
+
+	glVertex3f(1481 / xx, 1 - (720 / yy), 0.0);
+	glVertex3f(1492 / xx, 1 - (634 / yy), 0.0);
+	glVertex3f(1499 / xx, 1 - (635 / yy), 0.0);
+
+	glVertex3f(1473 / xx, 1 - (718 / yy), 0.0);
+	glVertex3f(1477 / xx, 1 - (736 / yy), 0.0);
+	glVertex3f(1468 / xx, 1 - (735 / yy), 0.0);
+
+	glVertex3f(1477 / xx, 1 - (736 / yy), 0.0);
+	glVertex3f(1468 / xx, 1 - (735 / yy), 0.0);
+	glVertex3f(1471 / xx, 1 - (746 / yy), 0.0);
+
+	glVertex3f(1468 / xx, 1 - (735 / yy), 0.0);
+	glVertex3f(1471 / xx, 1 - (746 / yy), 0.0);
+	glVertex3f(1458 / xx, 1 - (734 / yy), 0.0);
+
+	glVertex3f(1471 / xx, 1 - (746 / yy), 0.0);
+	glVertex3f(1458 / xx, 1 - (734 / yy), 0.0);
+	glVertex3f(1459 / xx, 1 - (746 / yy), 0.0);
+
+	//y
+
+
+
+
+	glVertex3f(5 / xx, 1 - (100 / yy), 0.0);
+	glVertex3f(138 / xx, 1 - (53 / yy), 0.0);
+	glVertex3f(7 / xx, 1 - (130 / yy), 0.0);
+	glVertex3f(138 / xx, 1 - (53 / yy), 0.0);
+	glVertex3f(7 / xx, 1 - (130 / yy), 0.0);
+	glVertex3f(147 / xx, 1 - (70 / yy), 0.0);
+
+	glVertex3f(147 / xx, 1 - (70 / yy), 0.0);
+	glVertex3f(154 / xx, 1 - (338 / yy), 0.0);
+	glVertex3f(137 / xx, 1 - (328 / yy), 0.0);
+
+	glVertex3f(137 / xx, 1 - (328 / yy), 0.0);
+	glVertex3f(147 / xx, 1 - (70 / yy), 0.0);
+	glVertex3f(135 / xx, 1 - (80 / yy), 0.0);
+	glVertex3f(122 / xx, 1 - (318 / yy), 0.0);
+	glVertex3f(138 / xx, 1 - (361 / yy), 0.0);
+	glVertex3f(153 / xx, 1 - (340 / yy), 0.0);
+
+	glVertex3f(24 / xx, 1 - (122 / yy), 0.0);
+	glVertex3f(5 / xx, 1 - (130 / yy), 0.0);
+	glVertex3f(5 / xx, 1 - (329 / yy), 0.0);
+	glVertex3f(24 / xx, 1 - (122 / yy), 0.0);
+	glVertex3f(20 / xx, 1 - (322 / yy), 0.0);
+	glVertex3f(5 / xx, 1 - (329 / yy), 0.0);
+
+	glVertex3f(127 / xx, 1 - (283 / yy), 0.0);
+	glVertex3f(128 / xx, 1 - (309 / yy), 0.0);
+	glVertex3f(11 / xx, 1 - (325 / yy), 0.0);
+	glVertex3f(127 / xx, 1 - (283 / yy), 0.0);
+	glVertex3f(17 / xx, 1 - (296 / yy), 0.0);
+	glVertex3f(11 / xx, 1 - (325 / yy), 0.0);
+
+	glVertex3f(24 / xx, 1 - (122 / yy), 0.0);
+	glVertex3f(44 / xx, 1 - (169 / yy), 0.0);
+	glVertex3f(20 / xx, 1 - (204 / yy), 0.0);
+
+	glVertex3f(36 / xx, 1 - (148 / yy), 0.0);
+	glVertex3f(44 / xx, 1 - (169 / yy), 0.0);
+	glVertex3f(121 / xx, 1 - (108 / yy), 0.0);
+	glVertex3f(44 / xx, 1 - (169 / yy), 0.0);
+	glVertex3f(121 / xx, 1 - (108 / yy), 0.0);
+	glVertex3f(127 / xx, 1 - (121 / yy), 0.0);
+
+	glVertex3f(97 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(131 / xx, 1 - (135 / yy), 0.0);
+	glVertex3f(109 / xx, 1 - (137 / yy), 0.0);
+	glVertex3f(97 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(131 / xx, 1 - (135 / yy), 0.0);
+	glVertex3f(113 / xx, 1 - (83 / yy), 0.0);
+
+	glVertex3f(91 / xx, 1 - (93 / yy), 0.0);
+	glVertex3f(94 / xx, 1 - (120 / yy), 0.0);
+	glVertex3f(74 / xx, 1 - (100 / yy), 0.0);
+	glVertex3f(74 / xx, 1 - (100 / yy), 0.0);
+	glVertex3f(94 / xx, 1 - (120 / yy), 0.0);
+	glVertex3f(78 / xx, 1 - (127 / yy), 0.0);
+
+	glVertex3f(96 / xx, 1 - (138 / yy), 0.0);
+	glVertex3f(130 / xx, 1 - (266 / yy), 0.0);
+	glVertex3f(83 / xx, 1 - (146 / yy), 0.0);
+	glVertex3f(83 / xx, 1 - (146 / yy), 0.0);
+	glVertex3f(130 / xx, 1 - (266 / yy), 0.0);
+	glVertex3f(120 / xx, 1 - (277 / yy), 0.0);
+
+	glVertex3f(132 / xx, 1 - (245 / yy), 0.0);
+	glVertex3f(130 / xx, 1 - (266 / yy), 0.0);
+	glVertex3f(118 / xx, 1 - (225 / yy), 0.0);
+
+	glVertex3f(130 / xx, 1 - (266 / yy), 0.0);
+	glVertex3f(120 / xx, 1 - (277 / yy), 0.0);
+	glVertex3f(130 / xx, 1 - (276 / yy), 0.0);
+
+	glVertex3f(21 / xx, 1 - (225 / yy), 0.0);
+	glVertex3f(20 / xx, 1 - (235 / yy), 0.0);
+	glVertex3f(56 / xx, 1 - (162 / yy), 0.0);
+	glVertex3f(56 / xx, 1 - (162 / yy), 0.0);
+	glVertex3f(20 / xx, 1 - (235 / yy), 0.0);
+	glVertex3f(72 / xx, 1 - (152 / yy), 0.0);
+
+	glVertex3f(48 / xx, 1 - (192 / yy), 0.0);
+	glVertex3f(86 / xx, 1 - (155 / yy), 0.0);
+	glVertex3f(20 / xx, 1 - (235 / yy), 0.0);
+	glVertex3f(86 / xx, 1 - (155 / yy), 0.0);
+	glVertex3f(20 / xx, 1 - (235 / yy), 0.0);
+	glVertex3f(90 / xx, 1 - (171 / yy), 0.0);
+
+	glVertex3f(90 / xx, 1 - (171 / yy), 0.0);
+	glVertex3f(43 / xx, 1 - (216 / yy), 0.0);
+	glVertex3f(24 / xx, 1 - (252 / yy), 0.0);
+	glVertex3f(90 / xx, 1 - (171 / yy), 0.0);
+	glVertex3f(24 / xx, 1 - (252 / yy), 0.0);
+	glVertex3f(28 / xx, 1 - (278 / yy), 0.0);
+
+	glVertex3f(70 / xx, 1 - (215 / yy), 0.0);
+	glVertex3f(96 / xx, 1 - (202 / yy), 0.0);
+	glVertex3f(28 / xx, 1 - (278 / yy), 0.0);
+	glVertex3f(96 / xx, 1 - (202 / yy), 0.0);
+	glVertex3f(28 / xx, 1 - (278 / yy), 0.0);
+	glVertex3f(96 / xx, 1 - (227 / yy), 0.0);
+
+	glVertex3f(110 / xx, 1 - (243 / yy), 0.0);
+	glVertex3f(126 / xx, 1 - (171 / yy), 0.0);
+	glVertex3f(114 / xx, 1 - (146 / yy), 0.0);
+	glVertex3f(114 / xx, 1 - (146 / yy), 0.0);
+	glVertex3f(110 / xx, 1 - (243 / yy), 0.0);
+	glVertex3f(86 / xx, 1 - (290 / yy), 0.0);
+
+	glVertex3f(86 / xx, 1 - (290 / yy), 0.0);
+	glVertex3f(98 / xx, 1 - (229 / yy), 0.0);
+	glVertex3f(56 / xx, 1 - (291 / yy), 0.0);
+	//國
+
+	glVertex3f(261 / xx, 1 - (74 / yy), 0.0);
+	glVertex3f(261 / xx, 1 - (104 / yy), 0.0);
+	glVertex3f(306 / xx, 1 - (109 / yy), 0.0);
+	glVertex3f(306 / xx, 1 - (109 / yy), 0.0);
+	glVertex3f(261 / xx, 1 - (104 / yy), 0.0);
+	glVertex3f(279 / xx, 1 - (132 / yy), 0.0);
+
+	glVertex3f(219 / xx, 1 - (150 / yy), 0.0);
+	glVertex3f(328 / xx, 1 - (121 / yy), 0.0);
+	glVertex3f(330 / xx, 1 - (151 / yy), 0.0);
+	glVertex3f(219 / xx, 1 - (150 / yy), 0.0);
+	glVertex3f(330 / xx, 1 - (151 / yy), 0.0);
+	glVertex3f(221 / xx, 1 - (193 / yy), 0.0);
+
+	glVertex3f(279 / xx, 1 - (134 / yy), 0.0);
+	glVertex3f(306 / xx, 1 - (108 / yy), 0.0);
+	glVertex3f(304 / xx, 1 - (129 / yy), 0.0);
+
+	glVertex3f(278 / xx, 1 - (170 / yy), 0.0);
+	glVertex3f(247 / xx, 1 - (247 / yy), 0.0);
+	glVertex3f(243 / xx, 1 - (216 / yy), 0.0);
+	glVertex3f(278 / xx, 1 - (170 / yy), 0.0);
+	glVertex3f(247 / xx, 1 - (247 / yy), 0.0);
+	glVertex3f(292 / xx, 1 - (167 / yy), 0.0);
+
+	glVertex3f(279 / xx, 1 - (190 / yy), 0.0);
+	glVertex3f(320 / xx, 1 - (179 / yy), 0.0);
+	glVertex3f(247 / xx, 1 - (247 / yy), 0.0);
+
+	glVertex3f(315 / xx, 1 - (184 / yy), 0.0);
+	glVertex3f(324 / xx, 1 - (172 / yy), 0.0);
+	glVertex3f(332 / xx, 1 - (192 / yy), 0.0);
+
+	glVertex3f(318 / xx, 1 - (186 / yy), 0.0);
+	glVertex3f(289 / xx, 1 - (281 / yy), 0.0);
+	glVertex3f(335 / xx, 1 - (197 / yy), 0.0);
+	glVertex3f(318 / xx, 1 - (186 / yy), 0.0);
+	glVertex3f(289 / xx, 1 - (281 / yy), 0.0);
+	glVertex3f(266 / xx, 1 - (287 / yy), 0.0);
+
+	glVertex3f(216 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(361 / xx, 1 - (300 / yy), 0.0);
+	glVertex3f(356 / xx, 1 - (280 / yy), 0.0);
+	glVertex3f(216 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(361 / xx, 1 - (300 / yy), 0.0);
+	glVertex3f(234 / xx, 1 - (324 / yy), 0.0);
+
+	//立
+
+	glVertex3f(402 / xx, 1 - (124 / yy), 0.0);
+	glVertex3f(419 / xx, 1 - (223 / yy), 0.0);
+	glVertex3f(387 / xx, 1 - (128 / yy), 0.0);
+	glVertex3f(387 / xx, 1 - (128 / yy), 0.0);
+	glVertex3f(419 / xx, 1 - (223 / yy), 0.0);
+	glVertex3f(405 / xx, 1 - (228 / yy), 0.0);
+
+	glVertex3f(405 / xx, 1 - (128 / yy), 0.0);
+	glVertex3f(489 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(473 / xx, 1 - (96 / yy), 0.0);
+	glVertex3f(405 / xx, 1 - (128 / yy), 0.0);
+	glVertex3f(489 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(431 / xx, 1 - (145 / yy), 0.0);
+
+	glVertex3f(473 / xx, 1 - (60 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (443 / yy), 0.0);
+	glVertex3f(487 / xx, 1 - (53 / yy), 0.0);
+	glVertex3f(487 / xx, 1 - (53 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (443 / yy), 0.0);
+	glVertex3f(493 / xx, 1 - (430 / yy), 0.0);
+
+
+	glVertex3f(486 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(530 / xx, 1 - (94 / yy), 0.0);
+	glVertex3f(514 / xx, 1 - (116 / yy), 0.0);
+	glVertex3f(486 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(514 / xx, 1 - (116 / yy), 0.0);
+	glVertex3f(487 / xx, 1 - (115 / yy), 0.0);
+
+	glVertex3f(531 / xx, 1 - (101 / yy), 0.0);
+	glVertex3f(539 / xx, 1 - (115 / yy), 0.0);
+	glVertex3f(440 / xx, 1 - (223 / yy), 0.0);
+	glVertex3f(531 / xx, 1 - (101 / yy), 0.0);
+	glVertex3f(440 / xx, 1 - (223 / yy), 0.0);
+	glVertex3f(441 / xx, 1 - (196 / yy), 0.0);
+
+	glVertex3f(443 / xx, 1 - (223 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (191 / yy), 0.0);
+	glVertex3f(506 / xx, 1 - (203 / yy), 0.0);
+	glVertex3f(471 / xx, 1 - (191 / yy), 0.0);
+	glVertex3f(506 / xx, 1 - (203 / yy), 0.0);
+	glVertex3f(510 / xx, 1 - (181 / yy), 0.0);
+
+
+	//中
+	glVertex3f(598 / xx, 1 - (91 / yy), 0.0);
+	glVertex3f(612 / xx, 1 - (84 / yy), 0.0);
+	glVertex3f(616 / xx, 1 - (234 / yy), 0.0);
+	glVertex3f(598 / xx, 1 - (91 / yy), 0.0);
+	glVertex3f(616 / xx, 1 - (234 / yy), 0.0);
+	glVertex3f(603 / xx, 1 - (236 / yy), 0.0);
+
+	glVertex3f(614 / xx, 1 - (83 / yy), 0.0);
+	glVertex3f(623 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(632 / xx, 1 - (86 / yy), 0.0);
+
+	glVertex3f(623 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(632 / xx, 1 - (86 / yy), 0.0);
+	glVertex3f(633 / xx, 1 - (216 / yy), 0.0);
+	glVertex3f(623 / xx, 1 - (96 / yy), 0.0);
+	glVertex3f(633 / xx, 1 - (216 / yy), 0.0);
+	glVertex3f(622 / xx, 1 - (221 / yy), 0.0);
+
+	glVertex3f(700 / xx, 1 - (194 / yy), 0.0);
+	glVertex3f(697 / xx, 1 - (214 / yy), 0.0);
+	glVertex3f(541 / xx, 1 - (241 / yy), 0.0);
+	glVertex3f(541 / xx, 1 - (241 / yy), 0.0);
+	glVertex3f(697 / xx, 1 - (214 / yy), 0.0);
+	glVertex3f(539 / xx, 1 - (277 / yy), 0.0);
+
+	glVertex3f(539 / xx, 1 - (277 / yy), 0.0);
+	glVertex3f(594 / xx, 1 - (251 / yy), 0.0);
+	glVertex3f(549 / xx, 1 - (293 / yy), 0.0);
+
+	glVertex3f(700 / xx, 1 - (191 / yy), 0.0);
+	glVertex3f(745 / xx, 1 - (214 / yy), 0.0);
+	glVertex3f(696 / xx, 1 - (212 / yy), 0.0);
+	glVertex3f(700 / xx, 1 - (191 / yy), 0.0);
+	glVertex3f(745 / xx, 1 - (214 / yy), 0.0);
+	glVertex3f(732 / xx, 1 - (188 / yy), 0.0);
+
+	glVertex3f(732 / xx, 1 - (188 / yy), 0.0);
+	glVertex3f(745 / xx, 1 - (214 / yy), 0.0);
+	glVertex3f(755 / xx, 1 - (193 / yy), 0.0);
+	glVertex3f(732 / xx, 1 - (188 / yy), 0.0);
+	glVertex3f(755 / xx, 1 - (193 / yy), 0.0);
+	glVertex3f(747 / xx, 1 - (176 / yy), 0.0);
+
+	glVertex3f(575 / xx, 1 - (274 / yy), 0.0);
+	glVertex3f(600 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(601 / xx, 1 - (331 / yy), 0.0);
+	glVertex3f(600 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(601 / xx, 1 - (331 / yy), 0.0);
+	glVertex3f(621 / xx, 1 - (309 / yy), 0.0);
+
+	glVertex3f(600 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(621 / xx, 1 - (309 / yy), 0.0);
+	glVertex3f(638 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(600 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(638 / xx, 1 - (291 / yy), 0.0);
+	glVertex3f(636 / xx, 1 - (271 / yy), 0.0);
+
+	glVertex3f(643 / xx, 1 - (271 / yy), 0.0);
+	glVertex3f(666 / xx, 1 - (259 / yy), 0.0);
+	glVertex3f(646 / xx, 1 - (281 / yy), 0.0);
+	glVertex3f(701 / xx, 1 - (251 / yy), 0.0);
+	glVertex3f(746 / xx, 1 - (293 / yy), 0.0);
+	glVertex3f(741 / xx, 1 - (344 / yy), 0.0);
+
+	glVertex3f(642 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(682 / xx, 1 - (49 / yy), 0.0);
+	glVertex3f(688 / xx, 1 - (58 / yy), 0.0);
+	glVertex3f(688 / xx, 1 - (58 / yy), 0.0);
+	glVertex3f(642 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(685 / xx, 1 - (85 / yy), 0.0);
+
+
+	glVertex3f(653 / xx, 1 - (80 / yy), 0.0);
+	glVertex3f(650 / xx, 1 - (211 / yy), 0.0);
+	glVertex3f(642 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(642 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(650 / xx, 1 - (211 / yy), 0.0);
+	glVertex3f(643 / xx, 1 - (213 / yy), 0.0);
+
+	glVertex3f(685 / xx, 1 - (87 / yy), 0.0);
+	glVertex3f(675 / xx, 1 - (200 / yy), 0.0);
+	glVertex3f(666 / xx, 1 - (84 / yy), 0.0);
+	glVertex3f(666 / xx, 1 - (84 / yy), 0.0);
+	glVertex3f(675 / xx, 1 - (200 / yy), 0.0);
+	glVertex3f(666 / xx, 1 - (206 / yy), 0.0);
+
+	glVertex3f(653 / xx, 1 - (113 / yy), 0.0);
+	glVertex3f(666 / xx, 1 - (102 / yy), 0.0);
+	glVertex3f(667 / xx, 1 - (152 / yy), 0.0);
+
+	glVertex3f(653 / xx, 1 - (113 / yy), 0.0);
+	glVertex3f(658 / xx, 1 - (140 / yy), 0.0);
+	glVertex3f(662 / xx, 1 - (129 / yy), 0.0);
+
+	glVertex3f(653 / xx, 1 - (113 / yy), 0.0);
+	glVertex3f(658 / xx, 1 - (140 / yy), 0.0);
+	glVertex3f(653 / xx, 1 - (129 / yy), 0.0);
+	glVertex3f(662 / xx, 1 - (129 / yy), 0.0);
+	glVertex3f(652 / xx, 1 - (160 / yy), 0.0);
+	glVertex3f(660 / xx, 1 - (164 / yy), 0.0);
+
+	glVertex3f(662 / xx, 1 - (163 / yy), 0.0);
+	glVertex3f(652 / xx, 1 - (160 / yy), 0.0);
+	glVertex3f(651 / xx, 1 - (176 / yy), 0.0);
+	glVertex3f(651 / xx, 1 - (176 / yy), 0.0);
+	glVertex3f(669 / xx, 1 - (155 / yy), 0.0);
+	glVertex3f(657 / xx, 1 - (190 / yy), 0.0);
+
+
+	glVertex3f(660 / xx, 1 - (195 / yy), 0.0);
+	glVertex3f(649 / xx, 1 - (209 / yy), 0.0);
+	glVertex3f(668 / xx, 1 - (202 / yy), 0.0);
+
+	glVertex3f(687 / xx, 1 - (76 / yy), 0.0);
+	glVertex3f(685 / xx, 1 - (94 / yy), 0.0);
+	glVertex3f(722 / xx, 1 - (52 / yy), 0.0);
+	glVertex3f(685 / xx, 1 - (94 / yy), 0.0);
+	glVertex3f(722 / xx, 1 - (52 / yy), 0.0);
+	glVertex3f(700 / xx, 1 - (92 / yy), 0.0);
+
+	glVertex3f(700 / xx, 1 - (92 / yy), 0.0);
+	glVertex3f(722 / xx, 1 - (52 / yy), 0.0);
+	glVertex3f(693 / xx, 1 - (199 / yy), 0.0);
+	glVertex3f(693 / xx, 1 - (199 / yy), 0.0);
+	glVertex3f(722 / xx, 1 - (52 / yy), 0.0);
+	glVertex3f(702 / xx, 1 - (192 / yy), 0.0);
+
+	glVertex3f(682 / xx, 1 - (114 / yy), 0.0);
+	glVertex3f(681 / xx, 1 - (129 / yy), 0.0);
+	glVertex3f(698 / xx, 1 - (135 / yy), 0.0);
+	glVertex3f(681 / xx, 1 - (129 / yy), 0.0);
+	glVertex3f(698 / xx, 1 - (135 / yy), 0.0);
+	glVertex3f(694 / xx, 1 - (164 / yy), 0.0);
+
+	glVertex3f(694 / xx, 1 - (164 / yy), 0.0);
+	glVertex3f(690 / xx, 1 - (150 / yy), 0.0);
+	glVertex3f(683 / xx, 1 - (149 / yy), 0.0);
+	glVertex3f(683 / xx, 1 - (149 / yy), 0.0);
+	glVertex3f(676 / xx, 1 - (150 / yy), 0.0);
+	glVertex3f(693 / xx, 1 - (195 / yy), 0.0);
+	glVertex3f(693 / xx, 1 - (195 / yy), 0.0);
+	glVertex3f(676 / xx, 1 - (150 / yy), 0.0);
+	glVertex3f(686 / xx, 1 - (186 / yy), 0.0);
+
+	//興
+
+	glVertex3f(803 / xx, 1 - (172 / yy), 0.0);
+	glVertex3f(796 / xx, 1 - (184 / yy), 0.0);
+	glVertex3f(820 / xx, 1 - (180 / yy), 0.0);
+
+	glVertex3f(796 / xx, 1 - (184 / yy), 0.0);
+	glVertex3f(801 / xx, 1 - (219 / yy), 0.0);
+	glVertex3f(820 / xx, 1 - (180 / yy), 0.0);
+
+	glVertex3f(801 / xx, 1 - (219 / yy), 0.0);
+	glVertex3f(820 / xx, 1 - (180 / yy), 0.0);
+	glVertex3f(810 / xx, 1 - (226 / yy), 0.0);
+
+	glVertex3f(810 / xx, 1 - (226 / yy), 0.0);
+	glVertex3f(820 / xx, 1 - (180 / yy), 0.0);
+	glVertex3f(836 / xx, 1 - (198 / yy), 0.0);
+
+	glVertex3f(836 / xx, 1 - (198 / yy), 0.0);
+	glVertex3f(820 / xx, 1 - (180 / yy), 0.0);
+	glVertex3f(888 / xx, 1 - (162 / yy), 0.0);
+
+	glVertex3f(888 / xx, 1 - (162 / yy), 0.0);
+	glVertex3f(820 / xx, 1 - (180 / yy), 0.0);
+	glVertex3f(892 / xx, 1 - (133 / yy), 0.0);
+
+	glVertex3f(892 / xx, 1 - (133 / yy), 0.0);
+	glVertex3f(888 / xx, 1 - (162 / yy), 0.0);
+	glVertex3f(913 / xx, 1 - (137 / yy), 0.0);
+
+	glVertex3f(913 / xx, 1 - (137 / yy), 0.0);
+	glVertex3f(888 / xx, 1 - (162 / yy), 0.0);
+	glVertex3f(908 / xx, 1 - (162 / yy), 0.0);
+
+	glVertex3f(870 / xx, 1 - (148 / yy), 0.0);
+	glVertex3f(880 / xx, 1 - (144 / yy), 0.0);
+	glVertex3f(879 / xx, 1 - (113 / yy), 0.0);
+
+	glVertex3f(879 / xx, 1 - (113 / yy), 0.0);
+	glVertex3f(888 / xx, 1 - (57 / yy), 0.0);
+	glVertex3f(888 / xx, 1 - (114 / yy), 0.0);
+
+	glVertex3f(888 / xx, 1 - (114 / yy), 0.0);
+	glVertex3f(883 / xx, 1 - (142 / yy), 0.0);
+	glVertex3f(891 / xx, 1 - (137 / yy), 0.0);
+
+	glVertex3f(862 / xx, 1 - (179 / yy), 0.0);
+	glVertex3f(874 / xx, 1 - (171 / yy), 0.0);
+	glVertex3f(865 / xx, 1 - (247 / yy), 0.0);
+	glVertex3f(862 / xx, 1 - (179 / yy), 0.0);
+	glVertex3f(865 / xx, 1 - (247 / yy), 0.0);
+	glVertex3f(846 / xx, 1 - (237 / yy), 0.0);
+
+	glVertex3f(846 / xx, 1 - (237 / yy), 0.0);
+	glVertex3f(865 / xx, 1 - (247 / yy), 0.0);
+	glVertex3f(850 / xx, 1 - (282 / yy), 0.0);
+	glVertex3f(850 / xx, 1 - (282 / yy), 0.0);
+	glVertex3f(846 / xx, 1 - (237 / yy), 0.0);
+	glVertex3f(810 / xx, 1 - (286 / yy), 0.0);
+
+	glVertex3f(882 / xx, 1 - (221 / yy), 0.0);
+	glVertex3f(911 / xx, 1 - (257 / yy), 0.0);
+	glVertex3f(939 / xx, 1 - (259 / yy), 0.0);
+
+	glVertex3f(911 / xx, 1 - (257 / yy), 0.0);
+	glVertex3f(939 / xx, 1 - (259 / yy), 0.0);
+	glVertex3f(915 / xx, 1 - (284 / yy), 0.0);
+
+	glVertex3f(915 / xx, 1 - (284 / yy), 0.0);
+	glVertex3f(911 / xx, 1 - (257 / yy), 0.0);
+	glVertex3f(890 / xx, 1 - (281 / yy), 0.0);
+
+	glVertex3f(915 / xx, 1 - (284 / yy), 0.0);
+	glVertex3f(939 / xx, 1 - (259 / yy), 0.0);
+	glVertex3f(938 / xx, 1 - (276 / yy), 0.0);
+
+	glVertex3f(938 / xx, 1 - (276 / yy), 0.0);
+	glVertex3f(915 / xx, 1 - (284 / yy), 0.0);
+	glVertex3f(931 / xx, 1 - (301 / yy), 0.0);
+
+	//大
+
+
+	glVertex3f(1013 / xx, 1 - (43 / yy), 0.0);
+	glVertex3f(1020 / xx, 1 - (69 / yy), 0.0);
+	glVertex3f(1015 / xx, 1 - (65 / yy), 0.0);
+	glVertex3f(1013 / xx, 1 - (43 / yy), 0.0);
+	glVertex3f(1015 / xx, 1 - (65 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (85 / yy), 0.0);
+	glVertex3f(1013 / xx, 1 - (43 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (85 / yy), 0.0);
+	glVertex3f(1000 / xx, 1 - (78 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (62 / yy), 0.0);
+	glVertex3f(1018 / xx, 1 - (110 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (170 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (85 / yy), 0.0);
+	glVertex3f(1017 / xx, 1 - (87 / yy), 0.0);
+	glVertex3f(1018 / xx, 1 - (110 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (135 / yy), 0.0);
+	glVertex3f(1026 / xx, 1 - (122 / yy), 0.0);
+	glVertex3f(1005 / xx, 1 - (170 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (135 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (168 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (201 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (168 / yy), 0.0);
+	glVertex3f(1006 / xx, 1 - (201 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (204 / yy), 0.0);
+
+	glVertex3f(967 / xx, 1 - (294 / yy), 0.0);
+	glVertex3f(958 / xx, 1 - (275 / yy), 0.0);
+	glVertex3f(984 / xx, 1 - (230 / yy), 0.0);
+
+	glVertex3f(958 / xx, 1 - (275 / yy), 0.0);
+	glVertex3f(984 / xx, 1 - (230 / yy), 0.0);
+	glVertex3f(961 / xx, 1 - (246 / yy), 0.0);
+
+	glVertex3f(984 / xx, 1 - (230 / yy), 0.0);
+	glVertex3f(961 / xx, 1 - (246 / yy), 0.0);
+	glVertex3f(980 / xx, 1 - (208 / yy), 0.0);
+
+	glVertex3f(984 / xx, 1 - (230 / yy), 0.0);
+	glVertex3f(980 / xx, 1 - (208 / yy), 0.0);
+	glVertex3f(1002 / xx, 1 - (217 / yy), 0.0);
+
+	glVertex3f(980 / xx, 1 - (208 / yy), 0.0);
+	glVertex3f(1002 / xx, 1 - (217 / yy), 0.0);
+	glVertex3f(1103 / xx, 1 - (151 / yy), 0.0);
+
+	glVertex3f(1002 / xx, 1 - (217 / yy), 0.0);
+	glVertex3f(1103 / xx, 1 - (151 / yy), 0.0);
+	glVertex3f(1096 / xx, 1 - (174 / yy), 0.0);
+
+	glVertex3f(1103 / xx, 1 - (151 / yy), 0.0);
+	glVertex3f(1096 / xx, 1 - (174 / yy), 0.0);
+	glVertex3f(1116 / xx, 1 - (163 / yy), 0.0);
+
+	glVertex3f(1096 / xx, 1 - (174 / yy), 0.0);
+	glVertex3f(1116 / xx, 1 - (163 / yy), 0.0);
+	glVertex3f(1124 / xx, 1 - (184 / yy), 0.0);
+
+	glVertex3f(1124 / xx, 1 - (184 / yy), 0.0);
+	glVertex3f(1096 / xx, 1 - (174 / yy), 0.0);
+	glVertex3f(1116 / xx, 1 - (198 / yy), 0.0);
+
+	glVertex3f(1116 / xx, 1 - (198 / yy), 0.0);
+	glVertex3f(1096 / xx, 1 - (174 / yy), 0.0);
+	glVertex3f(1101 / xx, 1 - (197 / yy), 0.0);
+
+	glVertex3f(1101 / xx, 1 - (197 / yy), 0.0);
+	glVertex3f(1096 / xx, 1 - (174 / yy), 0.0);
+	glVertex3f(1082 / xx, 1 - (208 / yy), 0.0);
+
+	glVertex3f(1047 / xx, 1 - (50 / yy), 0.0);
+	glVertex3f(1056 / xx, 1 - (64 / yy), 0.0);
+	glVertex3f(1036 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1056 / xx, 1 - (64 / yy), 0.0);
+	glVertex3f(1036 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (82 / yy), 0.0);
+
+	glVertex3f(1036 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1022 / xx, 1 - (87 / yy), 0.0);
+	glVertex3f(1020 / xx, 1 - (97 / yy), 0.0);
+
+	glVertex3f(1036 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1049 / xx, 1 - (82 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (92 / yy), 0.0);
+
+	glVertex3f(1036 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (92 / yy), 0.0);
+	glVertex3f(1020 / xx, 1 - (97 / yy), 0.0);
+
+	glVertex3f(1027 / xx, 1 - (110 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (92 / yy), 0.0);
+	glVertex3f(1020 / xx, 1 - (100 / yy), 0.0);
+
+	glVertex3f(1027 / xx, 1 - (108 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (89 / yy), 0.0);
+	glVertex3f(1040 / xx, 1 - (109 / yy), 0.0);
+
+	glVertex3f(1040 / xx, 1 - (109 / yy), 0.0);
+	glVertex3f(1030 / xx, 1 - (110 / yy), 0.0);
+	glVertex3f(1022 / xx, 1 - (142 / yy), 0.0);
+
+	glVertex3f(1040 / xx, 1 - (109 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1037 / xx, 1 - (140 / yy), 0.0);
+
+	glVertex3f(1037 / xx, 1 - (140 / yy), 0.0);
+	glVertex3f(1029 / xx, 1 - (133 / yy), 0.0);
+	glVertex3f(1023 / xx, 1 - (145 / yy), 0.0);
+
+	glVertex3f(1037 / xx, 1 - (141 / yy), 0.0);
+	glVertex3f(1023 / xx, 1 - (145 / yy), 0.0);
+	glVertex3f(1030 / xx, 1 - (163 / yy), 0.0);
+
+	glVertex3f(1025 / xx, 1 - (161 / yy), 0.0);
+	glVertex3f(1022 / xx, 1 - (183 / yy), 0.0);
+	glVertex3f(1047 / xx, 1 - (170 / yy), 0.0);
+
+
+	glVertex3f(1047 / xx, 1 - (115 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (118 / yy), 0.0);
+	glVertex3f(1038 / xx, 1 - (141 / yy), 0.0);
+
+	glVertex3f(1038 / xx, 1 - (141 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (118 / yy), 0.0);
+	glVertex3f(1046 / xx, 1 - (149 / yy), 0.0);
+
+	glVertex3f(1039 / xx, 1 - (141 / yy), 0.0);
+	glVertex3f(1031 / xx, 1 - (166 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (155 / yy), 0.0);
+
+	glVertex3f(1031 / xx, 1 - (166 / yy), 0.0);
+	glVertex3f(1050 / xx, 1 - (155 / yy), 0.0);
+	glVertex3f(1048 / xx, 1 - (171 / yy), 0.0);
+
+	glVertex3f(1091 / xx, 1 - (48 / yy), 0.0);
+	glVertex3f(1066 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(1085 / xx, 1 - (102 / yy), 0.0);
+
+	glVertex3f(1066 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(1058 / xx, 1 - (72 / yy), 0.0);
+	glVertex3f(1057 / xx, 1 - (84 / yy), 0.0);
+
+	glVertex3f(1066 / xx, 1 - (92 / yy), 0.0);
+	glVertex3f(1066 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(1057 / xx, 1 - (84 / yy), 0.0);
+
+	glVertex3f(1066 / xx, 1 - (92 / yy), 0.0);
+	glVertex3f(1066 / xx, 1 - (77 / yy), 0.0);
+	glVertex3f(1078 / xx, 1 - (90 / yy), 0.0);
+
+	glVertex3f(1078 / xx, 1 - (90 / yy), 0.0);
+	glVertex3f(1086 / xx, 1 - (103 / yy), 0.0);
+	glVertex3f(1080 / xx, 1 - (165 / yy), 0.0);
+
+	glVertex3f(1060 / xx, 1 - (108 / yy), 0.0);
+	glVertex3f(1081 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(1053 / xx, 1 - (147 / yy), 0.0);
+
+	glVertex3f(1053 / xx, 1 - (147 / yy), 0.0);
+	glVertex3f(1081 / xx, 1 - (98 / yy), 0.0);
+	glVertex3f(1078 / xx, 1 - (164 / yy), 0.0);
+
+	glVertex3f(1061 / xx, 1 - (175 / yy), 0.0);
+	glVertex3f(1063 / xx, 1 - (157 / yy), 0.0);
+	glVertex3f(1078 / xx, 1 - (164 / yy), 0.0);
+
+
+	glVertex3f(1060 / xx, 1 - (193 / yy), 0.0);
+	glVertex3f(1031 / xx, 1 - (226 / yy), 0.0);
+	glVertex3f(1065 / xx, 1 - (212 / yy), 0.0);
+
+	glVertex3f(1031 / xx, 1 - (226 / yy), 0.0);
+	glVertex3f(1065 / xx, 1 - (212 / yy), 0.0);
+	glVertex3f(1063 / xx, 1 - (231 / yy), 0.0);
+
+	glVertex3f(1031 / xx, 1 - (226 / yy), 0.0);
+	glVertex3f(1051 / xx, 1 - (232 / yy), 0.0);
+	glVertex3f(1040 / xx, 1 - (238 / yy), 0.0);
+
+	glVertex3f(1063 / xx, 1 - (231 / yy), 0.0);
+	glVertex3f(1051 / xx, 1 - (232 / yy), 0.0);
+	glVertex3f(1041 / xx, 1 - (260 / yy), 0.0);
+
+	glVertex3f(1041 / xx, 1 - (260 / yy), 0.0);
+	glVertex3f(1063 / xx, 1 - (231 / yy), 0.0);
+	glVertex3f(1068 / xx, 1 - (251 / yy), 0.0);
+
+	glVertex3f(1019 / xx, 1 - (273 / yy), 0.0);
+	glVertex3f(1008 / xx, 1 - (265 / yy), 0.0);
+	glVertex3f(1008 / xx, 1 - (284 / yy), 0.0);
+
+	glVertex3f(1019 / xx, 1 - (273 / yy), 0.0);
+	glVertex3f(1008 / xx, 1 - (284 / yy), 0.0);
+	glVertex3f(1023 / xx, 1 - (287 / yy), 0.0);
+
+	glVertex3f(1018 / xx, 1 - (271 / yy), 0.0);
+	glVertex3f(1019 / xx, 1 - (280 / yy), 0.0);
+	glVertex3f(1049 / xx, 1 - (269 / yy), 0.0);
+
+	glVertex3f(1018 / xx, 1 - (271 / yy), 0.0);
+	glVertex3f(1049 / xx, 1 - (269 / yy), 0.0);
+	glVertex3f(1067 / xx, 1 - (248 / yy), 0.0);
+
+	glVertex3f(1067 / xx, 1 - (248 / yy), 0.0);
+	glVertex3f(1049 / xx, 1 - (269 / yy), 0.0);
+	glVertex3f(1085 / xx, 1 - (263 / yy), 0.0);
+
+	glVertex3f(1085 / xx, 1 - (263 / yy), 0.0);
+	glVertex3f(1069 / xx, 1 - (248 / yy), 0.0);
+	glVertex3f(1098 / xx, 1 - (250 / yy), 0.0);
+
+	glVertex3f(1085 / xx, 1 - (263 / yy), 0.0);
+	glVertex3f(1098 / xx, 1 - (250 / yy), 0.0);
+	glVertex3f(1100 / xx, 1 - (274 / yy), 0.0);
+
+	glVertex3f(1051 / xx, 1 - (270 / yy), 0.0);
+	glVertex3f(1070 / xx, 1 - (269 / yy), 0.0);
+	glVertex3f(1065 / xx, 1 - (369 / yy), 0.0);
+
+	glVertex3f(1051 / xx, 1 - (270 / yy), 0.0);
+	glVertex3f(1065 / xx, 1 - (369 / yy), 0.0);
+	glVertex3f(1052 / xx, 1 - (337 / yy), 0.0);
+
+	glVertex3f(1052 / xx, 1 - (337 / yy), 0.0);
+	glVertex3f(1065 / xx, 1 - (369 / yy), 0.0);
+	glVertex3f(1035 / xx, 1 - (414 / yy), 0.0);
+
+	glVertex3f(1052 / xx, 1 - (337 / yy), 0.0);
+	glVertex3f(1035 / xx, 1 - (414 / yy), 0.0);
+	glVertex3f(1019 / xx, 1 - (393 / yy), 0.0);
+
+	glVertex3f(1035 / xx, 1 - (414 / yy), 0.0);
+	glVertex3f(1019 / xx, 1 - (393 / yy), 0.0);
+	glVertex3f(991 / xx, 1 - (419 / yy), 0.0);
+
+	glVertex3f(991 / xx, 1 - (419 / yy), 0.0);
+	glVertex3f(1035 / xx, 1 - (414 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (439 / yy), 0.0);
+
+	glVertex3f(991 / xx, 1 - (419 / yy), 0.0);
+	glVertex3f(990 / xx, 1 - (439 / yy), 0.0);
+	glVertex3f(956 / xx, 1 - (413 / yy), 0.0);
+
+
+	//學
+
+	glEnd();
+
+	glBegin(GL_POLYGON);
+
+	glVertex3f(1246 / xx, 1 - (1 / yy), 0.0);
+	glVertex3f(1316 / xx, 1 - (24 / yy), 0.0);
+	glVertex3f(1363 / xx, 1 - (23 / yy), 0.0);
+	glVertex3f(1408 / xx, 1 - (24 / yy), 0.0);
+	glVertex3f(1468 / xx, 1 - (3 / yy), 0.0);
+	glVertex3f(1457 / xx, 1 - (49 / yy), 0.0);
+	glVertex3f(1451 / xx, 1 - (81 / yy), 0.0);
+	glVertex3f(1448 / xx, 1 - (133 / yy), 0.0);
+	glVertex3f(1448 / xx, 1 - (201 / yy), 0.0);
+	glVertex3f(1450 / xx, 1 - (216 / yy), 0.0);
+	glVertex3f(1463 / xx, 1 - (319 / yy), 0.0);
+	glVertex3f(1484 / xx, 1 - (393 / yy), 0.0);
+	glVertex3f(1440 / xx, 1 - (364 / yy), 0.0);
+	glVertex3f(1390 / xx, 1 - (336 / yy), 0.0);
+	glVertex3f(1318 / xx, 1 - (336 / yy), 0.0);
+	glVertex3f(1277 / xx, 1 - (350 / yy), 0.0);
+	glVertex3f(1232 / xx, 1 - (385 / yy), 0.0);
+	glVertex3f(1255 / xx, 1 - (228 / yy), 0.0);
+	glVertex3f(1285 / xx, 1 - (148 / yy), 0.0);
+	glVertex3f(1261 / xx, 1 - (53 / yy), 0.0);
+
+	glEnd();
+	glBegin(GL_TRIANGLES);
+
+	glVertex3f(1230 / xx, 1 - (0 / yy), 0.0);
+	glVertex3f(1314 / xx, 1 - (0 / yy), 0.0);
+	glVertex3f(1265 / xx, 1 - (190 / yy), 0.0);
+
+
+	glEnd();
+	glColor3f(1.0, 0.0, 0.0);
+
+	glBegin(GL_POLYGON);
+
+	glVertex3f(1329 / xx, 1 - (114 / yy), 0.0);
+	glVertex3f(1356 / xx, 1 - (102 / yy), 0.0);
+	glVertex3f(1384 / xx, 1 - (114 / yy), 0.0);
+	glVertex3f(1403 / xx, 1 - (138 / yy), 0.0);
+	glVertex3f(1410 / xx, 1 - (170 / yy), 0.0);
+	glVertex3f(1410 / xx, 1 - (201 / yy), 0.0);
+	glVertex3f(1400 / xx, 1 - (232 / yy), 0.0);
+	glVertex3f(1390 / xx, 1 - (250 / yy), 0.0);
+	glVertex3f(1359 / xx, 1 - (269 / yy), 0.0);
+	glVertex3f(1330 / xx, 1 - (257 / yy), 0.0);
+	glVertex3f(1312 / xx, 1 - (219 / yy), 0.0);
+	glVertex3f(1307 / xx, 1 - (177 / yy), 0.0);
+	glVertex3f(1314 / xx, 1 - (144 / yy), 0.0);
+
+	glEnd();
+
+	glColor3f(1.0, 1.0, 1.0);
+
+	glBegin(GL_POLYGON);
+
+	glVertex3f(1235 / xx, 1 - (29 / yy), 0.0);
+	glVertex3f(1291 / xx, 1 - (49 / yy), 0.0);
+	glVertex3f(1327 / xx, 1 - (83 / yy), 0.0);
+	glVertex3f(1357 / xx, 1 - (127 / yy), 0.0);
+	glVertex3f(1402 / xx, 1 - (225 / yy), 0.0);
+	glVertex3f(1422 / xx, 1 - (307 / yy), 0.0);
+	glVertex3f(1422 / xx, 1 - (331 / yy), 0.0);
+	glVertex3f(1410 / xx, 1 - (288 / yy), 0.0);
+	glVertex3f(1387 / xx, 1 - (220 / yy), 0.0);
+	glVertex3f(1345 / xx, 1 - (133 / yy), 0.0);
+	glVertex3f(1301 / xx, 1 - (83 / yy), 0.0);
+	glVertex3f(1240 / xx, 1 - (47 / yy), 0.0);
+
+	glEnd();
 	
-		//a
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+	
+	
+
+}
+void drawRobotRight(){
+
+	if (rightAttack == 1){
+		rightSwing = (rightSwing + 10) % 360;
+		if (rightSwing == 350){
+			rightSwing = 0;
+			rightAttack = 0;
+		}
+		glPushMatrix();
+		glRotatef((GLfloat)-rightSwing, 1.0, 0.0, 0.0);
+		glPushMatrix();
+
+		glTranslatef(1.6, -1.7, -3.0);
+		glPushMatrix();
+
+		//再推
+		glTranslatef(0.0, 0.0, -1.0);
+		//轉
+		glRotatef(45, 1.0, 0.0, 0.0);
+		//把手臂推出去
+		glTranslatef(0.0, 0.0, -1.0);
 
 
-		0.0, 0.0, 1.0,376 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 376 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 386 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 376 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 386 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 386 / xx, 1 - (604 / yy), 0.0,
-		//l
+		//第四根
+		glPushMatrix();
+		glTranslatef(-0.2, -0.3, -1.35);
 
-		0.0, 0.0, 1.0,	483 / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, 481 / xx, 1 - (628 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, 481 / xx, 1 - (628 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 481 / xx, 1 - (628 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (612 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (612 / yy), 0.0,
-		0.0, 0.0, 1.0, 466 / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (612 / yy), 0.0,
-		0.0, 0.0, 1.0, 466 / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, 460 / xx, 1 - (602 / yy), 0.0,
-		0.0, 0.0, 1.0, 466 / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, 460 / xx, 1 - (602 / yy), 0.0,
-		0.0, 0.0, 1.0, 453 / xx, 1 - (617 / yy), 0.0,
-		0.0, 0.0, 1.0, 460 / xx, 1 - (602 / yy), 0.0,
-		0.0, 0.0, 1.0, 453 / xx, 1 - (617 / yy), 0.0,
-		0.0, 0.0, 1.0, 448 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 453 / xx, 1 - (617 / yy), 0.0,
-		0.0, 0.0, 1.0, 448 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 445 / xx, 1 - (619 / yy), 0.0,
-		0.0, 0.0, 1.0, 448 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 445 / xx, 1 - (619 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (611 / yy), 0.0,
-		0.0, 0.0, 1.0, 455 / xx, 1 - (619 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (611 / yy), 0.0,
-		0.0, 0.0, 1.0, 440 / xx, 1 - (627 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (611 / yy), 0.0,
-		0.0, 0.0, 1.0, 440 / xx, 1 - (627 / yy), 0.0,
-		0.0, 0.0, 1.0, 426 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 440 / xx, 1 - (627 / yy), 0.0,
-		0.0, 0.0, 1.0, 426 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 435 / xx, 1 - (640 / yy), 0.0,
-		0.0, 0.0, 1.0, 426 / xx, 1 - (629 / yy), 0.0,
-		0.0, 0.0, 1.0, 435 / xx, 1 - (640 / yy), 0.0,
-		0.0, 0.0, 1.0, 423 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 435 / xx, 1 - (640 / yy), 0.0,
-		0.0, 0.0, 1.0, 423 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 423 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 422 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 422 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, 422 / xx, 1 - (644 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, 426 / xx, 1 - (687 / yy), 0.0,
-		0.0, 0.0, 1.0, 434 / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, 426 / xx, 1 - (687 / yy), 0.0,
-		0.0, 0.0, 1.0, 437 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 426 / xx, 1 - (687 / yy), 0.0,
-		0.0, 0.0, 1.0, 437 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 433 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 437 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 433 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 446 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 433 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 446 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 446 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 446 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 446 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 455 / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, 446 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 455 / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, 458 / xx, 1 - (719 / yy), 0.0,
-		0.0, 0.0, 1.0, 455 / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, 458 / xx, 1 - (719 / yy), 0.0,
-		0.0, 0.0, 1.0, 464 / xx, 1 - (700 / yy), 0.0,
-		0.0, 0.0, 1.0, 458 / xx, 1 - (719 / yy), 0.0,
-		0.0, 0.0, 1.0, 464 / xx, 1 - (700 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 464 / xx, 1 - (700 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 484 / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 484 / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, 474 / xx, 1 - (678 / yy), 0.0,
-		//C
-		0.0, 0.0, 1.0,	(260 + chungh) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungh) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + chungh) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + chungh) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungh) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungh) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungh) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (268 + chungh) / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + chungh) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungh) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + chungh) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungh) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungh) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungh) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungh) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungh) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungh) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + chungh) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungh) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + chungh) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + chungh) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + chungh) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + chungh) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + chungh) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + chungh) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + chungh) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungh) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + chungh) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungh) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungh) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungh) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungh) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungh) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungh) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungh) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungh) / xx, 1 - (716 / yy), 0.0,
-		//h
+		//指節
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
 
-		0.0, 0.0, 1.0,555 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 565 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 565 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 555 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 557 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 565 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 557 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 565 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 566 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 565 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 566 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 571 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 566 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 571 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 575 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 571 / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, 575 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 578 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 575 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 578 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 583 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 578 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 583 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 584 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 583 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 584 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 588 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 584 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 588 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 588 / xx, 1 - (684 / yy), 0.0,
-		0.0, 0.0, 1.0, 588 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 588 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 598 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 588 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 598 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 598 / xx, 1 - (636 / yy), 0.0,
-		//u
-		0.0, 0.0, 1.0,(260 + chungn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + chungn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + chungn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (268 + chungn) / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + chungn) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + chungn) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + chungn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungn) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungn) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + chungn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + chungn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + chungn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + chungn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + chungn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + chungn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + chungn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + chungn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + chungn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + chungn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungn) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + chungn) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + chungn) / xx, 1 - (716 / yy), 0.0,
-		//n
-		0.0, 0.0, 1.0,(201 + chungg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (212 + chungg) / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (208 + chungg) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (208 + chungg) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (229 + chungg) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (222 + chungg) / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (229 + chungg) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (229 + chungg) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (245 + chungg) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (245 + chungg) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (238 + chungg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (245 + chungg) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (238 + chungg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (246 + chungg) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (238 + chungg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (246 + chungg) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (246 + chungg) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (230 + chungg) / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (230 + chungg) / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, (233 + chungg) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (230 + chungg) / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, (233 + chungg) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (224 + chungg) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (233 + chungg) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (224 + chungg) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (224 + chungg) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (216 + chungg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (216 + chungg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (206 + chungg) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (216 + chungg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (206 + chungg) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg) / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, (206 + chungg) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg) / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg) / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (209 + chungg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (209 + chungg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (209 + chungg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 705 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 713 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 714 / xx, 1 - (726 / yy), 0.0,
-		0.0, 0.0, 1.0, 705 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 714 / xx, 1 - (726 / yy), 0.0,
-		0.0, 0.0, 1.0, 705 / xx, 1 - (724 / yy), 0.0,
-		0.0, 0.0, 1.0, 714 / xx, 1 - (726 / yy), 0.0,
-		0.0, 0.0, 1.0, 705 / xx, 1 - (724 / yy), 0.0,
-		0.0, 0.0, 1.0, 708 / xx, 1 - (738 / yy), 0.0,
-		0.0, 0.0, 1.0, 705 / xx, 1 - (724 / yy), 0.0,
-		0.0, 0.0, 1.0, 708 / xx, 1 - (738 / yy), 0.0,
-		0.0, 0.0, 1.0, 698 / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, 708 / xx, 1 - (738 / yy), 0.0,
-		0.0, 0.0, 1.0, 698 / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, 701 / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, 698 / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, 701 / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (739 / yy), 0.0,
-		0.0, 0.0, 1.0, 701 / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (739 / yy), 0.0,
-		0.0, 0.0, 1.0, 692 / xx, 1 - (750 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (739 / yy), 0.0,
-		0.0, 0.0, 1.0, 692 / xx, 1 - (750 / yy), 0.0,
-		0.0, 0.0, 1.0, 683 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 692 / xx, 1 - (750 / yy), 0.0,
-		0.0, 0.0, 1.0, 683 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 682 / xx, 1 - (747 / yy), 0.0,
-		0.0, 0.0, 1.0, 683 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 682 / xx, 1 - (747 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (723 / yy), 0.0,
-		0.0, 0.0, 1.0, 682 / xx, 1 - (747 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (723 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (744 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (723 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (744 / yy), 0.0,
-		0.0, 0.0, 1.0, 671 / xx, 1 - (723 / yy), 0.0,
-		//g
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glPopMatrix();
 
-		0.0, 0.0, 1.0,753 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 763 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 763 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 753 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 763 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 753 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 763 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 763 / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, 798 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 763 / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, 798 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 798 / xx, 1 - (663 / yy), 0.0,
-		0.0, 0.0, 1.0, 798 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 798 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 808 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 798 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 808 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 808 / xx, 1 - (603 / yy), 0.0,
-		//H
+		glPopMatrix();
+		//第三根
+		glPushMatrix();
+		glTranslatef(0.1, -0.3, -1.35);
+
+		//指節
+
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glPopMatrix();
+
+		glPopMatrix();
+		//第二根
+		glPushMatrix();
+		glTranslatef(-0.2, 0.0, -1.35);
+
+		//指節
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glPopMatrix();
+
+		glPopMatrix();
+		//第一根手指
+		glPushMatrix();
+		glTranslatef(0.1, 0.0, -1.35);
+
+		//指節
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glPopMatrix();
+
+		glPopMatrix();
 
 
-		0.0, 0.0, 1.0,863 / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, 853 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 859 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 853 / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, 859 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 848 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 859 / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, 848 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 849 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 848 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 849 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 849 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 839 / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 839 / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 839 / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 828 / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 828 / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, 824 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 824 / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, 825 / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 825 / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, 827 / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, 827 / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, 839 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 827 / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, 839 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, 839 / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, 852 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, 852 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 850 / xx, 1 - (685 / yy), 0.0,
-		0.0, 0.0, 1.0, 852 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 850 / xx, 1 - (685 / yy), 0.0,
-		0.0, 0.0, 1.0, 860 / xx, 1 - (674 / yy), 0.0,
-		0.0, 0.0, 1.0, 850 / xx, 1 - (685 / yy), 0.0,
-		0.0, 0.0, 1.0, 860 / xx, 1 - (674 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, 860 / xx, 1 - (674 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, 864 / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, 864 / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 864 / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 864 / xx, 1 - (697 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 864 / xx, 1 - (697 / yy), 0.0,
-		0.0, 0.0, 1.0, 860 / xx, 1 - (709 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 860 / xx, 1 - (709 / yy), 0.0,
-		0.0, 0.0, 1.0, 852 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 855 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 852 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 843 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 852 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 843 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 841 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 843 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 841 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 841 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 830 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 838 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 830 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 832 / xx, 1 - (698 / yy), 0.0,
-		0.0, 0.0, 1.0, 830 / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, 832 / xx, 1 - (698 / yy), 0.0,
-		0.0, 0.0, 1.0, 824 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 832 / xx, 1 - (698 / yy), 0.0,
-		0.0, 0.0, 1.0, 824 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (689 / yy), 0.0,
-		0.0, 0.0, 1.0, 824 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 831 / xx, 1 - (689 / yy), 0.0,
-		0.0, 0.0, 1.0, 823 / xx, 1 - (691 / yy), 0.0,
+
+		glPushMatrix();
+		//下手臂
+		glScalef(0.4, 0.4, 2.0);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+
+		glPushMatrix();
+		//上手臂
+		glScalef(0.4, 0.4, 2.0);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPopMatrix();
+		glPopMatrix();
+	}
+	else{
+		glPushMatrix();
+
+		glTranslatef(1.6, -1.7, -3.0);
+
+
+
+
+
+		glPushMatrix();
+
+
+		//再推
+		glTranslatef(0.0, 0.0, -1.0);
+		//轉
+		glRotatef(45, 1.0, 0.0, 0.0);
+		//把手臂推出去
+		glTranslatef(0.0, 0.0, -1.0);
+
+
+		//第四根
+		glPushMatrix();
+		glTranslatef(-0.2, -0.3, -1.35);
+
+		//指節
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glPopMatrix();
+
+		glPopMatrix();
+		//第三根
+		glPushMatrix();
+		GLfloat light_position3[] = { 1.0, 1.0, 1.0, 0.0 };
+		GLfloat white_light3[] = { 0.0, 0.5, 1.0, 1.0 };
+		GLfloat lmodel_ambient3[] = { 0.1, 0.1, 0.1, 1.0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, light_position3);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light3);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, white_light3);
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient3);
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		glTranslatef(0.1, -0.3, -1.35);
+
+		//指節
+
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-60, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+
+		glutWireCube(1.0);
+
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHTING);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glPopMatrix();
+
+		glPopMatrix();
+		//第二根
+		glPushMatrix();
+		GLfloat light_position2[] = { 1.0, 1.0, 1.0, 0.0 };
+		GLfloat white_light2[] = { 0.0, 1.0, 1.0, 1.0 };
+		GLfloat lmodel_ambient2[] = { 0.1, 0.1, 0.1, 1.0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, light_position2);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light2);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, white_light2);
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient2);
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		glTranslatef(-0.2, 0.0, -1.35);
+
+		//指節
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHTING);
+		glPopMatrix();
+
+		glPopMatrix();
+		//第一根手指
+		glPushMatrix();
+		GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+		GLfloat white_light[] = { 1.0, 1.0, 1.0, 1.0 };
+		GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
+		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+
+		glTranslatef(0.1, 0.0, -1.35);
+
+		//指節
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.4);
+		glRotatef(-30, 1.0, 0.0, 0.0);
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.25);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+		glScalef(0.05, 0.1, 0.5);
+		glutWireCube(1.0);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHTING);
+		glPopMatrix();
+
+		glPopMatrix();
+
+
+
+		glPushMatrix();
+		//下手臂
+		glScalef(0.4, 0.4, 2.0);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPushMatrix();
+
+		glPushMatrix();
+		//上手臂
+		glScalef(0.4, 0.4, 2.0);
+		glutWireCube(1.0);
+		glPopMatrix();
+		glPopMatrix();
+
+		glPopMatrix();
+	}
+
+
+
+}
+void drawRobotLeft(){
+	//畫左手臂
+	glPushMatrix();
+	glTranslatef(-2.0, 0.7, -5.3);
+	if (leftAttack == 1){
+
+		glTranslatef(0.0, 0.0, planetShoot);
+		planetShoot -= 0.05;
+		if (planetShoot < -15){
+			leftAttack = 0;
+			glTranslatef(0.0, 0.0, -planetShoot);
+			planetShoot = 0;
+		}
+		//畫星球
+		year = (year + 1) % 360;
+		day = (day + 2) % 360;
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -2.0);
+		glPushMatrix();
+
+		glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
+		glutWireSphere(0.25, 20, 16);   //draw sun
+		glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
+		glTranslatef(1.0, 0.0, 0.0);
+		glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
+		glutWireSphere(0.1, 10, 8);//draw smaller planet 
+
+		glTranslatef(0.5, 0.0, 0.0);
+		glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
+		glutWireSphere(0.05, 10, 8);//畫衛星
+
+		glPopMatrix();
+		glPopMatrix();
+	}
+	else{
 		
-		//s
-
-		0.0, 0.0, 1.0,(176 + hsingi) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + hsingi) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + hsingi) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + hsingi) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + hsingi) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + hsingi) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + hsingi) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + hsingi) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + hsingi) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + hsingi) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + hsingi) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + hsingi) / xx, 1 - (716 / yy), 0.0,
-		//i
-
-
-		0.0, 0.0, 1.0,(260 + hsingn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + hsingn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + hsingn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + hsingn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + hsingn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + hsingn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + hsingn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (268 + hsingn) / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + hsingn) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + hsingn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + hsingn) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + hsingn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + hsingn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + hsingn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + hsingn) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + hsingn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + hsingn) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + hsingn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + hsingn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + hsingn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + hsingn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + hsingn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + hsingn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + hsingn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + hsingn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + hsingn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + hsingn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + hsingn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + hsingn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + hsingn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + hsingn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + hsingn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + hsingn) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + hsingn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + hsingn) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + hsingn) / xx, 1 - (716 / yy), 0.0,
-		//n
-
-		0.0, 0.0, 1.0,(201 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (212 + chungg + hsingg) / xx, 1 - (655 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (208 + chungg + hsingg) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (208 + chungg + hsingg) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg + hsingg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg + hsingg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (217 + chungg + hsingg) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (229 + chungg + hsingg) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg + hsingg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (222 + chungg + hsingg) / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (236 + chungg + hsingg) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (229 + chungg + hsingg) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg + hsingg) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (229 + chungg + hsingg) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg + hsingg) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg + hsingg) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (245 + chungg + hsingg) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (245 + chungg + hsingg) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (238 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (245 + chungg + hsingg) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (238 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (246 + chungg + hsingg) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (238 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (246 + chungg + hsingg) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg + hsingg) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (246 + chungg + hsingg) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg + hsingg) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (235 + chungg + hsingg) / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (230 + chungg + hsingg) / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, (242 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (230 + chungg + hsingg) / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, (233 + chungg + hsingg) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (230 + chungg + hsingg) / xx, 1 - (705 / yy), 0.0,
-		0.0, 0.0, 1.0, (233 + chungg + hsingg) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (224 + chungg + hsingg) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (233 + chungg + hsingg) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (224 + chungg + hsingg) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg + hsingg) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (224 + chungg + hsingg) / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg + hsingg) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (216 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (215 + chungg + hsingg) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (216 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (206 + chungg + hsingg) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (216 + chungg + hsingg) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (206 + chungg + hsingg) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg + hsingg) / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, (206 + chungg + hsingg) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg + hsingg) / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg + hsingg) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg + hsingg) / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg + hsingg) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (209 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (201 + chungg + hsingg) / xx, 1 - (694 / yy), 0.0,
-		0.0, 0.0, 1.0, (209 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg + hsingg) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (209 + chungg + hsingg) / xx, 1 - (678 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg + hsingg) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg + hsingg) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg + hsingg) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (211 + chungg + hsingg) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (202 + chungg + hsingg) / xx, 1 - (657 / yy), 0.0,
-		
-		0.0, 0.0, 1.0,(705 + hsingg) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (713 + hsingg) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (714 + hsingg) / xx, 1 - (726 / yy), 0.0,
-		0.0, 0.0, 1.0, (705 + hsingg) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (714 + hsingg) / xx, 1 - (726 / yy), 0.0,
-		0.0, 0.0, 1.0, (705 + hsingg) / xx, 1 - (724 / yy), 0.0,
-		0.0, 0.0, 1.0, (714 + hsingg) / xx, 1 - (726 / yy), 0.0,
-		0.0, 0.0, 1.0, (705 + hsingg) / xx, 1 - (724 / yy), 0.0,
-		0.0, 0.0, 1.0, (708 + hsingg) / xx, 1 - (738 / yy), 0.0,
-		0.0, 0.0, 1.0, (705 + hsingg) / xx, 1 - (724 / yy), 0.0,
-		0.0, 0.0, 1.0, (708 + hsingg) / xx, 1 - (738 / yy), 0.0,
-		0.0, 0.0, 1.0, (698 + hsingg) / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, (708 + hsingg) / xx, 1 - (738 / yy), 0.0,
-		0.0, 0.0, 1.0, (698 + hsingg) / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, (701 + hsingg) / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, (698 + hsingg) / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, (701 + hsingg) / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, (693 + hsingg) / xx, 1 - (739 / yy), 0.0,
-		0.0, 0.0, 1.0, (701 + hsingg) / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, (693 + hsingg) / xx, 1 - (739 / yy), 0.0,
-		0.0, 0.0, 1.0, (692 + hsingg) / xx, 1 - (750 / yy), 0.0,
-		0.0, 0.0, 1.0, (693 + hsingg) / xx, 1 - (739 / yy), 0.0,
-		0.0, 0.0, 1.0, (692 + hsingg) / xx, 1 - (750 / yy), 0.0,
-		0.0, 0.0, 1.0, (683 + hsingg) / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, (692 + hsingg) / xx, 1 - (750 / yy), 0.0,
-		0.0, 0.0, 1.0, (683 + hsingg) / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, (682 + hsingg) / xx, 1 - (747 / yy), 0.0,
-		0.0, 0.0, 1.0, (683 + hsingg) / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, (682 + hsingg) / xx, 1 - (747 / yy), 0.0,
-		0.0, 0.0, 1.0, (676 + hsingg) / xx, 1 - (723 / yy), 0.0,
-		0.0, 0.0, 1.0, (682 + hsingg) / xx, 1 - (747 / yy), 0.0,
-		0.0, 0.0, 1.0, (676 + hsingg) / xx, 1 - (723 / yy), 0.0,
-		0.0, 0.0, 1.0, (676 + hsingg) / xx, 1 - (744 / yy), 0.0,
-		0.0, 0.0, 1.0, (676 + hsingg) / xx, 1 - (723 / yy), 0.0,
-		0.0, 0.0, 1.0, (676 + hsingg) / xx, 1 - (744 / yy), 0.0,
-		0.0, 0.0, 1.0, (671 + hsingg) / xx, 1 - (723 / yy), 0.0,
-		
-		//g
-
-
-		0.0, 0.0, 1.0,1053 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 1043 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 1054 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 1043 / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, 1054 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 1045 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 1054 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 1045 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 1054 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (708 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 1060 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, 1060 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 1073 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1060 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 1073 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1075 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 1073 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1075 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 1082 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 1075 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 1082 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 1084 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 1082 / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, 1084 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 1087 / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, 1084 / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, 1087 / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, 1094 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 1087 / xx, 1 - (692 / yy), 0.0,
-		0.0, 0.0, 1.0, 1094 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 1089 / xx, 1 - (675 / yy), 0.0,
-		0.0, 0.0, 1.0, 1094 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 1089 / xx, 1 - (675 / yy), 0.0,
-		0.0, 0.0, 1.0, 1097 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 1089 / xx, 1 - (675 / yy), 0.0,
-		0.0, 0.0, 1.0, 1097 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 1088 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 1097 / xx, 1 - (690 / yy), 0.0,
-		0.0, 0.0, 1.0, 1088 / xx, 1 - (603 / yy), 0.0,
-		0.0, 0.0, 1.0, 1098 / xx, 1 - (603 / yy), 0.0,
-		
-
-		//U
-		0.0, 0.0, 1.0,(260 + universityn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + universityn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + universityn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (260 + universityn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + universityn) / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + universityn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + universityn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (268 + universityn) / xx, 1 - (676 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + universityn) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + universityn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (271 + universityn) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + universityn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (269 + universityn) / xx, 1 - (645 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + universityn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + universityn) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + universityn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + universityn) / xx, 1 - (637 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + universityn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (277 + universityn) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + universityn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + universityn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (284 + universityn) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + universityn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + universityn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (291 + universityn) / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + universityn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + universityn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (299 + universityn) / xx, 1 - (643 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + universityn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + universityn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + universityn) / xx, 1 - (654 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + universityn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + universityn) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + universityn) / xx, 1 - (660 / yy), 0.0,
-		0.0, 0.0, 1.0, (292 + universityn) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (302 + universityn) / xx, 1 - (716 / yy), 0.0,
-		//n
-		0.0, 0.0, 1.0,(176 + uni) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + uni) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + uni) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + uni) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + uni) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + uni) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + uni) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + uni) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + uni) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + uni) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + uni) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + uni) / xx, 1 - (716 / yy), 0.0,
-		//i
-
-
-
-		0.0, 0.0, 1.0,1195 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1206 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1214 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1206 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1214 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1224 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1214 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1224 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1233 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1224 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1233 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1243 / xx, 1 - (635 / yy), 0.0,
-		//v
-
-		0.0, 0.0, 1.0,1261 / xx, 1 - (680 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 1297 / xx, 1 - (680 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 1297 / xx, 1 - (680 / yy), 0.0,
-		0.0, 0.0, 1.0, 1288 / xx, 1 - (669 / yy), 0.0,
-		0.0, 0.0, 1.0, 1288 / xx, 1 - (669 / yy), 0.0,
-		0.0, 0.0, 1.0, 1297 / xx, 1 - (680 / yy), 0.0,
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1288 / xx, 1 - (669 / yy), 0.0,
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, 1292 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, 1292 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1284 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 1292 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1284 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 1285 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 1284 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 1285 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 1277 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 1285 / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, 1277 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 1270 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1277 / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, 1270 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1269 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1270 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1269 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1260 / xx, 1 - (639 / yy), 0.0,
-		0.0, 0.0, 1.0, 1269 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1260 / xx, 1 - (639 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (651 / yy), 0.0,
-		0.0, 0.0, 1.0, 1260 / xx, 1 - (639 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (651 / yy), 0.0,
-		0.0, 0.0, 1.0, 1254 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (651 / yy), 0.0,
-		0.0, 0.0, 1.0, 1254 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1254 / xx, 1 - (652 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (667 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (667 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (667 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (684 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (684 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (680 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (684 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (680 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (687 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (687 / yy), 0.0,
-		0.0, 0.0, 1.0, 1254 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1252 / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (687 / yy), 0.0,
-		0.0, 0.0, 1.0, 1254 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 1254 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (712 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (701 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (712 / yy), 0.0,
-		0.0, 0.0, 1.0, 1272 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (712 / yy), 0.0,
-		0.0, 0.0, 1.0, 1272 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1273 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 1272 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1273 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 1279 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1273 / xx, 1 - (717 / yy), 0.0,
-		0.0, 0.0, 1.0, 1279 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1279 / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1284 / xx, 1 - (700 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (715 / yy), 0.0,
-		0.0, 0.0, 1.0, 1284 / xx, 1 - (700 / yy), 0.0,
-		0.0, 0.0, 1.0, 1293 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1284 / xx, 1 - (700 / yy), 0.0,
-		0.0, 0.0, 1.0, 1293 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1287 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 1293 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1287 / xx, 1 - (691 / yy), 0.0,
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (692 / yy), 0.0,
-		
-
-		//e
-
-		0.0, 0.0, 1.0,1310 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1310 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 1320 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 1310 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1320 / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, 1320 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1319 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1321 / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, 1324 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1319 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1324 / xx, 1 - (659 / yy), 0.0,
-		0.0, 0.0, 1.0, 1324 / xx, 1 - (650 / yy), 0.0,
-		0.0, 0.0, 1.0, 1319 / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, 1324 / xx, 1 - (650 / yy), 0.0,
-		0.0, 0.0, 1.0, 1322 / xx, 1 - (639 / yy), 0.0,
-		0.0, 0.0, 1.0, 1324 / xx, 1 - (650 / yy), 0.0,
-		0.0, 0.0, 1.0, 1322 / xx, 1 - (639 / yy), 0.0,
-		0.0, 0.0, 1.0, 1331 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 1322 / xx, 1 - (639 / yy), 0.0,
-		0.0, 0.0, 1.0, 1331 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1331 / xx, 1 - (649 / yy), 0.0,
-		0.0, 0.0, 1.0, 1329 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1337 / xx, 1 - (653 / yy), 0.0,
-		0.0, 0.0, 1.0, 1329 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1337 / xx, 1 - (653 / yy), 0.0,
-		0.0, 0.0, 1.0, 1339 / xx, 1 - (638 / yy), 0.0,
-		
-		//r
-
-
-		0.0, 0.0, 1.0,(863 + universitys) / xx, 1 - (657 / yy), 0.0,
-		0.0, 0.0, 1.0, (853 + universitys) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (859 + universitys) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (853 + universitys) / xx, 1 - (658 / yy), 0.0,
-		0.0, 0.0, 1.0, (859 + universitys) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (848 + universitys) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (859 + universitys) / xx, 1 - (642 / yy), 0.0,
-		0.0, 0.0, 1.0, (848 + universitys) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (849 + universitys) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (848 + universitys) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (849 + universitys) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (849 + universitys) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (839 + universitys) / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (647 / yy), 0.0,
-		0.0, 0.0, 1.0, (839 + universitys) / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (839 + universitys) / xx, 1 - (633 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (828 + universitys) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (828 + universitys) / xx, 1 - (638 / yy), 0.0,
-		0.0, 0.0, 1.0, (824 + universitys) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (824 + universitys) / xx, 1 - (648 / yy), 0.0,
-		0.0, 0.0, 1.0, (825 + universitys) / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (825 + universitys) / xx, 1 - (662 / yy), 0.0,
-		0.0, 0.0, 1.0, (827 + universitys) / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (656 / yy), 0.0,
-		0.0, 0.0, 1.0, (827 + universitys) / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, (839 + universitys) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (827 + universitys) / xx, 1 - (671 / yy), 0.0,
-		0.0, 0.0, 1.0, (839 + universitys) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, (839 + universitys) / xx, 1 - (664 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, (852 + universitys) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (677 / yy), 0.0,
-		0.0, 0.0, 1.0, (852 + universitys) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (850 + universitys) / xx, 1 - (685 / yy), 0.0,
-		0.0, 0.0, 1.0, (852 + universitys) / xx, 1 - (670 / yy), 0.0,
-		0.0, 0.0, 1.0, (850 + universitys) / xx, 1 - (685 / yy), 0.0,
-		0.0, 0.0, 1.0, (860 + universitys) / xx, 1 - (674 / yy), 0.0,
-		0.0, 0.0, 1.0, (850 + universitys) / xx, 1 - (685 / yy), 0.0,
-		0.0, 0.0, 1.0, (860 + universitys) / xx, 1 - (674 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (860 + universitys) / xx, 1 - (674 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (864 + universitys) / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (688 / yy), 0.0,
-		0.0, 0.0, 1.0, (864 + universitys) / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, (864 + universitys) / xx, 1 - (683 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, (864 + universitys) / xx, 1 - (697 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, (864 + universitys) / xx, 1 - (697 / yy), 0.0,
-		0.0, 0.0, 1.0, (860 + universitys) / xx, 1 - (709 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, (860 + universitys) / xx, 1 - (709 / yy), 0.0,
-		0.0, 0.0, 1.0, (852 + universitys) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (855 + universitys) / xx, 1 - (699 / yy), 0.0,
-		0.0, 0.0, 1.0, (852 + universitys) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (843 + universitys) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (852 + universitys) / xx, 1 - (714 / yy), 0.0,
-		0.0, 0.0, 1.0, (843 + universitys) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (841 + universitys) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (843 + universitys) / xx, 1 - (706 / yy), 0.0,
-		0.0, 0.0, 1.0, (841 + universitys) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (841 + universitys) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (830 + universitys) / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, (838 + universitys) / xx, 1 - (704 / yy), 0.0,
-		0.0, 0.0, 1.0, (830 + universitys) / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, (832 + universitys) / xx, 1 - (698 / yy), 0.0,
-		0.0, 0.0, 1.0, (830 + universitys) / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, (832 + universitys) / xx, 1 - (698 / yy), 0.0,
-		0.0, 0.0, 1.0, (824 + universitys) / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, (832 + universitys) / xx, 1 - (698 / yy), 0.0,
-		0.0, 0.0, 1.0, (824 + universitys) / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (689 / yy), 0.0,
-		0.0, 0.0, 1.0, (824 + universitys) / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, (831 + universitys) / xx, 1 - (689 / yy), 0.0,
-		0.0, 0.0, 1.0, (823 + universitys) / xx, 1 - (691 / yy), 0.0,
-		
-		//s
-		0.0, 0.0, 1.0,(176 + universi) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + universi) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + universi) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + universi) / xx, 1 - (604 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + universi) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + universi) / xx, 1 - (621 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + universi) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + universi) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + universi) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + universi) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (176 + universi) / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, (187 + universi) / xx, 1 - (716 / yy), 0.0,
-		//i
-
-		0.0, 0.0, 1.0,(140 + universityt) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (163 + universityt) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (140 + universityt) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (140 + universityt) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (163 + universityt) / xx, 1 - (646 / yy), 0.0,
-		0.0, 0.0, 1.0, (163 + universityt) / xx, 1 - (636 / yy), 0.0,
-		0.0, 0.0, 1.0, (146 + universityt) / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (606 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, (146 + universityt) / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, (146 + universityt) / xx, 1 - (615 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, (146 + universityt) / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, (146 + universityt) / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, (149 + universityt) / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, (155 + universityt) / xx, 1 - (702 / yy), 0.0,
-		0.0, 0.0, 1.0, (149 + universityt) / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, (160 + universityt) / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, (149 + universityt) / xx, 1 - (711 / yy), 0.0,
-		0.0, 0.0, 1.0, (160 + universityt) / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, (156 + universityt) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (160 + universityt) / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, (156 + universityt) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (165 + universityt) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (160 + universityt) / xx, 1 - (707 / yy), 0.0,
-		0.0, 0.0, 1.0, (165 + universityt) / xx, 1 - (716 / yy), 0.0,
-		0.0, 0.0, 1.0, (165 + universityt) / xx, 1 - (709 / yy), 0.0,
-		
-		//t
-
-
-		0.0, 0.0, 1.0,1454 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1463 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1477 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 1463 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1477 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 1481 / xx, 1 - (720 / yy), 0.0,
-		0.0, 0.0, 1.0, 1481 / xx, 1 - (720 / yy), 0.0,
-		0.0, 0.0, 1.0, 1492 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 1477 / xx, 1 - (703 / yy), 0.0,
-		0.0, 0.0, 1.0, 1481 / xx, 1 - (720 / yy), 0.0,
-		0.0, 0.0, 1.0, 1492 / xx, 1 - (634 / yy), 0.0,
-		0.0, 0.0, 1.0, 1499 / xx, 1 - (635 / yy), 0.0,
-		0.0, 0.0, 1.0, 1473 / xx, 1 - (718 / yy), 0.0,
-		0.0, 0.0, 1.0, 1477 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 1468 / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, 1477 / xx, 1 - (736 / yy), 0.0,
-		0.0, 0.0, 1.0, 1468 / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, 1471 / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, 1468 / xx, 1 - (735 / yy), 0.0,
-		0.0, 0.0, 1.0, 1471 / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, 1458 / xx, 1 - (734 / yy), 0.0,
-		0.0, 0.0, 1.0, 1471 / xx, 1 - (746 / yy), 0.0,
-		0.0, 0.0, 1.0, 1458 / xx, 1 - (734 / yy), 0.0,
-		0.0, 0.0, 1.0, 1459 / xx, 1 - (746 / yy), 0.0,
-		//y
-
-
-
-
-		0.0, 0.0, 1.0,5 / xx, 1 - (100 / yy), 0.0,
-		0.0, 0.0, 1.0, 138 / xx, 1 - (53 / yy), 0.0,
-		0.0, 0.0, 1.0, 7 / xx, 1 - (130 / yy), 0.0,
-		0.0, 0.0, 1.0, 138 / xx, 1 - (53 / yy), 0.0,
-		0.0, 0.0, 1.0, 7 / xx, 1 - (130 / yy), 0.0,
-		0.0, 0.0, 1.0, 147 / xx, 1 - (70 / yy), 0.0,
-		0.0, 0.0, 1.0, 147 / xx, 1 - (70 / yy), 0.0,
-		0.0, 0.0, 1.0, 154 / xx, 1 - (338 / yy), 0.0,
-		0.0, 0.0, 1.0, 137 / xx, 1 - (328 / yy), 0.0,
-		0.0, 0.0, 1.0, 137 / xx, 1 - (328 / yy), 0.0,
-		0.0, 0.0, 1.0, 147 / xx, 1 - (70 / yy), 0.0,
-		0.0, 0.0, 1.0, 135 / xx, 1 - (80 / yy), 0.0,
-		0.0, 0.0, 1.0, 122 / xx, 1 - (318 / yy), 0.0,
-		0.0, 0.0, 1.0, 138 / xx, 1 - (361 / yy), 0.0,
-		0.0, 0.0, 1.0, 153 / xx, 1 - (340 / yy), 0.0,
-		0.0, 0.0, 1.0, 24 / xx, 1 - (122 / yy), 0.0,
-		0.0, 0.0, 1.0, 5 / xx, 1 - (130 / yy), 0.0,
-		0.0, 0.0, 1.0, 5 / xx, 1 - (329 / yy), 0.0,
-		0.0, 0.0, 1.0, 24 / xx, 1 - (122 / yy), 0.0,
-		0.0, 0.0, 1.0, 20 / xx, 1 - (322 / yy), 0.0,
-		0.0, 0.0, 1.0, 5 / xx, 1 - (329 / yy), 0.0,
-		0.0, 0.0, 1.0, 127 / xx, 1 - (283 / yy), 0.0,
-		0.0, 0.0, 1.0, 128 / xx, 1 - (309 / yy), 0.0,
-		0.0, 0.0, 1.0, 11 / xx, 1 - (325 / yy), 0.0,
-		0.0, 0.0, 1.0, 127 / xx, 1 - (283 / yy), 0.0,
-		0.0, 0.0, 1.0, 17 / xx, 1 - (296 / yy), 0.0,
-		0.0, 0.0, 1.0, 11 / xx, 1 - (325 / yy), 0.0,
-		0.0, 0.0, 1.0, 24 / xx, 1 - (122 / yy), 0.0,
-		0.0, 0.0, 1.0, 44 / xx, 1 - (169 / yy), 0.0,
-		0.0, 0.0, 1.0, 20 / xx, 1 - (204 / yy), 0.0,
-		0.0, 0.0, 1.0, 36 / xx, 1 - (148 / yy), 0.0,
-		0.0, 0.0, 1.0, 44 / xx, 1 - (169 / yy), 0.0,
-		0.0, 0.0, 1.0, 121 / xx, 1 - (108 / yy), 0.0,
-		0.0, 0.0, 1.0, 44 / xx, 1 - (169 / yy), 0.0,
-		0.0, 0.0, 1.0, 121 / xx, 1 - (108 / yy), 0.0,
-		0.0, 0.0, 1.0, 127 / xx, 1 - (121 / yy), 0.0,
-		0.0, 0.0, 1.0, 97 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 131 / xx, 1 - (135 / yy), 0.0,
-		0.0, 0.0, 1.0, 109 / xx, 1 - (137 / yy), 0.0,
-		0.0, 0.0, 1.0, 97 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 131 / xx, 1 - (135 / yy), 0.0,
-		0.0, 0.0, 1.0, 113 / xx, 1 - (83 / yy), 0.0,
-		0.0, 0.0, 1.0, 91 / xx, 1 - (93 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (120 / yy), 0.0,
-		0.0, 0.0, 1.0, 74 / xx, 1 - (100 / yy), 0.0,
-		0.0, 0.0, 1.0, 74 / xx, 1 - (100 / yy), 0.0,
-		0.0, 0.0, 1.0, 94 / xx, 1 - (120 / yy), 0.0,
-		0.0, 0.0, 1.0, 78 / xx, 1 - (127 / yy), 0.0,
-		0.0, 0.0, 1.0, 96 / xx, 1 - (138 / yy), 0.0,
-		0.0, 0.0, 1.0, 130 / xx, 1 - (266 / yy), 0.0,
-		0.0, 0.0, 1.0, 83 / xx, 1 - (146 / yy), 0.0,
-		0.0, 0.0, 1.0, 83 / xx, 1 - (146 / yy), 0.0,
-		0.0, 0.0, 1.0, 130 / xx, 1 - (266 / yy), 0.0,
-		0.0, 0.0, 1.0, 120 / xx, 1 - (277 / yy), 0.0,
-		0.0, 0.0, 1.0, 132 / xx, 1 - (245 / yy), 0.0,
-		0.0, 0.0, 1.0, 130 / xx, 1 - (266 / yy), 0.0,
-		0.0, 0.0, 1.0, 118 / xx, 1 - (225 / yy), 0.0,
-		0.0, 0.0, 1.0, 130 / xx, 1 - (266 / yy), 0.0,
-		0.0, 0.0, 1.0, 120 / xx, 1 - (277 / yy), 0.0,
-		0.0, 0.0, 1.0, 130 / xx, 1 - (276 / yy), 0.0,
-		0.0, 0.0, 1.0, 21 / xx, 1 - (225 / yy), 0.0,
-		0.0, 0.0, 1.0, 20 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 56 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 56 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 20 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 72 / xx, 1 - (152 / yy), 0.0,
-		0.0, 0.0, 1.0, 48 / xx, 1 - (192 / yy), 0.0,
-		0.0, 0.0, 1.0, 86 / xx, 1 - (155 / yy), 0.0,
-		0.0, 0.0, 1.0, 20 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 86 / xx, 1 - (155 / yy), 0.0,
-		0.0, 0.0, 1.0, 20 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 90 / xx, 1 - (171 / yy), 0.0,
-		0.0, 0.0, 1.0, 90 / xx, 1 - (171 / yy), 0.0,
-		0.0, 0.0, 1.0, 43 / xx, 1 - (216 / yy), 0.0,
-		0.0, 0.0, 1.0, 24 / xx, 1 - (252 / yy), 0.0,
-		0.0, 0.0, 1.0, 90 / xx, 1 - (171 / yy), 0.0,
-		0.0, 0.0, 1.0, 24 / xx, 1 - (252 / yy), 0.0,
-		0.0, 0.0, 1.0, 28 / xx, 1 - (278 / yy), 0.0,
-		0.0, 0.0, 1.0, 70 / xx, 1 - (215 / yy), 0.0,
-		0.0, 0.0, 1.0, 96 / xx, 1 - (202 / yy), 0.0,
-		0.0, 0.0, 1.0, 28 / xx, 1 - (278 / yy), 0.0,
-		0.0, 0.0, 1.0, 96 / xx, 1 - (202 / yy), 0.0,
-		0.0, 0.0, 1.0, 28 / xx, 1 - (278 / yy), 0.0,
-		0.0, 0.0, 1.0, 96 / xx, 1 - (227 / yy), 0.0,
-		0.0, 0.0, 1.0, 110 / xx, 1 - (243 / yy), 0.0,
-		0.0, 0.0, 1.0, 126 / xx, 1 - (171 / yy), 0.0,
-		0.0, 0.0, 1.0, 114 / xx, 1 - (146 / yy), 0.0,
-		0.0, 0.0, 1.0, 114 / xx, 1 - (146 / yy), 0.0,
-		0.0, 0.0, 1.0, 110 / xx, 1 - (243 / yy), 0.0,
-		0.0, 0.0, 1.0, 86 / xx, 1 - (290 / yy), 0.0,
-		0.0, 0.0, 1.0, 86 / xx, 1 - (290 / yy), 0.0,
-		0.0, 0.0, 1.0, 98 / xx, 1 - (229 / yy), 0.0,
-		0.0, 0.0, 1.0, 56 / xx, 1 - (291 / yy), 0.0,
-		//國
-		0.0, 0.0, 1.0, 261 / xx, 1 - (74 / yy), 0.0,
-		0.0, 0.0, 1.0, 261 / xx, 1 - (104 / yy), 0.0,
-		0.0, 0.0, 1.0, 306 / xx, 1 - (109 / yy), 0.0,
-		0.0, 0.0, 1.0, 306 / xx, 1 - (109 / yy), 0.0,
-		0.0, 0.0, 1.0, 261 / xx, 1 - (104 / yy), 0.0,
-		0.0, 0.0, 1.0, 279 / xx, 1 - (132 / yy), 0.0,
-		0.0, 0.0, 1.0, 219 / xx, 1 - (150 / yy), 0.0,
-		0.0, 0.0, 1.0, 328 / xx, 1 - (121 / yy), 0.0,
-		0.0, 0.0, 1.0, 330 / xx, 1 - (151 / yy), 0.0,
-		0.0, 0.0, 1.0, 219 / xx, 1 - (150 / yy), 0.0,
-		0.0, 0.0, 1.0, 330 / xx, 1 - (151 / yy), 0.0,
-		0.0, 0.0, 1.0, 221 / xx, 1 - (193 / yy), 0.0,
-		0.0, 0.0, 1.0, 279 / xx, 1 - (134 / yy), 0.0,
-		0.0, 0.0, 1.0, 306 / xx, 1 - (108 / yy), 0.0,
-		0.0, 0.0, 1.0, 304 / xx, 1 - (129 / yy), 0.0,
-		0.0, 0.0, 1.0, 278 / xx, 1 - (170 / yy), 0.0,
-		0.0, 0.0, 1.0, 247 / xx, 1 - (247 / yy), 0.0,
-		0.0, 0.0, 1.0, 243 / xx, 1 - (216 / yy), 0.0,
-		0.0, 0.0, 1.0, 278 / xx, 1 - (170 / yy), 0.0,
-		0.0, 0.0, 1.0, 247 / xx, 1 - (247 / yy), 0.0,
-		0.0, 0.0, 1.0, 292 / xx, 1 - (167 / yy), 0.0,
-		0.0, 0.0, 1.0, 279 / xx, 1 - (190 / yy), 0.0,
-		0.0, 0.0, 1.0, 320 / xx, 1 - (179 / yy), 0.0,
-		0.0, 0.0, 1.0, 247 / xx, 1 - (247 / yy), 0.0,
-		0.0, 0.0, 1.0, 315 / xx, 1 - (184 / yy), 0.0,
-		0.0, 0.0, 1.0, 324 / xx, 1 - (172 / yy), 0.0,
-		0.0, 0.0, 1.0, 332 / xx, 1 - (192 / yy), 0.0,
-		0.0, 0.0, 1.0, 318 / xx, 1 - (186 / yy), 0.0,
-		0.0, 0.0, 1.0, 289 / xx, 1 - (281 / yy), 0.0,
-		0.0, 0.0, 1.0, 335 / xx, 1 - (197 / yy), 0.0,
-		0.0, 0.0, 1.0, 318 / xx, 1 - (186 / yy), 0.0,
-		0.0, 0.0, 1.0, 289 / xx, 1 - (281 / yy), 0.0,
-		0.0, 0.0, 1.0, 266 / xx, 1 - (287 / yy), 0.0,
-		0.0, 0.0, 1.0, 216 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 361 / xx, 1 - (300 / yy), 0.0,
-		0.0, 0.0, 1.0, 356 / xx, 1 - (280 / yy), 0.0,
-		0.0, 0.0, 1.0, 216 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 361 / xx, 1 - (300 / yy), 0.0,
-		0.0, 0.0, 1.0, 234 / xx, 1 - (324 / yy), 0.0,
-		//立
-		0.0, 0.0, 1.0, 402 / xx, 1 - (124 / yy), 0.0,
-		0.0, 0.0, 1.0, 419 / xx, 1 - (223 / yy), 0.0,
-		0.0, 0.0, 1.0, 387 / xx, 1 - (128 / yy), 0.0,
-		0.0, 0.0, 1.0, 387 / xx, 1 - (128 / yy), 0.0,
-		0.0, 0.0, 1.0, 419 / xx, 1 - (223 / yy), 0.0,
-		0.0, 0.0, 1.0, 405 / xx, 1 - (228 / yy), 0.0,
-		0.0, 0.0, 1.0, 405 / xx, 1 - (128 / yy), 0.0,
-		0.0, 0.0, 1.0, 489 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (96 / yy), 0.0,
-		0.0, 0.0, 1.0, 405 / xx, 1 - (128 / yy), 0.0,
-		0.0, 0.0, 1.0, 489 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 431 / xx, 1 - (145 / yy), 0.0,
-		0.0, 0.0, 1.0, 473 / xx, 1 - (60 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (443 / yy), 0.0,
-		0.0, 0.0, 1.0, 487 / xx, 1 - (53 / yy), 0.0,
-		0.0, 0.0, 1.0, 487 / xx, 1 - (53 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (443 / yy), 0.0,
-		0.0, 0.0, 1.0, 493 / xx, 1 - (430 / yy), 0.0,
-		0.0, 0.0, 1.0, 486 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 530 / xx, 1 - (94 / yy), 0.0,
-		0.0, 0.0, 1.0, 514 / xx, 1 - (116 / yy), 0.0,
-		0.0, 0.0, 1.0, 486 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 514 / xx, 1 - (116 / yy), 0.0,
-		0.0, 0.0, 1.0, 487 / xx, 1 - (115 / yy), 0.0,
-		0.0, 0.0, 1.0, 531 / xx, 1 - (101 / yy), 0.0,
-		0.0, 0.0, 1.0, 539 / xx, 1 - (115 / yy), 0.0,
-		0.0, 0.0, 1.0, 440 / xx, 1 - (223 / yy), 0.0,
-		0.0, 0.0, 1.0, 531 / xx, 1 - (101 / yy), 0.0,
-		0.0, 0.0, 1.0, 440 / xx, 1 - (223 / yy), 0.0,
-		0.0, 0.0, 1.0, 441 / xx, 1 - (196 / yy), 0.0,
-		0.0, 0.0, 1.0, 443 / xx, 1 - (223 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (191 / yy), 0.0,
-		0.0, 0.0, 1.0, 506 / xx, 1 - (203 / yy), 0.0,
-		0.0, 0.0, 1.0, 471 / xx, 1 - (191 / yy), 0.0,
-		0.0, 0.0, 1.0, 506 / xx, 1 - (203 / yy), 0.0,
-		0.0, 0.0, 1.0, 510 / xx, 1 - (181 / yy), 0.0,
-		//中
-		0.0, 0.0, 1.0, 598 / xx, 1 - (91 / yy), 0.0,
-		0.0, 0.0, 1.0, 612 / xx, 1 - (84 / yy), 0.0,
-		0.0, 0.0, 1.0, 616 / xx, 1 - (234 / yy), 0.0,
-		0.0, 0.0, 1.0, 598 / xx, 1 - (91 / yy), 0.0,
-		0.0, 0.0, 1.0, 616 / xx, 1 - (234 / yy), 0.0,
-		0.0, 0.0, 1.0, 603 / xx, 1 - (236 / yy), 0.0,
-		0.0, 0.0, 1.0, 614 / xx, 1 - (83 / yy), 0.0,
-		0.0, 0.0, 1.0, 623 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 632 / xx, 1 - (86 / yy), 0.0,
-		0.0, 0.0, 1.0, 623 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 632 / xx, 1 - (86 / yy), 0.0,
-		0.0, 0.0, 1.0, 633 / xx, 1 - (216 / yy), 0.0,
-		0.0, 0.0, 1.0, 623 / xx, 1 - (96 / yy), 0.0,
-		0.0, 0.0, 1.0, 633 / xx, 1 - (216 / yy), 0.0,
-		0.0, 0.0, 1.0, 622 / xx, 1 - (221 / yy), 0.0,
-		0.0, 0.0, 1.0, 700 / xx, 1 - (194 / yy), 0.0,
-		0.0, 0.0, 1.0, 697 / xx, 1 - (214 / yy), 0.0,
-		0.0, 0.0, 1.0, 541 / xx, 1 - (241 / yy), 0.0,
-		0.0, 0.0, 1.0, 541 / xx, 1 - (241 / yy), 0.0,
-		0.0, 0.0, 1.0, 697 / xx, 1 - (214 / yy), 0.0,
-		0.0, 0.0, 1.0, 539 / xx, 1 - (277 / yy), 0.0,
-		0.0, 0.0, 1.0, 539 / xx, 1 - (277 / yy), 0.0,
-		0.0, 0.0, 1.0, 594 / xx, 1 - (251 / yy), 0.0,
-		0.0, 0.0, 1.0, 549 / xx, 1 - (293 / yy), 0.0,
-		0.0, 0.0, 1.0, 700 / xx, 1 - (191 / yy), 0.0,
-		0.0, 0.0, 1.0, 745 / xx, 1 - (214 / yy), 0.0,
-		0.0, 0.0, 1.0, 696 / xx, 1 - (212 / yy), 0.0,
-		0.0, 0.0, 1.0, 700 / xx, 1 - (191 / yy), 0.0,
-		0.0, 0.0, 1.0, 745 / xx, 1 - (214 / yy), 0.0,
-		0.0, 0.0, 1.0, 732 / xx, 1 - (188 / yy), 0.0,
-		0.0, 0.0, 1.0, 732 / xx, 1 - (188 / yy), 0.0,
-		0.0, 0.0, 1.0, 745 / xx, 1 - (214 / yy), 0.0,
-		0.0, 0.0, 1.0, 755 / xx, 1 - (193 / yy), 0.0,
-		0.0, 0.0, 1.0, 732 / xx, 1 - (188 / yy), 0.0,
-		0.0, 0.0, 1.0, 755 / xx, 1 - (193 / yy), 0.0,
-		0.0, 0.0, 1.0, 747 / xx, 1 - (176 / yy), 0.0,
-		0.0, 0.0, 1.0, 575 / xx, 1 - (274 / yy), 0.0,
-		0.0, 0.0, 1.0, 600 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 601 / xx, 1 - (331 / yy), 0.0,
-		0.0, 0.0, 1.0, 600 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 601 / xx, 1 - (331 / yy), 0.0,
-		0.0, 0.0, 1.0, 621 / xx, 1 - (309 / yy), 0.0,
-		0.0, 0.0, 1.0, 600 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 621 / xx, 1 - (309 / yy), 0.0,
-		0.0, 0.0, 1.0, 638 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 600 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 638 / xx, 1 - (291 / yy), 0.0,
-		0.0, 0.0, 1.0, 636 / xx, 1 - (271 / yy), 0.0,
-		0.0, 0.0, 1.0, 643 / xx, 1 - (271 / yy), 0.0,
-		0.0, 0.0, 1.0, 666 / xx, 1 - (259 / yy), 0.0,
-		0.0, 0.0, 1.0, 646 / xx, 1 - (281 / yy), 0.0,
-		0.0, 0.0, 1.0, 701 / xx, 1 - (251 / yy), 0.0,
-		0.0, 0.0, 1.0, 746 / xx, 1 - (293 / yy), 0.0,
-		0.0, 0.0, 1.0, 741 / xx, 1 - (344 / yy), 0.0,
-		0.0, 0.0, 1.0, 642 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 682 / xx, 1 - (49 / yy), 0.0,
-		0.0, 0.0, 1.0, 688 / xx, 1 - (58 / yy), 0.0,
-		0.0, 0.0, 1.0, 688 / xx, 1 - (58 / yy), 0.0,
-		0.0, 0.0, 1.0, 642 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 685 / xx, 1 - (85 / yy), 0.0,
-		0.0, 0.0, 1.0, 653 / xx, 1 - (80 / yy), 0.0,
-		0.0, 0.0, 1.0, 650 / xx, 1 - (211 / yy), 0.0,
-		0.0, 0.0, 1.0, 642 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 642 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 650 / xx, 1 - (211 / yy), 0.0,
-		0.0, 0.0, 1.0, 643 / xx, 1 - (213 / yy), 0.0,
-		0.0, 0.0, 1.0, 685 / xx, 1 - (87 / yy), 0.0,
-		0.0, 0.0, 1.0, 675 / xx, 1 - (200 / yy), 0.0,
-		0.0, 0.0, 1.0, 666 / xx, 1 - (84 / yy), 0.0,
-		0.0, 0.0, 1.0, 666 / xx, 1 - (84 / yy), 0.0,
-		0.0, 0.0, 1.0, 675 / xx, 1 - (200 / yy), 0.0,
-		0.0, 0.0, 1.0, 666 / xx, 1 - (206 / yy), 0.0,
-		0.0, 0.0, 1.0, 653 / xx, 1 - (113 / yy), 0.0,
-		0.0, 0.0, 1.0, 666 / xx, 1 - (102 / yy), 0.0,
-		0.0, 0.0, 1.0, 667 / xx, 1 - (152 / yy), 0.0,
-		0.0, 0.0, 1.0, 653 / xx, 1 - (113 / yy), 0.0,
-		0.0, 0.0, 1.0, 658 / xx, 1 - (140 / yy), 0.0,
-		0.0, 0.0, 1.0, 662 / xx, 1 - (129 / yy), 0.0,
-		0.0, 0.0, 1.0, 653 / xx, 1 - (113 / yy), 0.0,
-		0.0, 0.0, 1.0, 658 / xx, 1 - (140 / yy), 0.0,
-		0.0, 0.0, 1.0, 653 / xx, 1 - (129 / yy), 0.0,
-		0.0, 0.0, 1.0, 662 / xx, 1 - (129 / yy), 0.0,
-		0.0, 0.0, 1.0, 652 / xx, 1 - (160 / yy), 0.0,
-		0.0, 0.0, 1.0, 660 / xx, 1 - (164 / yy), 0.0,
-		0.0, 0.0, 1.0, 662 / xx, 1 - (163 / yy), 0.0,
-		0.0, 0.0, 1.0, 652 / xx, 1 - (160 / yy), 0.0,
-		0.0, 0.0, 1.0, 651 / xx, 1 - (176 / yy), 0.0,
-		0.0, 0.0, 1.0, 651 / xx, 1 - (176 / yy), 0.0,
-		0.0, 0.0, 1.0, 669 / xx, 1 - (155 / yy), 0.0,
-		0.0, 0.0, 1.0, 657 / xx, 1 - (190 / yy), 0.0,
-		0.0, 0.0, 1.0, 660 / xx, 1 - (195 / yy), 0.0,
-		0.0, 0.0, 1.0, 649 / xx, 1 - (209 / yy), 0.0,
-		0.0, 0.0, 1.0, 668 / xx, 1 - (202 / yy), 0.0,
-		0.0, 0.0, 1.0, 687 / xx, 1 - (76 / yy), 0.0,
-		0.0, 0.0, 1.0, 685 / xx, 1 - (94 / yy), 0.0,
-		0.0, 0.0, 1.0, 722 / xx, 1 - (52 / yy), 0.0,
-		0.0, 0.0, 1.0, 685 / xx, 1 - (94 / yy), 0.0,
-		0.0, 0.0, 1.0, 722 / xx, 1 - (52 / yy), 0.0,
-		0.0, 0.0, 1.0, 700 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 700 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 722 / xx, 1 - (52 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (199 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (199 / yy), 0.0,
-		0.0, 0.0, 1.0, 722 / xx, 1 - (52 / yy), 0.0,
-		0.0, 0.0, 1.0, 702 / xx, 1 - (192 / yy), 0.0,
-		0.0, 0.0, 1.0, 682 / xx, 1 - (114 / yy), 0.0,
-		0.0, 0.0, 1.0, 681 / xx, 1 - (129 / yy), 0.0,
-		0.0, 0.0, 1.0, 698 / xx, 1 - (135 / yy), 0.0,
-		0.0, 0.0, 1.0, 681 / xx, 1 - (129 / yy), 0.0,
-		0.0, 0.0, 1.0, 698 / xx, 1 - (135 / yy), 0.0,
-		0.0, 0.0, 1.0, 694 / xx, 1 - (164 / yy), 0.0,
-		0.0, 0.0, 1.0, 694 / xx, 1 - (164 / yy), 0.0,
-		0.0, 0.0, 1.0, 690 / xx, 1 - (150 / yy), 0.0,
-		0.0, 0.0, 1.0, 683 / xx, 1 - (149 / yy), 0.0,
-		0.0, 0.0, 1.0, 683 / xx, 1 - (149 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (150 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (195 / yy), 0.0,
-		0.0, 0.0, 1.0, 693 / xx, 1 - (195 / yy), 0.0,
-		0.0, 0.0, 1.0, 676 / xx, 1 - (150 / yy), 0.0,
-		0.0, 0.0, 1.0, 686 / xx, 1 - (186 / yy), 0.0,
-		
-		//興
-		0.0, 0.0, 1.0, 803 / xx, 1 - (172 / yy), 0.0,
-		0.0, 0.0, 1.0, 796 / xx, 1 - (184 / yy), 0.0,
-		0.0, 0.0, 1.0, 820 / xx, 1 - (180 / yy), 0.0,
-		0.0, 0.0, 1.0, 796 / xx, 1 - (184 / yy), 0.0,
-		0.0, 0.0, 1.0, 801 / xx, 1 - (219 / yy), 0.0,
-		0.0, 0.0, 1.0, 820 / xx, 1 - (180 / yy), 0.0,
-		0.0, 0.0, 1.0, 801 / xx, 1 - (219 / yy), 0.0,
-		0.0, 0.0, 1.0, 820 / xx, 1 - (180 / yy), 0.0,
-		0.0, 0.0, 1.0, 810 / xx, 1 - (226 / yy), 0.0,
-		0.0, 0.0, 1.0, 810 / xx, 1 - (226 / yy), 0.0,
-		0.0, 0.0, 1.0, 820 / xx, 1 - (180 / yy), 0.0,
-		0.0, 0.0, 1.0, 836 / xx, 1 - (198 / yy), 0.0,
-		0.0, 0.0, 1.0, 836 / xx, 1 - (198 / yy), 0.0,
-		0.0, 0.0, 1.0, 820 / xx, 1 - (180 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 820 / xx, 1 - (180 / yy), 0.0,
-		0.0, 0.0, 1.0, 892 / xx, 1 - (133 / yy), 0.0,
-		0.0, 0.0, 1.0, 892 / xx, 1 - (133 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 913 / xx, 1 - (137 / yy), 0.0,
-		0.0, 0.0, 1.0, 913 / xx, 1 - (137 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 908 / xx, 1 - (162 / yy), 0.0,
-		0.0, 0.0, 1.0, 870 / xx, 1 - (148 / yy), 0.0,
-		0.0, 0.0, 1.0, 880 / xx, 1 - (144 / yy), 0.0,
-		0.0, 0.0, 1.0, 879 / xx, 1 - (113 / yy), 0.0,
-		0.0, 0.0, 1.0, 879 / xx, 1 - (113 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (57 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (114 / yy), 0.0,
-		0.0, 0.0, 1.0, 888 / xx, 1 - (114 / yy), 0.0,
-		0.0, 0.0, 1.0, 883 / xx, 1 - (142 / yy), 0.0,
-		0.0, 0.0, 1.0, 891 / xx, 1 - (137 / yy), 0.0,
-		0.0, 0.0, 1.0, 862 / xx, 1 - (179 / yy), 0.0,
-		0.0, 0.0, 1.0, 874 / xx, 1 - (171 / yy), 0.0,
-		0.0, 0.0, 1.0, 865 / xx, 1 - (247 / yy), 0.0,
-		0.0, 0.0, 1.0, 862 / xx, 1 - (179 / yy), 0.0,
-		0.0, 0.0, 1.0, 865 / xx, 1 - (247 / yy), 0.0,
-		0.0, 0.0, 1.0, 846 / xx, 1 - (237 / yy), 0.0,
-		0.0, 0.0, 1.0, 846 / xx, 1 - (237 / yy), 0.0,
-		0.0, 0.0, 1.0, 865 / xx, 1 - (247 / yy), 0.0,
-		0.0, 0.0, 1.0, 850 / xx, 1 - (282 / yy), 0.0,
-		0.0, 0.0, 1.0, 850 / xx, 1 - (282 / yy), 0.0,
-		0.0, 0.0, 1.0, 846 / xx, 1 - (237 / yy), 0.0,
-		0.0, 0.0, 1.0, 810 / xx, 1 - (286 / yy), 0.0,
-		0.0, 0.0, 1.0, 882 / xx, 1 - (221 / yy), 0.0,
-		0.0, 0.0, 1.0, 911 / xx, 1 - (257 / yy), 0.0,
-		0.0, 0.0, 1.0, 939 / xx, 1 - (259 / yy), 0.0,
-		0.0, 0.0, 1.0, 911 / xx, 1 - (257 / yy), 0.0,
-		0.0, 0.0, 1.0, 939 / xx, 1 - (259 / yy), 0.0,
-		0.0, 0.0, 1.0, 915 / xx, 1 - (284 / yy), 0.0,
-		0.0, 0.0, 1.0, 915 / xx, 1 - (284 / yy), 0.0,
-		0.0, 0.0, 1.0, 911 / xx, 1 - (257 / yy), 0.0,
-		0.0, 0.0, 1.0, 890 / xx, 1 - (281 / yy), 0.0,
-		0.0, 0.0, 1.0, 915 / xx, 1 - (284 / yy), 0.0,
-		0.0, 0.0, 1.0, 939 / xx, 1 - (259 / yy), 0.0,
-		0.0, 0.0, 1.0, 938 / xx, 1 - (276 / yy), 0.0,
-		0.0, 0.0, 1.0, 938 / xx, 1 - (276 / yy), 0.0,
-		0.0, 0.0, 1.0, 915 / xx, 1 - (284 / yy), 0.0,
-		0.0, 0.0, 1.0, 931 / xx, 1 - (301 / yy), 0.0,
-
-		//大
-
-
-		0.0, 0.0, 1.0, 1013 / xx, 1 - (43 / yy), 0.0,
-		0.0, 0.0, 1.0, 1020 / xx, 1 - (69 / yy), 0.0,
-		0.0, 0.0, 1.0, 1015 / xx, 1 - (65 / yy), 0.0,
-		0.0, 0.0, 1.0, 1013 / xx, 1 - (43 / yy), 0.0,
-		0.0, 0.0, 1.0, 1015 / xx, 1 - (65 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (85 / yy), 0.0,
-		0.0, 0.0, 1.0, 1013 / xx, 1 - (43 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (85 / yy), 0.0,
-		0.0, 0.0, 1.0, 1000 / xx, 1 - (78 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (62 / yy), 0.0,
-		0.0, 0.0, 1.0, 1018 / xx, 1 - (110 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (170 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (85 / yy), 0.0,
-		0.0, 0.0, 1.0, 1017 / xx, 1 - (87 / yy), 0.0,
-		0.0, 0.0, 1.0, 1018 / xx, 1 - (110 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (135 / yy), 0.0,
-		0.0, 0.0, 1.0, 1026 / xx, 1 - (122 / yy), 0.0,
-		0.0, 0.0, 1.0, 1005 / xx, 1 - (170 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (135 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (168 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (201 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (168 / yy), 0.0,
-		0.0, 0.0, 1.0, 1006 / xx, 1 - (201 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (204 / yy), 0.0,
-		0.0, 0.0, 1.0, 967 / xx, 1 - (294 / yy), 0.0,
-		0.0, 0.0, 1.0, 958 / xx, 1 - (275 / yy), 0.0,
-		0.0, 0.0, 1.0, 984 / xx, 1 - (230 / yy), 0.0,
-		0.0, 0.0, 1.0, 958 / xx, 1 - (275 / yy), 0.0,
-		0.0, 0.0, 1.0, 984 / xx, 1 - (230 / yy), 0.0,
-		0.0, 0.0, 1.0, 961 / xx, 1 - (246 / yy), 0.0,
-		0.0, 0.0, 1.0, 984 / xx, 1 - (230 / yy), 0.0,
-		0.0, 0.0, 1.0, 961 / xx, 1 - (246 / yy), 0.0,
-		0.0, 0.0, 1.0, 980 / xx, 1 - (208 / yy), 0.0,
-		0.0, 0.0, 1.0, 984 / xx, 1 - (230 / yy), 0.0,
-		0.0, 0.0, 1.0, 980 / xx, 1 - (208 / yy), 0.0,
-		0.0, 0.0, 1.0, 1002 / xx, 1 - (217 / yy), 0.0,
-		0.0, 0.0, 1.0, 980 / xx, 1 - (208 / yy), 0.0,
-		0.0, 0.0, 1.0, 1002 / xx, 1 - (217 / yy), 0.0,
-		0.0, 0.0, 1.0, 1103 / xx, 1 - (151 / yy), 0.0,
-		0.0, 0.0, 1.0, 1002 / xx, 1 - (217 / yy), 0.0,
-		0.0, 0.0, 1.0, 1103 / xx, 1 - (151 / yy), 0.0,
-		0.0, 0.0, 1.0, 1096 / xx, 1 - (174 / yy), 0.0,
-		0.0, 0.0, 1.0, 1103 / xx, 1 - (151 / yy), 0.0,
-		0.0, 0.0, 1.0, 1096 / xx, 1 - (174 / yy), 0.0,
-		0.0, 0.0, 1.0, 1116 / xx, 1 - (163 / yy), 0.0,
-		0.0, 0.0, 1.0, 1096 / xx, 1 - (174 / yy), 0.0,
-		0.0, 0.0, 1.0, 1116 / xx, 1 - (163 / yy), 0.0,
-		0.0, 0.0, 1.0, 1124 / xx, 1 - (184 / yy), 0.0,
-		0.0, 0.0, 1.0, 1124 / xx, 1 - (184 / yy), 0.0,
-		0.0, 0.0, 1.0, 1096 / xx, 1 - (174 / yy), 0.0,
-		0.0, 0.0, 1.0, 1116 / xx, 1 - (198 / yy), 0.0,
-		0.0, 0.0, 1.0, 1116 / xx, 1 - (198 / yy), 0.0,
-		0.0, 0.0, 1.0, 1096 / xx, 1 - (174 / yy), 0.0,
-		0.0, 0.0, 1.0, 1101 / xx, 1 - (197 / yy), 0.0,
-		0.0, 0.0, 1.0, 1101 / xx, 1 - (197 / yy), 0.0,
-		0.0, 0.0, 1.0, 1096 / xx, 1 - (174 / yy), 0.0,
-		0.0, 0.0, 1.0, 1082 / xx, 1 - (208 / yy), 0.0,
-		0.0, 0.0, 1.0, 1047 / xx, 1 - (50 / yy), 0.0,
-		0.0, 0.0, 1.0, 1056 / xx, 1 - (64 / yy), 0.0,
-		0.0, 0.0, 1.0, 1036 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1056 / xx, 1 - (64 / yy), 0.0,
-		0.0, 0.0, 1.0, 1036 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (82 / yy), 0.0,
-		0.0, 0.0, 1.0, 1036 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1022 / xx, 1 - (87 / yy), 0.0,
-		0.0, 0.0, 1.0, 1020 / xx, 1 - (97 / yy), 0.0,
-		0.0, 0.0, 1.0, 1036 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1049 / xx, 1 - (82 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 1036 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 1020 / xx, 1 - (97 / yy), 0.0,
-		0.0, 0.0, 1.0, 1027 / xx, 1 - (110 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 1020 / xx, 1 - (100 / yy), 0.0,
-		0.0, 0.0, 1.0, 1027 / xx, 1 - (108 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (89 / yy), 0.0,
-		0.0, 0.0, 1.0, 1040 / xx, 1 - (109 / yy), 0.0,
-		0.0, 0.0, 1.0, 1040 / xx, 1 - (109 / yy), 0.0,
-		0.0, 0.0, 1.0, 1030 / xx, 1 - (110 / yy), 0.0,
-		0.0, 0.0, 1.0, 1022 / xx, 1 - (142 / yy), 0.0,
-		0.0, 0.0, 1.0, 1040 / xx, 1 - (109 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1037 / xx, 1 - (140 / yy), 0.0,
-		0.0, 0.0, 1.0, 1037 / xx, 1 - (140 / yy), 0.0,
-		0.0, 0.0, 1.0, 1029 / xx, 1 - (133 / yy), 0.0,
-		0.0, 0.0, 1.0, 1023 / xx, 1 - (145 / yy), 0.0,
-		0.0, 0.0, 1.0, 1037 / xx, 1 - (141 / yy), 0.0,
-		0.0, 0.0, 1.0, 1023 / xx, 1 - (145 / yy), 0.0,
-		0.0, 0.0, 1.0, 1030 / xx, 1 - (163 / yy), 0.0,
-		0.0, 0.0, 1.0, 1025 / xx, 1 - (161 / yy), 0.0,
-		0.0, 0.0, 1.0, 1022 / xx, 1 - (183 / yy), 0.0,
-		0.0, 0.0, 1.0, 1047 / xx, 1 - (170 / yy), 0.0,
-		0.0, 0.0, 1.0, 1047 / xx, 1 - (115 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (118 / yy), 0.0,
-		0.0, 0.0, 1.0, 1038 / xx, 1 - (141 / yy), 0.0,
-		0.0, 0.0, 1.0, 1038 / xx, 1 - (141 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (118 / yy), 0.0,
-		0.0, 0.0, 1.0, 1046 / xx, 1 - (149 / yy), 0.0,
-		0.0, 0.0, 1.0, 1039 / xx, 1 - (141 / yy), 0.0,
-		0.0, 0.0, 1.0, 1031 / xx, 1 - (166 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (155 / yy), 0.0,
-		0.0, 0.0, 1.0, 1031 / xx, 1 - (166 / yy), 0.0,
-		0.0, 0.0, 1.0, 1050 / xx, 1 - (155 / yy), 0.0,
-		0.0, 0.0, 1.0, 1048 / xx, 1 - (171 / yy), 0.0,
-		0.0, 0.0, 1.0, 1091 / xx, 1 - (48 / yy), 0.0,
-		0.0, 0.0, 1.0, 1066 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 1085 / xx, 1 - (102 / yy), 0.0,
-		0.0, 0.0, 1.0, 1066 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 1058 / xx, 1 - (72 / yy), 0.0,
-		0.0, 0.0, 1.0, 1057 / xx, 1 - (84 / yy), 0.0,
-		0.0, 0.0, 1.0, 1066 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 1066 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 1057 / xx, 1 - (84 / yy), 0.0,
-		0.0, 0.0, 1.0, 1066 / xx, 1 - (92 / yy), 0.0,
-		0.0, 0.0, 1.0, 1066 / xx, 1 - (77 / yy), 0.0,
-		0.0, 0.0, 1.0, 1078 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1078 / xx, 1 - (90 / yy), 0.0,
-		0.0, 0.0, 1.0, 1086 / xx, 1 - (103 / yy), 0.0,
-		0.0, 0.0, 1.0, 1080 / xx, 1 - (165 / yy), 0.0,
-		0.0, 0.0, 1.0, 1060 / xx, 1 - (108 / yy), 0.0,
-		0.0, 0.0, 1.0, 1081 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 1053 / xx, 1 - (147 / yy), 0.0,
-		0.0, 0.0, 1.0, 1053 / xx, 1 - (147 / yy), 0.0,
-		0.0, 0.0, 1.0, 1081 / xx, 1 - (98 / yy), 0.0,
-		0.0, 0.0, 1.0, 1078 / xx, 1 - (164 / yy), 0.0,
-		0.0, 0.0, 1.0, 1061 / xx, 1 - (175 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (157 / yy), 0.0,
-		0.0, 0.0, 1.0, 1078 / xx, 1 - (164 / yy), 0.0,
-		0.0, 0.0, 1.0, 1060 / xx, 1 - (193 / yy), 0.0,
-		0.0, 0.0, 1.0, 1031 / xx, 1 - (226 / yy), 0.0,
-		0.0, 0.0, 1.0, 1065 / xx, 1 - (212 / yy), 0.0,
-		0.0, 0.0, 1.0, 1031 / xx, 1 - (226 / yy), 0.0,
-		0.0, 0.0, 1.0, 1065 / xx, 1 - (212 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (231 / yy), 0.0,
-		0.0, 0.0, 1.0, 1031 / xx, 1 - (226 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (232 / yy), 0.0,
-		0.0, 0.0, 1.0, 1040 / xx, 1 - (238 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (231 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (232 / yy), 0.0,
-		0.0, 0.0, 1.0, 1041 / xx, 1 - (260 / yy), 0.0,
-		0.0, 0.0, 1.0, 1041 / xx, 1 - (260 / yy), 0.0,
-		0.0, 0.0, 1.0, 1063 / xx, 1 - (231 / yy), 0.0,
-		0.0, 0.0, 1.0, 1068 / xx, 1 - (251 / yy), 0.0,
-		0.0, 0.0, 1.0, 1019 / xx, 1 - (273 / yy), 0.0,
-		0.0, 0.0, 1.0, 1008 / xx, 1 - (265 / yy), 0.0,
-		0.0, 0.0, 1.0, 1008 / xx, 1 - (284 / yy), 0.0,
-		0.0, 0.0, 1.0, 1019 / xx, 1 - (273 / yy), 0.0,
-		0.0, 0.0, 1.0, 1008 / xx, 1 - (284 / yy), 0.0,
-		0.0, 0.0, 1.0, 1023 / xx, 1 - (287 / yy), 0.0,
-		0.0, 0.0, 1.0, 1018 / xx, 1 - (271 / yy), 0.0,
-		0.0, 0.0, 1.0, 1019 / xx, 1 - (280 / yy), 0.0,
-		0.0, 0.0, 1.0, 1049 / xx, 1 - (269 / yy), 0.0,
-		0.0, 0.0, 1.0, 1018 / xx, 1 - (271 / yy), 0.0,
-		0.0, 0.0, 1.0, 1049 / xx, 1 - (269 / yy), 0.0,
-		0.0, 0.0, 1.0, 1067 / xx, 1 - (248 / yy), 0.0,
-		0.0, 0.0, 1.0, 1067 / xx, 1 - (248 / yy), 0.0,
-		0.0, 0.0, 1.0, 1049 / xx, 1 - (269 / yy), 0.0,
-		0.0, 0.0, 1.0, 1085 / xx, 1 - (263 / yy), 0.0,
-		0.0, 0.0, 1.0, 1085 / xx, 1 - (263 / yy), 0.0,
-		0.0, 0.0, 1.0, 1069 / xx, 1 - (248 / yy), 0.0,
-		0.0, 0.0, 1.0, 1098 / xx, 1 - (250 / yy), 0.0,
-		0.0, 0.0, 1.0, 1085 / xx, 1 - (263 / yy), 0.0,
-		0.0, 0.0, 1.0, 1098 / xx, 1 - (250 / yy), 0.0,
-		0.0, 0.0, 1.0, 1100 / xx, 1 - (274 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (270 / yy), 0.0,
-		0.0, 0.0, 1.0, 1070 / xx, 1 - (269 / yy), 0.0,
-		0.0, 0.0, 1.0, 1065 / xx, 1 - (369 / yy), 0.0,
-		0.0, 0.0, 1.0, 1051 / xx, 1 - (270 / yy), 0.0,
-		0.0, 0.0, 1.0, 1065 / xx, 1 - (369 / yy), 0.0,
-		0.0, 0.0, 1.0, 1052 / xx, 1 - (337 / yy), 0.0,
-		0.0, 0.0, 1.0, 1052 / xx, 1 - (337 / yy), 0.0,
-		0.0, 0.0, 1.0, 1065 / xx, 1 - (369 / yy), 0.0,
-		0.0, 0.0, 1.0, 1035 / xx, 1 - (414 / yy), 0.0,
-		0.0, 0.0, 1.0, 1052 / xx, 1 - (337 / yy), 0.0,
-		0.0, 0.0, 1.0, 1035 / xx, 1 - (414 / yy), 0.0,
-		0.0, 0.0, 1.0, 1019 / xx, 1 - (393 / yy), 0.0,
-		0.0, 0.0, 1.0, 1035 / xx, 1 - (414 / yy), 0.0,
-		0.0, 0.0, 1.0, 1019 / xx, 1 - (393 / yy), 0.0,
-		0.0, 0.0, 1.0, 991 / xx, 1 - (419 / yy), 0.0,
-		0.0, 0.0, 1.0, 991 / xx, 1 - (419 / yy), 0.0,
-		0.0, 0.0, 1.0, 1035 / xx, 1 - (414 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (439 / yy), 0.0,
-		0.0, 0.0, 1.0, 991 / xx, 1 - (419 / yy), 0.0,
-		0.0, 0.0, 1.0, 990 / xx, 1 - (439 / yy), 0.0,
-		0.0, 0.0, 1.0, 956 / xx, 1 - (413 / yy), 0.0,
-		//學
-
-		0.0, 0.0, 1.0, 1248 / xx, 1 - (0 / yy), 0.0,
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (18 / yy), 0.0,
-		0.0, 0.0, 1.0, 1256 / xx, 1 - (44 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1286 / xx, 1 - (18 / yy), 0.0,
-		0.0, 0.0, 1.0, 1256 / xx, 1 - (44 / yy), 0.0,
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (31 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1256 / xx, 1 - (44 / yy), 0.0,
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (31 / yy), 0.0,
-		0.0, 0.0, 1.0, 1260 / xx, 1 - (78 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (31 / yy), 0.0,
-		0.0, 0.0, 1.0, 1260 / xx, 1 - (78 / yy), 0.0,
-		0.0, 0.0, 1.0, 1384 / xx, 1 - (32 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1260 / xx, 1 - (78 / yy), 0.0,
-		0.0, 0.0, 1.0, 1384 / xx, 1 - (32 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (145 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1384 / xx, 1 - (32 / yy), 0.0,
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (145 / yy), 0.0,
-		0.0, 0.0, 1.0, 1426 / xx, 1 - (23 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1266 / xx, 1 - (145 / yy), 0.0,
-		0.0, 0.0, 1.0, 1426 / xx, 1 - (23 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (235 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1426 / xx, 1 - (23 / yy), 0.0,
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 1469 / xx, 1 - (3 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 1469 / xx, 1 - (3 / yy), 0.0,
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (346 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1469 / xx, 1 - (3 / yy), 0.0,
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (346 / yy), 0.0,
-		0.0, 0.0, 1.0, 1455 / xx, 1 - (54 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1296 / xx, 1 - (346 / yy), 0.0,
-		0.0, 0.0, 1.0, 1455 / xx, 1 - (54 / yy), 0.0,
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (338 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1455 / xx, 1 - (54 / yy), 0.0,
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (338 / yy), 0.0,
-		0.0, 0.0, 1.0, 1449 / xx, 1 - (102 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1332 / xx, 1 - (338 / yy), 0.0,
-		0.0, 0.0, 1.0, 1449 / xx, 1 - (102 / yy), 0.0,
-		0.0, 0.0, 1.0, 1389 / xx, 1 - (339 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1449 / xx, 1 - (102 / yy), 0.0,
-		0.0, 0.0, 1.0, 1389 / xx, 1 - (339 / yy), 0.0,
-		0.0, 0.0, 1.0, 1445 / xx, 1 - (172 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1389 / xx, 1 - (339 / yy), 0.0,
-		0.0, 0.0, 1.0, 1445 / xx, 1 - (172 / yy), 0.0,
-		0.0, 0.0, 1.0, 1437 / xx, 1 - (362 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1445 / xx, 1 - (172 / yy), 0.0,
-		0.0, 0.0, 1.0, 1437 / xx, 1 - (362 / yy), 0.0,
-		0.0, 0.0, 1.0, 1453 / xx, 1 - (258 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1437 / xx, 1 - (362 / yy), 0.0,
-		0.0, 0.0, 1.0, 1453 / xx, 1 - (258 / yy), 0.0,
-		0.0, 0.0, 1.0, 1465 / xx, 1 - (329 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1437 / xx, 1 - (362 / yy), 0.0,
-		0.0, 0.0, 1.0, 1465 / xx, 1 - (329 / yy), 0.0,
-		0.0, 0.0, 1.0, 1484 / xx, 1 - (395 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 1297 / xx, 1 - (346 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (365 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1262 / xx, 1 - (235 / yy), 0.0,
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (365 / yy), 0.0,
-		0.0, 0.0, 1.0, 1246 / xx, 1 - (326 / yy), 0.0,
-
-		0.0, 0.0, 1.0, 1261 / xx, 1 - (365 / yy), 0.0,
-		0.0, 0.0, 1.0, 1246 / xx, 1 - (326 / yy), 0.0,
-		0.0, 0.0, 1.0, 1232 / xx, 1 - (388 / yy), 0.0,
-		//log藍
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1339 / xx, 1 - (105 / yy), 0.0,
-		1.0, 0.0, 0.0, 1362 / xx, 1 - (98 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1339 / xx, 1 - (105 / yy), 0.0,
-		1.0, 0.0, 0.0, 1323 / xx, 1 - (122 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1323 / xx, 1 - (122 / yy), 0.0,
-		1.0, 0.0, 0.0, 1315 / xx, 1 - (139 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1315 / xx, 1 - (139 / yy), 0.0,
-		1.0, 0.0, 0.0, 1309 / xx, 1 - (158 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1309 / xx, 1 - (158 / yy), 0.0,
-		1.0, 0.0, 0.0, 1306 / xx, 1 - (178 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1306 / xx, 1 - (178 / yy), 0.0,
-		1.0, 0.0, 0.0, 1308 / xx, 1 - (200 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1308 / xx, 1 - (200 / yy), 0.0,
-		1.0, 0.0, 0.0, 1312 / xx, 1 - (224 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1312 / xx, 1 - (224 / yy), 0.0,
-		1.0, 0.0, 0.0, 1324 / xx, 1 - (249 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1324 / xx, 1 - (249 / yy), 0.0,
-		1.0, 0.0, 0.0, 1337 / xx, 1 - (264 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1337 / xx, 1 - (264 / yy), 0.0,
-		1.0, 0.0, 0.0, 1359 / xx, 1 - (271 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1359 / xx, 1 - (271 / yy), 0.0,
-		1.0, 0.0, 0.0, 1381 / xx, 1 - (262 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1381 / xx, 1 - (262 / yy), 0.0,
-		1.0, 0.0, 0.0, 1397 / xx, 1 - (243 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1397 / xx, 1 - (243 / yy), 0.0,
-		1.0, 0.0, 0.0, 1406 / xx, 1 - (216 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1406 / xx, 1 - (216 / yy), 0.0,
-		1.0, 0.0, 0.0, 1412 / xx, 1 - (191 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1412 / xx, 1 - (191 / yy), 0.0,
-		1.0, 0.0, 0.0, 1409 / xx, 1 - (165 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1409 / xx, 1 - (165 / yy), 0.0,
-		1.0, 0.0, 0.0, 1401 / xx, 1 - (142 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1401 / xx, 1 - (142 / yy), 0.0,
-		1.0, 0.0, 0.0, 1395 / xx, 1 - (128 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1395 / xx, 1 - (128 / yy), 0.0,
-		1.0, 0.0, 0.0, 1384 / xx, 1 - (110 / yy), 0.0,
-
-		1.0, 0.0, 0.0, 1357 / xx, 1 - (175 / yy), 0.0,
-		1.0, 0.0, 0.0, 1384 / xx, 1 - (110 / yy), 0.0,
-		1.0, 0.0, 0.0, 1362 / xx, 1 - (98 / yy), 0.0,
-		//log紅
-
-		1.0, 1.0, 1.0, 1254 / xx, 1 - (26 / yy), 0.0,
-		1.0, 1.0, 1.0, 1258 / xx, 1 - (48 / yy), 0.0,
-		1.0, 1.0, 1.0, 1281 / xx, 1 - (42 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1258 / xx, 1 - (48 / yy), 0.0,
-		1.0, 1.0, 1.0, 1281 / xx, 1 - (42 / yy), 0.0,
-		1.0, 1.0, 1.0, 1282 / xx, 1 - (62 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1281 / xx, 1 - (42 / yy), 0.0,
-		1.0, 1.0, 1.0, 1282 / xx, 1 - (62 / yy), 0.0,
-		1.0, 1.0, 1.0, 1304 / xx, 1 - (62 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1282 / xx, 1 - (62 / yy), 0.0,
-		1.0, 1.0, 1.0, 1304 / xx, 1 - (62 / yy), 0.0,
-		1.0, 1.0, 1.0, 1295 / xx, 1 - (77 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1304 / xx, 1 - (62 / yy), 0.0,
-		1.0, 1.0, 1.0, 1295 / xx, 1 - (77 / yy), 0.0,
-		1.0, 1.0, 1.0, 1319 / xx, 1 - (78 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1295 / xx, 1 - (77 / yy), 0.0,
-		1.0, 1.0, 1.0, 1319 / xx, 1 - (78 / yy), 0.0,
-		1.0, 1.0, 1.0, 1319 / xx, 1 - (99 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1319 / xx, 1 - (78 / yy), 0.0,
-		1.0, 1.0, 1.0, 1319 / xx, 1 - (99 / yy), 0.0,
-		1.0, 1.0, 1.0, 1340 / xx, 1 - (102 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1340 / xx, 1 - (102 / yy), 0.0,
-		1.0, 1.0, 1.0, 1319 / xx, 1 - (99 / yy), 0.0,
-		1.0, 1.0, 1.0, 1338 / xx, 1 - (122 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1340 / xx, 1 - (102 / yy), 0.0,
-		1.0, 1.0, 1.0, 1338 / xx, 1 - (122 / yy), 0.0,
-		1.0, 1.0, 1.0, 1353 / xx, 1 - (126 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1338 / xx, 1 - (122 / yy), 0.0,
-		1.0, 1.0, 1.0, 1353 / xx, 1 - (126 / yy), 0.0,
-		1.0, 1.0, 1.0, 1354 / xx, 1 - (152 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1353 / xx, 1 - (126 / yy), 0.0,
-		1.0, 1.0, 1.0, 1354 / xx, 1 - (152 / yy), 0.0,
-		1.0, 1.0, 1.0, 1372 / xx, 1 - (159 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1354 / xx, 1 - (152 / yy), 0.0,
-		1.0, 1.0, 1.0, 1372 / xx, 1 - (159 / yy), 0.0,
-		1.0, 1.0, 1.0, 1370 / xx, 1 - (183 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1372 / xx, 1 - (159 / yy), 0.0,
-		1.0, 1.0, 1.0, 1370 / xx, 1 - (183 / yy), 0.0,
-		1.0, 1.0, 1.0, 1389 / xx, 1 - (196 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1370 / xx, 1 - (183 / yy), 0.0,
-		1.0, 1.0, 1.0, 1389 / xx, 1 - (196 / yy), 0.0,
-		1.0, 1.0, 1.0, 1394 / xx, 1 - (237 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1389 / xx, 1 - (196 / yy), 0.0,
-		1.0, 1.0, 1.0, 1394 / xx, 1 - (237 / yy), 0.0,
-		1.0, 1.0, 1.0, 1408 / xx, 1 - (252 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1394 / xx, 1 - (237 / yy), 0.0,
-		1.0, 1.0, 1.0, 1408 / xx, 1 - (252 / yy), 0.0,
-		1.0, 1.0, 1.0, 1408 / xx, 1 - (291 / yy), 0.0,
-
-		1.0, 1.0, 1.0, 1408 / xx, 1 - (252 / yy), 0.0,
-		1.0, 1.0, 1.0, 1408 / xx, 1 - (291 / yy), 0.0,
-		1.0, 1.0, 1.0, 1418 / xx, 1 - (321 / yy) };
-
-	glInterleavedArrays(GL_C3F_V3F, 0, intertwined);
+		//畫星球
+		year = (year + 1) % 360;
+		day = (day + 2) % 360;
+		glPushMatrix();
+		glTranslatef(0.0, 0.0, -2.0);
+		glPushMatrix();
+
+		glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
+		glutWireSphere(0.25, 20, 16);   //draw sun
+		glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
+		glTranslatef(1.0, 0.0, 0.0);
+		glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
+		glutWireSphere(0.1, 10, 8);//draw smaller planet 
+
+		glTranslatef(0.5, 0.0, 0.0);
+		glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
+		glutWireSphere(0.05, 10, 8);//畫衛星
+
+		glPopMatrix();
+		glPopMatrix();
+	}
+	glPopMatrix();
+	glPushMatrix();
+
+	glTranslatef(-1.6, -1.7, -3.0);
+
+
+
+
+
+	glPushMatrix();
+
+
+	//再推
+	glTranslatef(0.0, 0.0, -1.0);
+	//轉
+	glRotatef(45, 1.0, 0.0, 0.0);
+	//把手臂推出去
+	glTranslatef(0.0, 0.0, -1.0);
+
+
+
+	//第四根
+	glPushMatrix();
+	glTranslatef(-0.2, -0.3, -1.35);
+
+	//指節
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -0.4);
+	glRotatef(30, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.25);
+	glutWireCube(1.0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.5);
+	glutWireCube(1.0);
+	glPopMatrix();
+
+	glPopMatrix();
+	//第三根
+	glPushMatrix();
+	GLfloat light_position3[] = { 1.0, 1.0, 1.0, 0.0 };
+	GLfloat white_light3[] = { 0.0, 0.5, 1.0, 1.0 };
+	GLfloat lmodel_ambient3[] = { 0.1, 0.1, 0.1, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position3);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light3);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, white_light3);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient3);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glTranslatef(0.1, -0.3, -1.35);
+
+	//指節
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -0.4);
+	glRotatef(30, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.25);
+
+	glutWireCube(1.0);
+	
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.5);
+	glutWireCube(1.0);
+	glPopMatrix();
+
+	glPopMatrix();
+	//第二根
+	glPushMatrix();
+	GLfloat light_position2[] = { 1.0, 1.0, 1.0, 0.0 };
+	GLfloat white_light2[] = { 0.0, 1.0, 1.0, 1.0 };
+	GLfloat lmodel_ambient2[] = { 0.1, 0.1, 0.1, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position2);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light2);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, white_light2);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient2);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glTranslatef(-0.2, 0.0, -1.35);
+
+	//指節
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -0.4);
+	glRotatef(30, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.25);
+	glutWireCube(1.0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.5);
+	glutWireCube(1.0);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	glPopMatrix();
+
+	glPopMatrix();
+	//第一根手指
+	glPushMatrix();
+	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	GLfloat white_light[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	
+	glTranslatef(0.1, 0.0, -1.35);
+
+	//指節
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -0.4);
+	glRotatef(30, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.25);
+	glutWireCube(1.0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(0.05, 0.1, 0.5);
+	glutWireCube(1.0);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	glPopMatrix();
+	
+	glPopMatrix();
+	
+
+
+	glPushMatrix();
+	//下手臂
+	glScalef(0.4, 0.4, 2.0);
+	glutWireCube(1.0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+
+	glPushMatrix();
+	//上手臂
+	glScalef(0.4, 0.4, 2.0);
+	glutWireCube(1.0);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPopMatrix();
+
+}
+
+void display(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	/*
+	glEnable(GL_CULL_FACE);
+
+	if (flag == 1){
+	glCullFace(GL_BACK);
+	}
+	else if(flag ==0){
+	glCullFace(GL_FRONT_AND_BACK);
+	}
+	glDisable(GL_CULL_FACE);
+	*/
+
+	
+	
+	
+	//畫Logo
+	drawLogo();
+	glPushMatrix();
+	glLoadIdentity();
+
+	
+	//畫左手	
+	drawRobotLeft();
+	
+	//畫右手
+	drawRobotRight();
+	glPopMatrix();
+
+
+	glutSwapBuffers();
+
+	glFlush();
+}
+
+void timer(int u){
+
+	glutTimerFunc(10, timer, 0);
+
+	if (fjump == 0){
+		fjump++;
+
+		jump = 75;
+	}
+	if (jump < 25){
+
+		glTranslatef(0.0, -0.02, 0.0);
+
+		jump++;
+	}
+	else if (jump == 25){
+		jump = 100;
+
+	}
+	else if (jump >75){
+		jump--;
+
+		glTranslatef(0.0, 0.02, 0.0);
+
+	}
+	else if (jump == 75){
+		jump = 50;
+		spaceIsClicked = 0;
+	}
+
+
+	glutPostRedisplay();
+
+}
+
+void init(void)
+{
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glShadeModel(GL_SMOOTH);
+
+	setupinitPointers();
 }
 void spinDisplay(void)
 {
@@ -6849,140 +7850,110 @@ void spinDisplay(void)
 		spin = spin - 360.0;
 	glutPostRedisplay();
 }
-void display(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	if (spinMode == 'x'){
-		glRotatef(spin, 1.0, 0.0, 0.0);
-	}
-	else if (spinMode == 'y'){
-		glRotatef(spin, 0.0, 1.0, 0.0);
-	}
-	else if (spinMode == 'z'){
-		glRotatef(spin, 0.0, 0.0, 1.0);
-	}
-
-	glPushMatrix();
-
-
-	if (derefMethod == DRAWARRAY){
-		glDrawArrays(GL_TRIANGLES, 0, total);
-
-	}
-	else if (derefMethod == DRAWELEMENT) {
-		GLuint indices[total + 1];
-		for (int i = 0; i < total; i++){
-			indices[i] = i;
-		}
-		glDrawElements(GL_TRIANGLES, total, GL_UNSIGNED_INT, indices);
-	}
-	else if (derefMethod == MULTIDRAWARRAY) {
-		GLint first[] = {0};
-		GLsizei count[] = { total };
-	
-		glMultiDrawArrays(GL_TRIANGLES, first, count, 1);
-	}
-	else if (derefMethod == MULTIDRAWELEMENT) {
-		GLuint num[total];
-		for (int i = 0; i < total; i++){
-			num[i] = i;
-		}
-		
-		GLsizei count[] = { total };
-
-
-		GLvoid * incides[] = { num };
-
-		glMultiDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT,incides,1);
-	}
-
-	glPopMatrix();
-
-	glPopMatrix();
-	glutSwapBuffers();
-	glFlush();
-}
-
-
-
-void init(void)
-{
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glShadeModel(GL_SMOOTH);
+void reshape(int w, int h){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-	setupinitPointers();
+	gluPerspective(60, 1.0, 0.0, 1000.0);
+	glMatrixMode(GL_MODELVIEW);
 }
+
 void keyboard(unsigned char key, int x, int y)
 {
 	switch (key) {
-	case 49:
-		if (derefMethod != DRAWARRAY){
-			derefMethod = DRAWARRAY;
+
+	case 119:
+		//w
+		glTranslatef(0.0, 0.0, 0.1);
+		glutPostRedisplay();
+		break;
+	case 97:
+		//a
+		glTranslatef(0.1, 0.0, 0.0);
+		glutPostRedisplay();
+		break;
+	case 115:
+		//s
+		glTranslatef(0.0, 0.0, -0.1);
+		glutPostRedisplay();
+		break;
+	case 100:
+		//d
+		glTranslatef(-0.1, 0.0, 0.0);
+		glutPostRedisplay();
+		break;
+	case 32:
+		//space
+		if (spaceIsClicked == 0){
+			jump = 0;
+			spaceIsClicked = 1;
+			glutPostRedisplay();
+		}
+		break;
+	case 122:
+		//z
+		if (leftAttack == 0){
+			leftAttack = 1;
 		}
 		glutPostRedisplay();
 		break;
-	case 50:
-		if (derefMethod != DRAWELEMENT){
-			derefMethod = DRAWELEMENT;
+	case 120:
+		//x
+		if (rightAttack == 0){
+			rightAttack = 1;
 		}
 		glutPostRedisplay();
 		break;
-	case 51:
-		if (derefMethod != MULTIDRAWARRAY){
-			derefMethod = MULTIDRAWARRAY;
-		}
-		glutPostRedisplay();
-		break;
-	case 52:
-		if (derefMethod != MULTIDRAWELEMENT){
-			derefMethod = MULTIDRAWELEMENT;
-		}
+	case 114:
+		//r
+		drawLogo();
+		spinMode = 'r';
 		glutPostRedisplay();
 		break;
 	}
+
 }
 
-void mouse (int button, int state, int x, int y)
+void mouse(int button, int state, int x, int y)
 {
-   switch (button) {
-	   case GLUT_RIGHT_BUTTON:
-		  if (state == GLUT_DOWN) {
-			  spinMode = 'x';
-			  glutIdleFunc(spinDisplay);
-         }
-         break;
-      case GLUT_LEFT_BUTTON:
-         if (state == GLUT_DOWN) {
-			 spinMode = 'z';
-			 glutIdleFunc(spinDisplay);
-         }
-         break;
-      case GLUT_MIDDLE_BUTTON:
-		  if (state == GLUT_DOWN) {
-			  spinMode = 'y';
-			  glutIdleFunc(spinDisplay);
-		  }
-      
-      default:
-         break;
-   }
+	switch (button) {
+	case GLUT_RIGHT_BUTTON:
+		if (state == GLUT_DOWN) {
+			spinMode = 'x';
+			glutIdleFunc(spinDisplay);
+		}
+		break;
+	case GLUT_LEFT_BUTTON:
+		if (state == GLUT_DOWN) {
+			spinMode = 'z';
+			glutIdleFunc(spinDisplay);
+		}
+		break;
+	case GLUT_MIDDLE_BUTTON:
+		if (state == GLUT_DOWN) {
+			spinMode = 'y';
+			glutIdleFunc(spinDisplay);
+		}
+
+	default:
+		break;
+	}
 }
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(1500, 750);
-	glutInitWindowPosition(0, 0);
+	glutInitWindowPosition(200, 0);
 	glutCreateWindow("hello");
 	init();
 	glewInit();
+
+	glutReshapeFunc(reshape);
+	glutDisplayFunc(display);
+	glutTimerFunc(1, timer, 0);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
-	glutDisplayFunc(display);
+
 	glutMainLoop();
 	return 0;
 }
